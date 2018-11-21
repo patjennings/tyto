@@ -1,0 +1,76 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+.background {
+    fill: #dbe4f5;
+    pointer-events: all;
+}
+
+#states {
+    fill: #FFF;
+}
+
+#state-borders {
+    fill: none;
+    stroke: #dbe4f5;
+    stroke-width: 1.5px;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    pointer-events: none;
+}
+
+.inner-card{
+    background-color: #FFFFFF;
+    width:320px;
+    // padding: 8px;
+    font-family: "Liberation Mono", monospace;
+    border: 1px solid #000000;
+    font-size: 0.75rem;
+    line-height: 1.6;
+
+    .title{
+	border-bottom: 1px solid #000;
+	background: #000;
+	color: #FFF;
+	padding: 8px;
+
+	p{
+	    margin: 0;
+	}
+    }
+    .content{
+	// border-bottom: 1px solid #000;
+	padding: 0 8px;
+    }
+
+    /* Titles */
+    &.sky{
+	.title{	
+	    // font-size: 0.75rem;
+	    font-weight: 500;
+	}
+    }
+    &.top{
+	.title{
+	    // font-size: 1rem;
+	    font-weight: 600;	    
+	}
+
+    }
+    &.middle{
+	.title{
+	    // font-size: 1.5rem;
+	    font-weight: 600;
+	}
+    }
+    &.low{
+	.title{
+	    // font-size: 2rem;
+	    font-weight: 600;
+	}
+    }
+}
+
+
