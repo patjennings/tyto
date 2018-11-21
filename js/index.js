@@ -1,5 +1,23 @@
 (function(window){
 
+    var mapPath = "assets/us.json";
+    var zones = [
+	{
+	    name: "C'est politique !",
+	    location: {
+                latitude: 29.975441,
+                longitude: -90
+            }
+	},
+	{
+	    name: "Sexy",
+	    location: {
+                latitude: 29.975441,
+                longitude: -85
+            }
+	}
+    ];
+    
     var content = [
         {
             name: "Banks in the service of the NRA",
@@ -28,6 +46,10 @@
     ];
 
     var scaleFac = 1070;
+
+    const scale = (num, in_min, in_max, out_min, out_max) => { // this is the map() function from processing
+	return (num - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+    }
     
     var width = screen.availWidth,
 	height = screen.availHeight;
@@ -63,7 +85,7 @@
     // svg.selectAll("body")
 
     // Ajouter la carte
-    d3.json("assets/us.json", function(error, us) {
+    d3.json(mapPath, function(error, us) {
 	if (error) throw error;
 
 	g.append("g")
@@ -79,42 +101,14 @@
 	    .attr("id", "state-borders")
 	    .attr("d", path);
 
-	createPlaces(); // On lance la fonction une fois que la carte est chargée et affichée
+	createArticles(); // On lance la fonction une fois que la carte est chargée et affichée
+	createZones(); // On lance la fonction une fois que la carte est chargée et affichée
     });
-
-    // function createPlaces(){
-    // 	// Ajouter les places
-    // 	g.append("g")
-    // 	    .attr("id", "places")
-    // 	    .selectAll("rect")
-    // 	    .data(content)
-    // 	    .enter().append("g")
-    // 	    .attr("class", "card")
-    // 	    .append("rect")
-    // 	    .attr("width", 96)
-    // 	    .attr("height", 128)
-    // 	    .attr("fill", "#FFFFFF")
-    // 	    .attr("stroke", "#000000");
     
-    // 	// .classed("zoomable", true)
-    // 	g.selectAll(".card")
-    // 	    .attr("transform", function(d) {
-    // 		return "translate(" + projection([
-    // 		    d.location.longitude,
-    // 		    d.location.latitude
-    // 		]) + ")";
-    // 	    })
-    // 	    .append("text")
-    // 	    .attr("width", 96)
-    // 	    .attr("class", "title")
-    // 	    .append("textspan")
-    // 	    .text(function(d) { return d.name; });
-    // }
-
-    function createPlaces(){
-	// Ajouter les places
+    function createArticles(){
+	// Ajouter les articles
 	g.append("g")
-	    .attr("id", "places")
+	    .attr("id", "articles")
 	    .selectAll("rect")
 	    .data(content)
 	    .enter().append("g")
@@ -149,23 +143,36 @@
 
 	// console.log(scaleFac);
     }
-    
 
-    // function clicked(d) {
-    // 	var centroid = path.centroid(d),
-    // 	    translate = projection.translate();
+    function createZones(){
+	// Ajouter les articles
+	g.append("g")
+	    .attr("id", "zones")
+	    .selectAll("text")
+	    .data(zones)
+	    .enter().append("g")
+	    .attr("class", "zone")
+	    .append("text")
+	    .attr("font-family", "Liberation Mono")
+	    .attr("font-size", "16px")
+	    .attr("text-anchor", "middle")
+	    .text(function(d){ return d.name})
 
-    // 	projection.translate([
-    // 	    translate[0] - centroid[0] + width / 2,
-    // 	    translate[1] - centroid[1] + height / 2
-    // 	]);
-
-    // 	zoom.translate(projection.translate());
-
-    // 	g.selectAll("path").transition()
-    // 	    .duration(700)
-    // 	    .attr("d", path);
-    // }
+	g.selectAll(".zone")
+	    .attr("transform", function(d) {
+		return "translate(" + projection([
+		    d.location.longitude,
+		    d.location.latitude
+		]) + ")";
+	    })
+	    // .attr("width", 96)
+	    // .attr("height", 128)
+	    // .attr("fill", "#FFFFFF")
+	    // .attr("opacity", "0")
+	// .attr("stroke", "#000000");
+	
+	
+    }
 
     function zoomed() {
 
@@ -183,6 +190,16 @@
 		d.location.latitude
 	    ]) + ")";
 	})
+	g.selectAll(".zone").attr("transform", function(d) {
+	    return "translate(" + projection([
+		d.location.longitude,
+		d.location.latitude
+	    ]) + ")";
+	})
+	    .selectAll("text")
+	    .attr("font-size", scale(s, 1070, 10000, 12, 24)+"px")
+
+	
 	
 	console.log(s);
 	scaleFac = s;
@@ -192,6 +209,11 @@
 
     // affiche le contenu relatif au niveau de zoom
     function drawContent(){
+
+	// adapter l'opacité au niveau de zoom
+	g.selectAll(".inner-card")
+	    .attr("style", "opacity:"+scale(scaleFac, 1070, 10000, 0.15, 1)+";")
+	
 	if(scaleFac < 1000){
 	    g.selectAll(".inner-card")
 		.attr("class", "inner-card sky")
