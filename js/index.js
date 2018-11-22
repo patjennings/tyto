@@ -20,7 +20,8 @@
     
     var content = [
         {
-            name: "Banks in the service of the NRA",
+	    id: 0,
+	    name: "Banks in the service of the NRA",
 	    content: {
 		top: "Cuomo is using strained argument... further regulation of guns",
 		middle: "New York Governor Cuomo is using strained arguments... I also support further regulation of guns... I would also support a campaign calling on an insurance company to refuse to work with the NRA to sell insurance to other parties",
@@ -29,9 +30,15 @@
             location: {
                 latitude: 30.975441,
                 longitude: -90
-            }
+            },
+	    relations: [
+		{id:0},
+		{id:2},
+		{id:5}
+	    ]
         },
 	{
+	    id: 1,
 	    name: "Pablo Servigne : ' Il faut élaborer une politique de l’effondrement '",
 	    content: {
 		top: "l’étude de l’effondrement... La perspective de l’effondrement du monde peut être un puissant stimulant à l’action... l’autre loi de la jungle",
@@ -41,7 +48,10 @@
             location: {
 		latitude: 29.975441,
 		longitude: -88
-            }
+            },
+	    relations: [
+		{id:6},
+	    ]
 	}
     ];
 
@@ -101,9 +111,14 @@
 	    .attr("id", "state-borders")
 	    .attr("d", path);
 
-	createArticles(); // On lance la fonction une fois que la carte est chargée et affichée
-	createZones(); // On lance la fonction une fois que la carte est chargée et affichée
+
+	// On lance les fonctions une fois que la carte est chargée et affichée
+	createArticles(); // création des articles
+	createZones(); // création des titres de zones
     });
+
+
+    
     
     function createArticles(){
 	// Ajouter les articles
@@ -201,7 +216,7 @@
 
 	
 	
-	console.log(s);
+	// console.log(s);
 	scaleFac = s;
 	
 	drawContent();
@@ -238,6 +253,11 @@
 	    g.selectAll(".content")
 		.html(function(d) { return "<p>"+d.content.low+"</p><a href='article.php?title="+d.name+"&content="+d.content.low+"'>Full article</a>"; });
 	}
+
+
+	var elem = g.selectAll(".inner-card");
+	console.log(elem.node().getBoundingClientRect());
+	// console.log(selection.node().getBbox())
 
     }
     

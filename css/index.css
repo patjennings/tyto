@@ -4,7 +4,7 @@ html, body {
   overflow: hidden; }
 
 .background {
-  fill: #dbe4f5;
+  fill: #e8e8e8;
   pointer-events: all; }
 
 #states {
@@ -12,7 +12,7 @@ html, body {
 
 #state-borders {
   fill: none;
-  stroke: #dbe4f5;
+  stroke: #e8e8e8;
   stroke-width: 1.5px;
   stroke-linejoin: round;
   stroke-linecap: round;
@@ -43,5 +43,10 @@ html, body {
     font-weight: 600; }
   .inner-card.low .title {
     font-weight: 600; }
+
+#zones {
+  font-family: "Liberation Mono", monospace;
+  font-size: 0.75rem;
+  line-height: 1.6; }
 
 /*# sourceMappingURL=index.css.map */
