@@ -1,13 +1,16 @@
 <?php
+header('Content-Type: application/json');
 
 // ini_set('display_errors', 1);
 // ini_set('display_startup_errors', 1);
 // error_reporting(E_ALL);
 
+include("includes/Parsedown.php");
+
 $fileList = glob('content/*.md');
 $filesArray = array();
 
-$obj;
+$obj = array();
 $json;
 
 //Loop through the array that glob returned.
@@ -20,25 +23,29 @@ foreach($filesArray as $file){
     $content = file_get_contents($file);
     // echo $content."<br/><br/><br/>";
     
-    writeJSON($content);
+    // writeJSON($content);
+
+    getContent($content);
     
     // parser le markdown
 }
 // writeJSON($content);
 
-
-function writeJSON($content){
+function getContent($content){
 
     // echo $content;
 
-    $metadata = explode("--", $content);
-    // echo $metadata;
+    $data = explode("--", $content);
+
+    /////////////////
+    // métadonnées
+    //////////////////
 
     // à chaque titre, on supprime et on remplace par un car. spécial
     $p1 = "/title: /";
     $p2 = "/position: /";
     $p3 = "/relations: /";
-    $removep1 = preg_replace($p1, "{{##}}", $metadata[0]);
+    $removep1 = preg_replace($p1, "{{##}}", $data[0]);
     $removep2 = preg_replace($p2, "{{##}}", $removep1);
     $removep3 = preg_replace($p3, "{{##}}", $removep2);
 
@@ -49,62 +56,100 @@ function writeJSON($content){
 
     foreach ($metaExplode as $item) {
         if($item == ""){
-            // do nothing, that's crap
+            // if empty, do nothing, that's crap
         }else{
             array_push($meta, $item); // on remplit le tableau des entrées
-            echo "- ".$item."<br/>";            
+            // echo "- ".$item."<br/>";            
         }
 
     }
 
+    $getTitle = $meta[0];
+
+    $meta[1] = str_replace(" ", "", $meta[1]); // on évacue les espaces
+    $meta[1] = str_replace("\n", "", $meta[1]); // éventuellement, les sauts de lignes
+    $getPosition = explode(",", $meta[1]); // et on éclate
+    $meta[2] = str_replace(" ", "", $meta[2]);
+    $meta[2] = str_replace("\n", "", $meta[2]);
+    $getRelations = explode(",", $meta[2]);
+
     
+    /////////////////////
+    // contenu
+    /////////////////
+    // echo $data[1];
+
+
+    $Parsedown = new Parsedown();
+    
+    $parsedText = $Parsedown->text($data[1]);
+
+    preg_match_all("|<strong>(.*)</strong>|U", $parsedText, $matchTop, PREG_PATTERN_ORDER);
+    preg_match_all("|<em>(.*)</em>|U", $parsedText, $matchMiddle, PREG_PATTERN_ORDER);
+    
+    // print_r($matches[1]);
+    
+    $contentTop = "";
+    $contentMiddle = "";
+    $contentLow = $parsedText;
+    
+    foreach($matchTop[1] as $part){
+        $contentTop .= $part."... ";
+        // echo $part;
+    }
+    foreach($matchMiddle[1] as $part){
+        $contentMiddle .= $part."... ";
+        // echo $part;
+    }
+    // var_dump($matches);
+    // echo $contentTop;
+    // echo "<hr/>";
+    // echo $contentMiddle;
+    // echo "<hr/>";
+    // echo $contentLow;
+    
+    // $searchl1 = preg
+// $str = $data[1];
+// $pattern = ;
+// preg_match_all("\[a]\", $str, $matches, PREG_PATTERN_ORDER, 3);
+// var_dump($matches);
+
+// echo "toto";
+
+    
+    // $getSliced;
+
+    writeJSON($getTitle, $contentTop, $contentMiddle, $contentLow, $getPosition, $getRelations);
+}
+function writeJSON($title, $contentTop, $contentMiddle, $contentLow, $position, $relations){
+
+    // echo $title, $contentTop, $contentMiddle, $contentLow, $position[0], $relations[0];
     
     global $obj;
     global $json;
 
-    $obj->id = 0;
-    $obj->title = "Banks in the service of the NRA";
-    $obj->content->top = "Cuomo is using strained argument... further regulation of guns";
-    $obj->content->middle ="New York Governor Cuomo is using strained arguments... I also support further regulation of guns... I would also support a campaign calling on an insurance company to refuse to work with the NRA to sell insurance to other parties";
-    $obj->content->low =" New York Governor Cuomo is using strained arguments to pressure banks to stop serving the NRA. This reminds me of how US marijuana businesses find it impossible to get bank accounts. I support petition campaigns calling on companies to break their special deals with the NRA. These campaigns follow a legitimate pathway. I also support further regulation of guns, including prohibition of high-velocity rifles (often called \"assault weapons\") and large magazines. I would also support a campaign calling on an insurance company to refuse to work with the NRA to sell insurance to other parties. (It sounds like that's what the insurance company is doing.) However, the state should not pressure banks or insurance companies to refuse to provide lawful services to the NRA, or to any other lawful organization, based on what it stands for. ";
-    $obj->location->latitude = 36.8714;
-    $obj->location->longitude = 25.5099;
-    $obj->relations[0]->id = 0;
-    $obj->relations[1]->id = 2;
-    $obj->relations[2]->id = 5;
+    $relationsFormat = array();
 
-    $json = json_encode($obj);
+    foreach($relations as $r){
+        array_push($relationsFormat, array('id' => intval("$r")));
+    }
 
-    // echo $myJSON;
-    
-    // global $theId;
-    // global $theFirstName;
-    // global $theSecondName;
-    // global $thePresence;
-    // global $jsonContent;
-    // global $jsonAnswersUrl;
+    $rq = array(
+        'id' => 0,
+        'title' => $title,
+        'content' => array(
+            'top' => $contentTop,
+            'middle' => $contentMiddle,
+            'low' => $contentLow
+        ),
+        'location' => array(
+            'latitude' => floatval($position[0]),
+            'longitude' => floatval($position[1])
+        ),
+        'relations' => $relationsFormat
+    );
 
-    // // echo $jsonAnswersUrl;
-            
-    // $newNode = [
-    //     "id" => intval($theId),
-    //     "title" => $theFirstName,
-    //     "content" => $theSecondName,
-    //     "location" => $thePresence,
-    //     "relations" => $thePresence
-    // ];
-		    
-    // // array_push($jsonAnswers['list'], $newNode);
-    // $newJsonString = json_encode($jsonAnswers);
-		    
-    // if(file_put_contents($jsonAnswersUrl, $newJsonString)) {
-    //     echo "Joueur créé";
-    //     // redirectToPage();
-    // }
-    // else
-    // {
-    //     echo "Il y a eu une erreur";
-    // }    
+    array_push($obj, $rq);
 }
-
+echo json_encode(json$obj);
 ?>

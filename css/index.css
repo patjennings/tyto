@@ -35,6 +35,14 @@ html, body {
       margin: 0; }
   .inner-card .content {
     padding: 0 8px; }
+    .inner-card .content em {
+      font-weight: normal;
+      font-style: normal;
+      background: #f8f9db; }
+    .inner-card .content strong {
+      font-weight: normal;
+      font-style: normal;
+      background: #ffe0e0; }
   .inner-card.sky .title {
     font-weight: 500; }
   .inner-card.top .title {

@@ -1,5 +1,9 @@
+var content;
+
 (function(window){
 
+    
+    
     // Data
     function reqListener () {
       console.log(this.responseText);
@@ -7,7 +11,11 @@
 
     var oReq = new XMLHttpRequest(); //New request object
     oReq.onload = function() {
-        console.log(this.responseText);
+        console.log(JSON.parse(this.responseText));
+	content = JSON.parse(this.responseText);
+
+	app();
+	
 	// reqListener();
     };
     oReq.open("get", "list-content.php", true);
@@ -15,6 +23,12 @@
     oReq.send();
     // reqListener();
     
+    
+
+    
+})(window);
+
+function app(){
     var mapPath = "assets/schinoussa.geojson";
     var zones = [
 	{
@@ -30,43 +44,6 @@
                 latitude: 36.8831,
                 longitude: 25.5264
             }
-	}
-    ];
-    
-    var content = [
-        {
-	    id: 0,
-	    title: "Banks in the service of the NRA",
-	    content: {
-		top: "Cuomo is using strained argument... further regulation of guns",
-		middle: "New York Governor Cuomo is using strained arguments... I also support further regulation of guns... I would also support a campaign calling on an insurance company to refuse to work with the NRA to sell insurance to other parties",
-		low: " New York Governor Cuomo is using strained arguments to pressure banks to stop serving the NRA. This reminds me of how US marijuana businesses find it impossible to get bank accounts. I support petition campaigns calling on companies to break their special deals with the NRA. These campaigns follow a legitimate pathway. I also support further regulation of guns, including prohibition of high-velocity rifles (often called \"assault weapons\") and large magazines. I would also support a campaign calling on an insurance company to refuse to work with the NRA to sell insurance to other parties. (It sounds like that's what the insurance company is doing.) However, the state should not pressure banks or insurance companies to refuse to provide lawful services to the NRA, or to any other lawful organization, based on what it stands for. "
-	    },
-            location: {
-                latitude: 36.8714,
-                longitude: 25.5099
-            },
-	    relations: [
-		{id:0},
-		{id:2},
-		{id:5}
-	    ]
-        },
-	{
-	    id: 1,
-	    title: "Pablo Servigne : ' Il faut élaborer une politique de l’effondrement '",
-	    content: {
-		top: "l’étude de l’effondrement... La perspective de l’effondrement du monde peut être un puissant stimulant à l’action... l’autre loi de la jungle",
-		middle: "La perspective de l’effondrement du monde peut être un puissant stimulant à l’action. Et permettre de tourner la page du capitalisme et de la société thermo-industrielle, qui ravagent le monde. Il reste à définir les modes d’action... Chercheur indépendant, essayiste, son domaine d’étude est principalement ce qu’il appelle la ' collapsologie ', l’étude de l’effondrement",
-		low: " La perspective de l’effondrement du monde peut être un puissant stimulant à l’action. Et permettre de tourner la page du capitalisme et de la société thermo-industrielle, qui ravagent le monde. Il reste à définir les modes d’action. C’est ce qu’explique Pablo Servigne dans cet entretien. Malgré la barbe, Pablo Servigne ne fait pas ses 40 ans. Depuis le succès de son ouvrage Comment tout peut s’effondrer, paru en 2015 au Seuil et coécrit avec Raphaël Stevens, les demandes de conférences pleuvent, la notoriété croît. Chercheur indépendant, essayiste, son domaine d’étude est principalement ce qu’il appelle la ' collapsologie ', l’étude de l’effondrement. Il s’est aussi attaché à contrer l’idéologie compétitive ambiante dans L’Entraide, l’autre loi de la jungle, coécrit avec Gauthier Chapelle et publié en 2017 aux éditions Les Liens qui libèrent. Ses deux compagnons de route et lui viennent de publier la suite du livre sur l’effondrement. Dans Une autre fin du monde est possible, ils mêlent travaux issus des sciences ' dures ', philosophie et spiritualité pour trouver une posture d’action face à l’effondrement annoncé. "
-	    },
-            location: {
-		latitude: 36.8609,
-		longitude: 25.5374
-            },
-	    relations: [
-		{id:6},
-	    ]
 	}
     ];
 
@@ -253,19 +230,19 @@
 	    g.selectAll(".inner-card")
 		.attr("class", "inner-card top")
 	    g.selectAll(".content")
-		.html(function(d) { return "<p>"+d.content.top+"</p><a href='article.php?title="+d.title+"&content="+d.content.low+"'>Full article</a>"; });
+		.html(function(d) { return "<p>"+d.content.top+"</p><a href='article.php'>Full article</a>"; });
 	}
 	else if(scaleFac >= 5000000 && scaleFac < 26000000){
 	    g.selectAll(".inner-card")
 		.attr("class", "inner-card middle")
 	    g.selectAll(".content")
-		.html(function(d) { return "<p>"+d.content.middle+"</p><a href='article.php?title="+d.title+"&content="+d.content.low+"'>Full article</a>"; });
+		.html(function(d) { return "<p>"+d.content.middle+"</p><a href='article.php'>Full article</a>"; });
 	}
 	else if(scaleFac >= 26000000){
 	    g.selectAll(".inner-card")
 		.attr("class", "inner-card low")
 	    g.selectAll(".content")
-		.html(function(d) { return "<p>"+d.content.low+"</p><a href='article.php?title="+d.title+"&content="+d.content.low+"'>Full article</a>"; });
+		.html(function(d) { return "<p>"+d.content.low+"</p><a href='article.php'>Full article</a>"; });
 	}
 
 
@@ -326,6 +303,4 @@
 
 	// console.log(s+" / "+t);
     }
-
-    
-})(window);
+}
