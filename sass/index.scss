@@ -90,5 +90,11 @@ html, body {
     font-size: 0.75rem;
     line-height: 1.6;
 }
+#infos{
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    bottom: 0;
+}
 
 

@@ -20,22 +20,13 @@ foreach($fileList as $filename){
 
 foreach($filesArray as $file){
     $content;
-    $content = file_get_contents($file);
-    // echo $content."<br/><br/><br/>";
-    
-    // writeJSON($content);
-
-    getContent($content);
-    
-    // parser le markdown
+    $content = file_get_contents($file);    
+    getContent($content, $file);
 }
-// writeJSON($content);
 
-function getContent($content){
+function getContent($content, $file){
 
-    // echo $content;
-
-    $data = explode("--", $content);
+    $data = explode("---", $content);
 
     /////////////////
     // métadonnées
@@ -59,9 +50,7 @@ function getContent($content){
             // if empty, do nothing, that's crap
         }else{
             array_push($meta, $item); // on remplit le tableau des entrées
-            // echo "- ".$item."<br/>";            
         }
-
     }
 
     $getTitle = $meta[0];
@@ -77,17 +66,11 @@ function getContent($content){
     /////////////////////
     // contenu
     /////////////////
-    // echo $data[1];
-
-
-    $Parsedown = new Parsedown();
-    
+    $Parsedown = new Parsedown(); 
     $parsedText = $Parsedown->text($data[1]);
 
     preg_match_all("|<strong>(.*)</strong>|U", $parsedText, $matchTop, PREG_PATTERN_ORDER);
     preg_match_all("|<em>(.*)</em>|U", $parsedText, $matchMiddle, PREG_PATTERN_ORDER);
-    
-    // print_r($matches[1]);
     
     $contentTop = "";
     $contentMiddle = "";
@@ -95,35 +78,15 @@ function getContent($content){
     
     foreach($matchTop[1] as $part){
         $contentTop .= $part."... ";
-        // echo $part;
     }
     foreach($matchMiddle[1] as $part){
         $contentMiddle .= $part."... ";
-        // echo $part;
     }
-    // var_dump($matches);
-    // echo $contentTop;
-    // echo "<hr/>";
-    // echo $contentMiddle;
-    // echo "<hr/>";
-    // echo $contentLow;
-    
-    // $searchl1 = preg
-// $str = $data[1];
-// $pattern = ;
-// preg_match_all("\[a]\", $str, $matches, PREG_PATTERN_ORDER, 3);
-// var_dump($matches);
 
-// echo "toto";
-
-    
-    // $getSliced;
-
-    writeJSON($getTitle, $contentTop, $contentMiddle, $contentLow, $getPosition, $getRelations);
+    writeJSON($getTitle, $contentTop, $contentMiddle, $contentLow, $getPosition, $getRelations, $file);
 }
-function writeJSON($title, $contentTop, $contentMiddle, $contentLow, $position, $relations){
 
-    // echo $title, $contentTop, $contentMiddle, $contentLow, $position[0], $relations[0];
+function writeJSON($title, $contentTop, $contentMiddle, $contentLow, $position, $relations, $path){
     
     global $obj;
     global $json;
@@ -137,10 +100,11 @@ function writeJSON($title, $contentTop, $contentMiddle, $contentLow, $position, 
     $rq = array(
         'id' => 0,
         'title' => $title,
+        'path' => $path,
         'content' => array(
             'top' => $contentTop,
             'middle' => $contentMiddle,
-            'low' => $contentLow
+            'low' => truncate($contentLow, 1200)
         ),
         'location' => array(
             'latitude' => floatval($position[0]),
@@ -151,5 +115,19 @@ function writeJSON($title, $contentTop, $contentMiddle, $contentLow, $position, 
 
     array_push($obj, $rq);
 }
-echo json_encode(json$obj);
+
+function truncate($string,$length=100,$append="&hellip;") {
+  $string = trim($string);
+
+  if(strlen($string) > $length) {
+    $string = wordwrap($string, $length);
+    $string = explode("\n", $string, 2);
+    $string = $string[0] . $append;
+  }
+
+  return $string;
+}
+
+echo json_encode($obj);
+
 ?>

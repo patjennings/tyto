@@ -1,9 +1,7 @@
 var content;
 
 (function(window){
-
-    
-    
+  
     // Data
     function reqListener () {
       console.log(this.responseText);
@@ -11,7 +9,7 @@ var content;
 
     var oReq = new XMLHttpRequest(); //New request object
     oReq.onload = function() {
-        console.log(JSON.parse(this.responseText));
+        // console.log(JSON.parse(this.responseText));
 	content = JSON.parse(this.responseText);
 
 	app();
@@ -22,9 +20,6 @@ var content;
 
     oReq.send();
     // reqListener();
-    
-    
-
     
 })(window);
 
@@ -58,13 +53,15 @@ function app(){
 
     var projection = d3.geo.mercator()
 	.scale(485035.40798408084)
-    	.translate([ -215452.9723933363,336604.3379795616]);
+    	.translate([ -214842.9723933363,336774.3379795616]);
+
+    // 485035.40798408084 / -214842.9723933363,336774.3379795616
     // 485035.40798408084 /
     //
 
     var path = d3.geo.path()
 	.projection(projection); 
-
+    
 
     var zoom = d3.behavior.zoom()
 	.translate(projection.translate())
@@ -74,7 +71,14 @@ function app(){
     
     var svg = d3.select("body").append("svg")
 	.attr("width", width)
-	.attr("height", height);
+	.attr("height", height)
+	.on('mousemove', function() {
+	    // console.log( d3.mouse(this) ) // log the mouse x,y position
+	    // console.log()
+
+	    displayInformations(projection.invert(d3.mouse(this)), d3.event.scale)
+	});
+    
 
     var g = svg.append("g")
 	.call(zoom);
@@ -84,6 +88,34 @@ function app(){
 	.attr("width", width)
 	.attr("height", height);
 
+
+
+    // d3.select("body").on("mousemove", function(e){
+    // 	e = e || window.event;
+	
+    // 	var pageX = e.pageX; // la position x de la souris
+    // 	var pageY = e.pageY; // la position y de la souris
+	
+    // 	console.log(pageX+" / "+pageY);
+    // })
+
+
+
+    // // D3 v4
+    // var x = d3.event.pageX - document.getElementById(<id-of-your-svg>).getBoundingClientRect().x + 10
+    // var y = d3.event.pageY - document.getElementById(<id-of-your-svg>).getBoundingClientRect().y + 10
+    function displayInformations(coords, zoom){
+
+	// var t = d3.event.translate;
+	// var s = d3.event.scale; 
+	// projection.translate(t).scale(s);
+	
+	console.log(coords);
+	infos = document.getElementById("position");
+	infos.value = coords[1].toFixed(4)+", "+coords[0].toFixed(4);
+	
+	// console.log(s);
+    }
     
     //////////////////////
     // Afficher la carte
@@ -230,19 +262,19 @@ function app(){
 	    g.selectAll(".inner-card")
 		.attr("class", "inner-card top")
 	    g.selectAll(".content")
-		.html(function(d) { return "<p>"+d.content.top+"</p><a href='article.php'>Full article</a>"; });
+		.html(function(d) { return "<p>"+d.content.top+"</p><a href='article.php?path="+d.path+"'>Full article</a>"; });
 	}
 	else if(scaleFac >= 5000000 && scaleFac < 26000000){
 	    g.selectAll(".inner-card")
 		.attr("class", "inner-card middle")
 	    g.selectAll(".content")
-		.html(function(d) { return "<p>"+d.content.middle+"</p><a href='article.php'>Full article</a>"; });
+		.html(function(d) { return "<p>"+d.content.middle+"</p><a href='article.php?path="+d.path+"'>Full article</a>"; });
 	}
 	else if(scaleFac >= 26000000){
 	    g.selectAll(".inner-card")
 		.attr("class", "inner-card low")
 	    g.selectAll(".content")
-		.html(function(d) { return "<p>"+d.content.low+"</p><a href='article.php'>Full article</a>"; });
+		.html(function(d) { return "<p>"+d.content.low+"</p><a href='article.php?path="+d.path+"'>Full article</a>"; });
 	}
 
 
