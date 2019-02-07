@@ -63,4 +63,11 @@ html, body {
   left: 0;
   bottom: 0; }
 
+.input-container {
+  position: absolute;
+  z-index: 999;
+  top: 0px;
+  left: 0px;
+  background: #fff; }
+
 /*# sourceMappingURL=index.css.map */

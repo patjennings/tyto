@@ -1,10 +1,11 @@
 var content;
+var isCreating = false;
 
 (function(window){
-  
+    
     // Data
     function reqListener () {
-      console.log(this.responseText);
+	console.log(this.responseText);
     }
 
     var oReq = new XMLHttpRequest(); //New request object
@@ -20,6 +21,7 @@ var content;
 
     oReq.send();
     // reqListener();
+
     
 })(window);
 
@@ -55,9 +57,7 @@ function app(){
 	.scale(485035.40798408084)
     	.translate([ -214842.9723933363,336774.3379795616]);
 
-    // 485035.40798408084 / -214842.9723933363,336774.3379795616
-    // 485035.40798408084 /
-    //
+    var currentPosition = [0, 0];
 
     var path = d3.geo.path()
 	.projection(projection); 
@@ -66,7 +66,7 @@ function app(){
     var zoom = d3.behavior.zoom()
 	.translate(projection.translate())
 	.scale(projection.scale())
-	// .scaleExtent([480*height, 48000 * height])
+    // .scaleExtent([480*height, 48000 * height])
 	.on("zoom", zoomed);  
     
     var svg = d3.select("body").append("svg")
@@ -75,8 +75,19 @@ function app(){
 	.on('mousemove', function() {
 	    // console.log( d3.mouse(this) ) // log the mouse x,y position
 	    // console.log()
+	    currentPosition = projection.invert(d3.mouse(this));
+	    displayInformations(d3.event.scale)
+	})
+	.on('click', function() {
+	    // console.log( d3.mouse(this) ) // log the mouse x,y position
+	
+	    currentPosition = projection.invert(d3.mouse(this));
 
-	    displayInformations(projection.invert(d3.mouse(this)), d3.event.scale)
+	    if(isCreating == false){
+		 createDocument(currentPosition);
+	    }
+	   
+	    // console.log("create element at "+currentPosition);
 	});
     
 
@@ -88,33 +99,50 @@ function app(){
 	.attr("width", width)
 	.attr("height", height);
 
+    // listener pour copier les coordonnées
+    window.addEventListener('keydown', (event) => {
+	const nomTouche = event.key;
 
+	console.log("touche pressée !");
 
-    // d3.select("body").on("mousemove", function(e){
-    // 	e = e || window.event;
-	
-    // 	var pageX = e.pageX; // la position x de la souris
-    // 	var pageY = e.pageY; // la position y de la souris
-	
-    // 	console.log(pageX+" / "+pageY);
-    // })
+	if (nomTouche === 'c') {
+	    // Pas d'alerte si seule la touche Control est pressée.
+	    copyTextToClipboard(currentPosition[1].toFixed(4)+", "+currentPosition[0].toFixed(4));
+	}
+	if (nomTouche === 't') {
+	    // Pas d'alerte si seule la touche Control est pressée.
+	    console.log("create it");
+	}
+    }, false);
 
-
-
-    // // D3 v4
-    // var x = d3.event.pageX - document.getElementById(<id-of-your-svg>).getBoundingClientRect().x + 10
-    // var y = d3.event.pageY - document.getElementById(<id-of-your-svg>).getBoundingClientRect().y + 10
-    function displayInformations(coords, zoom){
+    function displayInformations(zoom){
 
 	// var t = d3.event.translate;
 	// var s = d3.event.scale; 
 	// projection.translate(t).scale(s);
 	
-	console.log(coords);
+	// console.log(coords);
 	infos = document.getElementById("position");
-	infos.value = coords[1].toFixed(4)+", "+coords[0].toFixed(4);
+	infos.value = currentPosition[1].toFixed(4)+", "+currentPosition[0].toFixed(4);
 	
 	// console.log(s);
+    }
+
+    function createDocument(currentPosition){
+	var lat = currentPosition[0];
+	var long = currentPosition[1];
+	isCreating = true;
+	// console.log(lat+" / "+long);
+
+	// create layer w/ input + save button
+	var proj = projection([
+	    lat,
+	    long
+	])
+	var elements = "<div class='input-container' style='transform: translate("+proj[0]+"px, "+proj[1]+"px);'><textarea>"+lat+"\n"+long+"</textarea></div>";
+	
+	$(".map").append(elements);
+	// save/create file
     }
     
     //////////////////////
@@ -172,7 +200,7 @@ function app(){
 		var rectHeight = g.selectAll(".card").node().getBoundingClientRect().height
 
 		// console.log(rectHeight);
-	    
+		
 		return "translate(" + (proj[0]-(340/2)) +", "+(proj[1]-(rectHeight/2))+ ")";
 	    })
 	    .append("svg:foreignObject")
@@ -332,7 +360,35 @@ function app(){
 	scaleFac = s;
 	
 	drawContent();
+    }
 
-	// console.log(s+" / "+t);
+    function fallbackCopyTextToClipboard(text) {
+	var textArea = document.createElement("textarea");
+	textArea.value = text;
+	document.body.appendChild(textArea);
+	textArea.focus();
+	textArea.select();
+
+	try {
+	    var successful = document.execCommand('copy');
+	    var msg = successful ? 'successful' : 'unsuccessful';
+	    console.log('Fallback: Copying text command was ' + msg);
+	} catch (err) {
+	    console.error('Fallback: Oops, unable to copy', err);
+	}
+
+	document.body.removeChild(textArea);
+    }
+
+    function copyTextToClipboard(text) {
+	if (!navigator.clipboard) {
+	    fallbackCopyTextToClipboard(text);
+	    return;
+	}
+	navigator.clipboard.writeText(text).then(function() {
+	    console.log('Async: Copying to clipboard was successful!');
+	}, function(err) {
+	    console.error('Async: Could not copy text: ', err);
+	});
     }
 }
