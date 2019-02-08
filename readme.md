@@ -13,3 +13,14 @@ $ php -S localhost:8000 # lancer php, et ouvrir http://localhost:8000 dans le na
 
 
 Et on y va !
+
+## Niveaux de texte = niveaux de zoom ##
+du plus haut au plus bas :
+- au plus haut, on ne voit que les titres
+- en zoomant, on voit apparaitre le **bold**
+- puis on voit apparaitre *l'italique*. Ce qui est **bold**+*italic* apparait surligné
+- puis on voit les 1200 premiers caractères
+
+## Démo ##
+
+http://www.thomasguesnon.fr/platform/tyto/

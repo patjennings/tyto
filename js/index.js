@@ -18,7 +18,7 @@ var ctrlPushed = false;
 	
 	// reqListener();
     };
-    oReq.open("get", "includes/list-content.php", true);
+    oReq.open("get", "list-content.php", true);
 
     oReq.send();
     // reqListener();
@@ -30,17 +30,31 @@ function app(){
     var mapPath = "assets/schinoussa.geojson";
     var zones = [
 	{
-	    title: "C'est politique !",
+	    title: "Plaine de la politique",
 	    location: {
-                latitude: 36.8474,
-                longitude: 25.5190
+                latitude: 36.8675,
+                longitude: 25.5300
             }
 	},
 	{
-	    title: "Sexy",
+	    title: "Marais du sexy",
 	    location: {
-                latitude: 36.8831,
-                longitude: 25.5264
+                latitude: 36.8811,
+                longitude: 25.5327
+            }
+	},
+	{
+	    title: "Baie de l'intime",
+	    location: {
+                latitude: 36.8545,
+                longitude: 25.5336
+            }
+	},
+	{
+	    title: "Forêt du nécessaire",
+	    location: {
+                latitude: 36.8765,
+                longitude: 25.5173
             }
 	}
     ];
