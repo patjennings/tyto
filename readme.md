@@ -21,6 +21,8 @@ du plus haut au plus bas :
 - puis on voit apparaitre *l'italique*. Ce qui est **bold**+*italic* apparait surligné
 - puis on voit les 1200 premiers caractères
 
+Pour ajouter un élément : `Ctrl+click` à l'endroit souhaité
+
 ## Démo ##
 
 http://www.thomasguesnon.fr/platform/tyto/
