@@ -1,5 +1,6 @@
 var content;
 var isCreating = false;
+var ctrlPushed = false;
 
 (function(window){
     
@@ -17,7 +18,7 @@ var isCreating = false;
 	
 	// reqListener();
     };
-    oReq.open("get", "list-content.php", true);
+    oReq.open("get", "includes/list-content.php", true);
 
     oReq.send();
     // reqListener();
@@ -79,17 +80,27 @@ function app(){
 	    displayInformations(d3.event.scale)
 	})
 	.on('click', function() {
-	    // console.log( d3.mouse(this) ) // log the mouse x,y position
-	
 	    currentPosition = projection.invert(d3.mouse(this));
 
-	    if(isCreating == false){
-		 createDocument(currentPosition);
+	    if(isCreating == false && ctrlPushed == true){ // si on peut créer un doc ET que la touche ctrl est enfoncée
+		createDocument(currentPosition);
 	    }
-	   
-	    // console.log("create element at "+currentPosition);
 	});
+
+    // Ctrl key listener, pour utiliser avec le click lors de la création de documents
+    window.addEventListener('keydown', (event) => {
+	if(event.ctrlKey) {
+	    ctrlPushed = true;
+	    console.log("ctrl enfoncé");
+	}
+    }, false);
     
+    window.addEventListener('keyup', (event) => {
+	
+	ctrlPushed = false;
+	console.log("toutes les touches relachées");
+	
+    }, false);
 
     var g = svg.append("g")
 	.call(zoom);
@@ -129,22 +140,49 @@ function app(){
     }
 
     function createDocument(currentPosition){
-	var lat = currentPosition[0];
 	var long = currentPosition[1];
+	var lat = currentPosition[0];
 	isCreating = true;
-	// console.log(lat+" / "+long);
 
+	console.log("ich bin");
 	// create layer w/ input + save button
 	var proj = projection([
 	    lat,
 	    long
 	])
-	var elements = "<div class='input-container' style='transform: translate("+proj[0]+"px, "+proj[1]+"px);'><textarea>"+lat+"\n"+long+"</textarea></div>";
+	var content = "";
+	
+	var elements = "<div id='input-container' style='transform: translate("+proj[0]+"px, "+proj[1]+"px);'><input id='content-title' placeholder='Titre'></input><textarea id='content-content' rows='6' placeholder='Contenu'>"+content+"</textarea><input id='content-position-long' type='hidden' value='"+long+"'/><input id='content-position-lat' type='hidden' value='"+lat+"'/><div class='btn-container'><button type='submit' value='ok' class='btn highlight' id='document-validate'>Valider</button><button value='cancel' class='btn' id='document-cancel'>Annuler</button></div></div>";
 	
 	$(".map").append(elements);
+	saveDocument();
+	
 	// save/create file
     }
-    
+
+    function saveDocument(){
+	var btnValidate = document.getElementById("document-validate");
+	var btnCancel = document.getElementById("document-cancel");
+	
+	btnValidate.addEventListener('click', function() {
+	    console.log("save file");
+
+	    var titleValue = document.getElementById("content-title").value;
+	    var longValue = document.getElementById("content-position-long").value;
+	    var latValue = document.getElementById("content-position-lat").value;
+	    var contentValue = document.getElementById("content-content").value;
+	    var contentFormatted = "title: "+titleValue+"\nposition: "+longValue+", "+latValue+"\n\n---\n"+contentValue; // le title intégré dans la desc du markdown
+	    
+	    request("POST", "includes/saveMarkdownDocument.php", "title="+titleValue+"&content="+contentFormatted, requestCallback);
+	}, false);
+	
+	btnCancel.addEventListener('click', function() {
+	    var elem = document.getElementById("input-container");
+	    elem.parentNode.removeChild(elem);
+	    isCreating = false;
+	    // console.log(this);
+	}, false);
+    }
     //////////////////////
     // Afficher la carte
     ////////////////////////
@@ -392,3 +430,59 @@ function app(){
 	});
     }
 }
+
+
+// AJAX requests
+function getRequestObject(){
+    var o = null;
+    if(window.XMLHttpRequest){
+        o = new XMLHttpRequest();
+    }else if(window.ActiveXObject){
+        try{
+            o = new ActiveXObject('Msxml2.XMLHTTP');
+        }catch(e1){
+            try{
+                o = new ActiveXObject('Microsoft.XMLHTTP');
+            }catch(e2){
+
+            }
+        }
+    }
+    return o;
+}
+
+function request(method, uri, sendData, callback){
+    var o = getRequestObject();
+    var async = (callback!==null);
+    var timestamp = new Date();
+    var uniqueURI = uri+ (uri.indexOf("?") > 0 ? "&" : "?")+ "timestamp="+ timestamp.getTime();
+    
+    if(method === 'GET'){
+        if(sendData!=null){uniqueURI+="?"+sendData;}
+        o.open(method, uniqueURI, async);
+        o.send(null);
+    }else if(method === 'POST'){
+        o.open(method, uniqueURI, async);
+        o.setRequestHeader('Content-Type' , 'application/x-www-form-urlencoded');
+        o.send(sendData);
+    }
+    if(async){
+        o.onreadystatechange = function (){
+            if(o.readyState==4&&o.status==200){
+                callback(o.responseText);
+                // console.log("Success");
+
+            }else if(o.readyState==4&&o.status!=200){
+                // console.log("Error")
+            }
+        };
+    }
+    if(async){return ;}
+    else{return o.responseText;}
+}
+
+function requestCallback(text){
+    // on relance app(), et on recharge tout
+    app();
+}
+

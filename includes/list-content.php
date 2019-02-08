@@ -5,9 +5,9 @@ header('Content-Type: application/json');
 // ini_set('display_startup_errors', 1);
 // error_reporting(E_ALL);
 
-include("includes/Parsedown.php");
+include("Parsedown.php");
 
-$fileList = glob('content/*.md');
+$fileList = glob('../content/*.md');
 $filesArray = array();
 
 $obj = array();

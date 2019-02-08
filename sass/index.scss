@@ -98,12 +98,26 @@ html, body {
 }
 
 
-.input-container{
+#input-container{
     position: absolute;
     z-index: 999;
-    top: 0px;
-    left: 0px;
+    top: 0;
+    left: -175px; // (largeur/2)-largeur
+    width: 350px;
+    padding: 24px;
     // padding: 16px;
     background: #fff;
+    display: flex;
+    flex-direction: column;
+
+    #content-title{
+	margin-bottom: 16px;
+    }    
+    #content-content{
+	margin-bottom: 16px;	
+    }
+    .btn-container{
+	
+    }
 }
 

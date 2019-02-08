@@ -63,11 +63,19 @@ html, body {
   left: 0;
   bottom: 0; }
 
-.input-container {
+#input-container {
   position: absolute;
   z-index: 999;
-  top: 0px;
-  left: 0px;
-  background: #fff; }
+  top: 0;
+  left: -175px;
+  width: 350px;
+  padding: 24px;
+  background: #fff;
+  display: flex;
+  flex-direction: column; }
+  #input-container #content-title {
+    margin-bottom: 16px; }
+  #input-container #content-content {
+    margin-bottom: 16px; }
 
 /*# sourceMappingURL=index.css.map */
