@@ -1,4 +1,5 @@
-map with contents. a click opens the article in its own page.
+l'idée qui a conduit à ce projet est celle de pouvoir mettre en relation des idées dans un espace géographique, un genre de _carte du tendre_. dans cet espace, on crée des blocs de contenu, que l'on formatte selon leur "poids" : ainsi, plus l'élément est léger, plus haut on le voit et, plus l'élément est lourd, plus il va falloir zoomer pour le voir.
+selon ce principe, on structure des idées qu'on pourra voir s'entrechoquer avec d'autres sur l'espace de la carte.
 
 ## lancement ##
 d'abord, on ouvre les droits en écriture sur `/content` (c'est là que les fichiers markdown sont créés
@@ -23,7 +24,12 @@ l'idée est de voir apparaitre de plus en plus de contenu à mesure que l'on zoo
 - puis on voit apparaitre *l'italique*. Ce qui est **bold**+*italic* apparait surligné
 - puis on voit les 1200 premiers caractères
 
-Pour ajouter un élément : `ctrl+click` à l'endroit souhaité
+**titre : ultra-léger**
+bold : léger
+italic : moyen
+rien : lourd
+
+pour ajouter un élément : `ctrl+click` à l'endroit souhaité
 
 ## reste à faire ##
 - ajouter fonctions basiques de preview/formattage markdown
