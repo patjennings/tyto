@@ -142,15 +142,9 @@ function app(){
 
     function displayInformations(zoom){
 
-	// var t = d3.event.translate;
-	// var s = d3.event.scale; 
-	// projection.translate(t).scale(s);
-	
-	// console.log(coords);
 	infos = document.getElementById("position");
 	infos.value = currentPosition[1].toFixed(4)+", "+currentPosition[0].toFixed(4);
-	
-	// console.log(s);
+
     }
 
     function createDocument(currentPosition){
