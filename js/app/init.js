@@ -1,4 +1,5 @@
 import * as vars from "./vars";
+import appState from "./vars";
 import create from "./create";
 import zoom from "./zoom";
 import copyTextToClipboard from './utils';
@@ -7,8 +8,7 @@ import draw from './draw';
 import createArticles from './createArticles';
 import createZones from './createZones';
 import createPoints from './createPoints';
-
-// vars.isCreating = false;
+import listeners from './listeners';
 
 let content = null;
 
@@ -37,6 +37,11 @@ let content = null;
 })(window);
 
 function app(content){
+
+    var st = new appState();
+    st.isCreating = false;
+    st.scaleFac = 40000.503614997007;
+    st.currentPosition = [0, 0];
     
     vars.g.append("rect")
 	.attr("class", "background")
@@ -57,8 +62,6 @@ function app(content){
 
     d3.json(vars.mapPath, function(error, json) {
     	if (error) throw error;
-
-	// console.log(json.features[1].geometry.type);
 	
     	vars.g.append("g")
     	    .attr("id", "states")
@@ -74,6 +77,7 @@ function app(content){
     	// On lance les fonctions une fois que la carte est chargée et affichée
     	createArticles(content); // création des articles
     	createZones(content); // création des titres de zones
+	listeners();
 	// createPoints(); // affiche les points et permet de vérifier le centrage des cartes.
     });
 

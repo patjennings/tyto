@@ -1,5 +1,9 @@
 import * as vars from "./vars";
+import appState from "./vars";
+import scale from './utils';
 import draw from './draw';
+
+var st = new appState();
 
 /////////////////////////////////////////////////////
 // Fonction qui gère l'affichage lors des zooms
@@ -7,16 +11,14 @@ import draw from './draw';
 
 export default function zoomed() {
 
+    console.log("zoom");
+
     var t = d3.event.translate;
     var s = d3.event.scale; 
     vars.projection.translate(t).scale(s);
 
     // transforme les pays
     vars.g.selectAll("path").attr("d", vars.path);
-
-    // var elem = g.selectAll(".card").text("toto");
-
-    // console.log(d);
     
     // transforme les points au zoom et translate
     vars.g.selectAll(".card").attr("transform", function(d) {
@@ -24,9 +26,8 @@ export default function zoomed() {
 	    d.location.longitude,
 	    d.location.latitude
 	])
-	var rectHeight = vars.g.selectAll(".inner-card").node().getBoundingClientRect().height // La hauteur dynamique du contenant (.inner-card)
-
-	console.log(rectHeight);
+	// La hauteur dynamique du contenant (.inner-card)
+	var rectHeight = vars.g.selectAll(".inner-card").node().getBoundingClientRect().height
 	
 	return "translate(" + (proj[0]-(340/2)) +", "+(proj[1]-(rectHeight/2))+ ")";
     })
@@ -46,7 +47,8 @@ export default function zoomed() {
     // 	]) + ")";
     // })
 
-    scaleFac = s;
+    st.scaleFac = s;
+    console.log(st.scaleFac);
     
-    draw();
+    draw(s);
 }
