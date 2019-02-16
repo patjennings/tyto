@@ -3,9 +3,15 @@
   "version": "1.0.0",
   "description": "l'idée qui a conduit à ce projet est celle de pouvoir mettre en relation des idées dans un espace géographique, un genre de _carte du tendre_. dans cet espace, on crée des blocs de contenu, que l'on formatte selon leur \"poids\" : ainsi, plus l'élément est léger, plus haut on le voit et, plus l'élément est lourd, plus il va falloir zoomer pour le voir. selon ce principe, on structure des idées qu'on pourra voir s'entrechoquer avec d'autres sur l'espace de la carte.",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "babel-core": "^6.26.3"
+  },
   "devDependencies": {
-    "webpack": "^4.29.3"
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.3",
+    "babel-loader": "^8.0.5",
+    "webpack": "^4.29.3",
+    "webpack-cli": "^3.2.3"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -1,5 +1,6 @@
-export var isCreating = null;
-export var ctrlPushed = null;
+export let isCreating = null;             // doit être modifié
+export let scaleFac = 40000.503614997007; // doit être modifié
+export let currentPosition = [0, 0];      // doit être modifié
 
 import zoomed from "./zoom";
 
@@ -35,12 +36,6 @@ export var zones = [
     }
 ];
 
-export var scaleFac = 40000.503614997007;
-
-const scale = (num, in_min, in_max, out_min, out_max) => { // this is the map() function from processing
-    return (num - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-}
-
 export var width = screen.availWidth;
 export var height = screen.availHeight;
 
@@ -48,11 +43,8 @@ export var projection = d3.geo.mercator()
     .scale(485035.40798408084)
     .translate([ -214842.9723933363,336774.3379795616]);
 
-export var currentPosition = [0, 0];
-
 export var path = d3.geo.path()
     .projection(projection); 
-
 
 export var zoom = d3.behavior.zoom()
     .translate(projection.translate())
@@ -64,18 +56,19 @@ export var svg = d3.select("body").append("svg")
     .attr("height", height)
     .on('mousemove', function() {
 	currentPosition = projection.invert(d3.mouse(this));
-	displayInformations(d3.event.scale)
+	// displayInformations(d3.event.scale)
     })
     .on('click', function() {
 	currentPosition = projection.invert(d3.mouse(this));
-
+	create(currentPosition);
+	/*
 	if(vars.isCreating == false && vars.ctrlPushed == true){ // si on peut créer un doc ET que la touche ctrl est enfoncée
 	    console.log("créer l'article");
 	    create(currentPosition);
-	}
+	}*/
     });
 
 export var g = svg.append("g")
     .call(zoom);
 
-export var content;
+// export var content = "";

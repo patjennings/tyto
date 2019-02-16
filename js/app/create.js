@@ -1,10 +1,11 @@
 import * as vars from "./vars";
-console.log(vars);
+
+let isCreating = null;
 
 export default function create(currentPosition){
     var long = currentPosition[1];
     var lat = currentPosition[0];
-    vars.isCreating = true;
+    isCreating = true;
 
     // create layer w/ input + save button
     var proj = projection([
@@ -41,7 +42,7 @@ function save(){
     btnCancel.addEventListener('click', function() {
 	var elem = document.getElementById("input-container");
 	elem.parentNode.removeChild(elem);
-	vars.isCreating = false;
+	isCreating = false;
 	// console.log(this);
     }, false);
 }
