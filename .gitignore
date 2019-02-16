@@ -2,3 +2,4 @@
 .sass-cache/*
 sein.osm
 node_modules/*
+node_modules/
