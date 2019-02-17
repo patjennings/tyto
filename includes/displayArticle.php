@@ -1,6 +1,6 @@
 <?php
 $path = $_GET['path'];
-include("includes/Parsedown.php");
+include("Parsedown.php");
 
 $fileContent = file_get_contents($path);
 $content = explode("---", $fileContent);
@@ -45,8 +45,8 @@ $parsedText = $Parsedown->text($content[1]);
     <title><?php echo $getTitle; ?></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="css/all.css" />
-            <link rel="stylesheet" type="text/css" href="css/article.css" />
+    <link rel="stylesheet" type="text/css" href="../dist/css/all.css" />
+            <link rel="stylesheet" type="text/css" href="../dist/css/article.css" />
 
     <!--
 	<script src="js/less.min.js" type="text/javascript"></script>

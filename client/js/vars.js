@@ -51,7 +51,7 @@ export default function appState() {
 
 var st = new appState();
 
-export var mapPath = "assets/schinoussa.geojson";
+export var mapPath = "dist/assets/schinoussa.geojson";
 export var zones = [
     {
 	title: "Plaine de la politique",

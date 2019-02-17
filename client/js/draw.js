@@ -6,6 +6,7 @@ import scale from './utils';
 // affiche le contenu relatif au niveau de zooms
 //////////////////////////////////////////////////
 
+let pFile = "includes/displayArticle.php";
 var st = new appState();
 
 export default function draw(s){
@@ -26,19 +27,19 @@ export default function draw(s){
 	vars.g.selectAll(".inner-card")
 	    .attr("class", "inner-card top")
 	vars.g.selectAll(".content")
-	    .html(function(d) { return "<p>"+d.content.top+"</p><a href='article.php?path="+d.path+"'>Full article</a>"; });
+	    .html(function(d) { return "<p>"+d.content.top+"</p><a href='"+pFile+"?path="+d.path+"'>Full article</a>"; });
     }
     else if(s >= 5000000 && s < 26000000){
 	vars.g.selectAll(".inner-card")
 	    .attr("class", "inner-card middle")
 	vars.g.selectAll(".content")
-	    .html(function(d) { return "<p>"+d.content.middle+"</p><a href='article.php?path="+d.path+"'>Full article</a>"; });
+	    .html(function(d) { return "<p>"+d.content.top+"</p><a href='"+pFile+"?path="+d.path+"'>Full article</a>"; });
     }
     else if(s >= 26000000){
 	vars.g.selectAll(".inner-card")
 	    .attr("class", "inner-card low")
 	vars.g.selectAll(".content")
-	    .html(function(d) { return "<p>"+d.content.low+"</p><a href='article.php?path="+d.path+"'>Full article</a>"; });
+	    .html(function(d) { return "<p>"+d.content.top+"</p><a href='"+pFile+"?path="+d.path+"'>Full article</a>"; });
     }
 
 

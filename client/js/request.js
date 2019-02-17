@@ -25,6 +25,8 @@ export default function request(method, uri, sendData = null, callback = request
     var async = (callback!==null);
     var timestamp = new Date();
     var uniqueURI = uri+ (uri.indexOf("?") > 0 ? "&" : "?")+ "timestamp="+ timestamp.getTime();
+
+    // console.log(uri);
     
     if(method === 'GET'){
         if(sendData!=null){uniqueURI+="?"+sendData;}
@@ -40,8 +42,8 @@ export default function request(method, uri, sendData = null, callback = request
             if(o.readyState==4&&o.status==200){
                 callback(o.responseText);
                 console.log("request is successful");
+		// console.log(callback);
 		// return o.responseText;
-
             }else if(o.readyState==4&&o.status!=200){
                 console.log("There was an error during this request")
             }

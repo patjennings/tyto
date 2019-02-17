@@ -1,13 +1,15 @@
 <?php
 header('Content-Type: application/json');
 
+// $rootPath = "http://localhost/tyto";
+
 // ini_set('display_errors', 1);
 // ini_set('display_startup_errors', 1);
 // error_reporting(E_ALL);
 
-include("includes/Parsedown.php");
+include("Parsedown.php");
 
-$fileList = glob('content/*.md');
+$fileList = glob("../dist/content/*.md");
 $filesArray = array();
 
 $obj = array();

@@ -7,20 +7,18 @@ import scale from './utils';
 import draw from './draw';
 import createArticles from './createArticles';
 import createZones from './createZones';
-// import createPoints from './createPoints';
 import listeners from './listeners';
 import request from './request';
 
 let content = null;
 
 (function(window){
-    var appData = request("GET", "list-content.php", null, writeAppData); // on télécharge les données
+    var appData = request("GET", "includes/list-content.php", null, writeAppData); // on télécharge les données
     // app();
 })(window);
 
 export function writeAppData(data){
     // on relance app(), et on recharge tout
-    // console.log(text);
     var st = new appState();
     st.appData = JSON.parse(data);
     app();
@@ -32,6 +30,8 @@ export default function app(){
     st.isCreating = false;
     st.scaleFac = 40000.503614997007;
     st.currentPosition = [0, 0];
+
+    console.log(st.appData);
     
     vars.g.append("rect")
 	.attr("class", "background")
@@ -51,7 +51,7 @@ export default function app(){
     ////////////////////////
 
     d3.json(vars.mapPath, function(error, json) {
-    	if (error) throw error;
+    	// if (error) throw error;
 	
     	vars.g.append("g")
     	    .attr("id", "states")
