@@ -9,7 +9,7 @@ $content = $_POST['content'];
     
 
 if ($_POST) {
-    file_put_contents("../content/".$title.".md", $content); 
+    file_put_contents("../dist/content/".$title.".md", $content); 
 }
 
 ?>
