@@ -1,7 +1,7 @@
 import zoomed from "./zoom";
 import * as vars from "./vars";
 import appState from "./vars";
-import create from "./create";
+import addContent from "./addContent";
 
 let ctrlPushed = false;
 
@@ -12,18 +12,12 @@ export default function listeners(){
     // Ctrl key listener, pour utiliser avec le click lors de la création de documents
     window.addEventListener('keydown', (event) => {
 	if(event.ctrlKey) {
-	    ctrlPushed = true;
-	    
-	}
-
-	
+	    ctrlPushed = true;	    
+	}	
     }, false);
 
-    
-    //
     window.addEventListener('keyup', (event) => {
-	ctrlPushed = false;
-	
+	ctrlPushed = false;	
     }, false);
 
     d3.select("body").select("svg")
@@ -35,9 +29,9 @@ export default function listeners(){
 	.on('click', function() {
 	    st.currentPosition = vars.projection.invert(d3.mouse(this));
 
-	    if(ctrlPushed == true){ // si on peut créer un doc ET que la touche ctrl est enfoncée
-	    create(st.currentPosition);
-	}
+	    if(ctrlPushed == true && st.isCreating == false){ // si on peut créer un doc ET que la touche ctrl est enfoncée
+		addContent(st.currentPosition);
+	    }
 	});
 
     // on déclare le zoom

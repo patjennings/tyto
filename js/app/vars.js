@@ -1,12 +1,16 @@
 import zoomed from "./zoom";
 
-// cette fonction contient modifie les états de l'application, avec des getters et des setters
-// pour pouvoir vivre tout au long du déroulement     
+// toutes ces variables sont modifiées dans init.js, via l'objet appState()
+let isCreating = null; // on est en train de créer un article // false
+let scaleFac = null; // doit être modifié //40000.503614997007
+let currentPosition = null;      // doit être modifié //[0, 0]
+let appData = null;      // doit être modifié avec le nouveau contenu chargé du json
 
-export default function appState() {
-    var isCreating = null; // on est en train de créer un article // false
-    var scaleFac = null; // doit être modifié //40000.503614997007
-    var currentPosition = null;      // doit être modifié //[0, 0]
+// cette fonction contient modifie les états de l'application, avec des getters et des setters
+// pour pouvoir vivre tout au long du déroulement
+// s'applique sur les trois variables déclarées au dessus
+
+export default function appState() {    
     
     // var archive = [];
 
@@ -32,6 +36,14 @@ export default function appState() {
 	},
 	set: function(value) {
 	    currentPosition = value;
+	}
+    });
+    Object.defineProperty(this, 'appData', {
+	get: function() {
+	    return appData;
+	},
+	set: function(value) {
+	    appData = value;
 	}
     });
   // this.getArchive = function() { return archive; };
@@ -80,31 +92,6 @@ export var projection = d3.geo.mercator()
 
 export var path = d3.geo.path()
     .projection(projection);
-
-// export var zoom = d3.behavior.zoom()
-//     .translate(projection.translate())
-//     .scale(projection.scale())
-//     .on("zoom", zoomed);
-
-
-/*
-export var svg = d3.select("body").append("svg")
-    .attr("width", width)
-    .attr("height", height)
-    .on('mousemove', function() {
-	st.currentPosition = projection.invert(d3.mouse(this));
-	// displayInformations(d3.event.scale)
-    })
-    .on('click', function() {
-	st.currentPosition = projection.invert(d3.mouse(this));
-	create(st.currentPosition);
-	
-	if(vars.isCreating == false && vars.ctrlPushed == true){ // si on peut créer un doc ET que la touche ctrl est enfoncée
-	    console.log("créer l'article");
-	    create(currentPosition);
-	}
-    });
-*/
 
 export var svg = d3.select("body")
     .append("svg")

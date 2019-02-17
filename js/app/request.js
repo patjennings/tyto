@@ -1,3 +1,5 @@
+import app from './app';
+import writeAppData from './app';
 
 // AJAX requests
 function getRequestObject(){
@@ -18,7 +20,7 @@ function getRequestObject(){
     return o;
 }
 
-export function request(method, uri, sendData, callback){
+export default function request(method, uri, sendData = null, callback = requestCallback){
     var o = getRequestObject();
     var async = (callback!==null);
     var timestamp = new Date();
@@ -37,13 +39,16 @@ export function request(method, uri, sendData, callback){
         o.onreadystatechange = function (){
             if(o.readyState==4&&o.status==200){
                 callback(o.responseText);
-                // console.log("Success");
+                console.log("request is successful");
+		// return o.responseText;
 
             }else if(o.readyState==4&&o.status!=200){
-                // console.log("Error")
+                console.log("There was an error during this request")
             }
         };
     }
     if(async){return ;}
     else{return o.responseText;}
 }
+
+

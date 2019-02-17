@@ -3,7 +3,7 @@ import * as vars from "./vars";
 // Ajouter les zones
 /////////////////////////
 
-export default function createZones(content){
+export default function createZones(){
     
     vars.g.append("g")
 	.attr("id", "zones")

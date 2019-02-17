@@ -1,8 +1,9 @@
 import * as vars from "./vars";
 import appState from "./vars";
+import request from './request';
+import app from './app';
 
 let isCreating = null;
-
 var st = new appState();
 
 export default function create(currentPosition){
@@ -39,7 +40,7 @@ function save(){
 	var contentValue = document.getElementById("content-content").value;
 	var contentFormatted = "title: "+titleValue+"\nposition: "+longValue+", "+latValue+"\n\n---\n"+contentValue; // le title intégré dans la desc du markdown
 	
-	request("POST", "includes/saveMarkdownDocument.php", "title="+titleValue+"&content="+contentFormatted, requestCallback);
+	request("POST", "includes/saveMarkdownDocument.php", "title="+titleValue+"&content="+contentFormatted, app);
     }, false);
     
     btnCancel.addEventListener('click', function() {

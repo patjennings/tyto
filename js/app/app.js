@@ -1,42 +1,32 @@
 import * as vars from "./vars";
 import appState from "./vars";
-import create from "./create";
+import addContent from "./addContent";
 import zoom from "./zoom";
 import copyTextToClipboard from './utils';
 import scale from './utils';
 import draw from './draw';
 import createArticles from './createArticles';
 import createZones from './createZones';
-import createPoints from './createPoints';
+// import createPoints from './createPoints';
 import listeners from './listeners';
+import request from './request';
 
 let content = null;
 
 (function(window){
-    
-    // Data
-    function reqListener () {
-	// console.log(this.responseText);
-    }
-
-    var oReq = new XMLHttpRequest(); //New request object
-    oReq.onload = function() {
-        // console.log(JSON.parse(this.responseText));
-	content = JSON.parse(this.responseText);
-
-	app(content);
-	
-	// reqListener();
-    };
-    oReq.open("get", "list-content.php", true);
-
-    oReq.send();
-    // reqListener();
-
-    
+    var appData = request("GET", "list-content.php", null, writeAppData); // on télécharge les données
+    // app();
 })(window);
 
-function app(content){
+export function writeAppData(data){
+    // on relance app(), et on recharge tout
+    // console.log(text);
+    var st = new appState();
+    st.appData = JSON.parse(data);
+    app();
+}
+
+export default function app(){
 
     var st = new appState();
     st.isCreating = false;
@@ -75,8 +65,8 @@ function app(content){
     	// .on("click", clicked);
 
     	// On lance les fonctions une fois que la carte est chargée et affichée
-    	createArticles(content); // création des articles
-    	createZones(content); // création des titres de zones
+    	createArticles(); // création des articles
+    	createZones(); // création des titres de zones
 	listeners();
 	// createPoints(); // affiche les points et permet de vérifier le centrage des cartes.
     });
@@ -88,8 +78,5 @@ function app(content){
 
 
 
-function requestCallback(text){
-    // on relance app(), et on recharge tout
-    app();
-}
+
 

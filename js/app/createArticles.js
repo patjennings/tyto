@@ -1,15 +1,19 @@
 import * as vars from "./vars";
+import appState from "./vars";
 import draw from './draw';
+
 /////////////////////////
 // Ajouter les articles
 //////////////////////////
 
-export default function createArticles(content){
+export default function createArticles(){
+
+    var st = new appState();
     
     vars.g.append("g")
 	.attr("id", "articles")
 	.selectAll("rect")
-	.data(content)
+	.data(st.appData)
 	.enter().append("g")
 	.attr("class", "card")
 	.append("rect")
