@@ -27,9 +27,10 @@ export function writeAppData(data){
 export default function app(){
 
     
-
+    console.log();
     var st = new appState();
     st.isCreating = false;
+    st.isDragging = false;
     st.scaleFac = 40000.503614997007;
     st.currentPosition = [0, 0];
 

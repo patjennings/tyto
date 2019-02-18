@@ -1,4 +1,4 @@
-@import "fonts"; // CSS font file created with gulp-inline-fonts
+// @import "fonts"; // CSS font file created with gulp-inline-fonts
 
 $baseRem: 1rem;
 $basePt: 9pt;
@@ -11,7 +11,7 @@ $break-small: 480px;
 $break-medium: 800px;
 $break-large: 1170px;
 
-$hoverSpeed: 0.2s;
+$hoverSpeed: 0.15s;
 $hoverEase: ease-in-out;
 
 //-- typo:start --//

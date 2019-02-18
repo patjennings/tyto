@@ -2,6 +2,7 @@ import zoomed from "./zoom";
 
 // toutes ces variables sont modifiées dans init.js, via l'objet appState()
 let isCreating = null; // on est en train de créer un article // false
+let isDragging = null; // false
 let scaleFac = null; // doit être modifié //40000.503614997007
 let currentPosition = null;      // doit être modifié //[0, 0]
 let appData = null;      // doit être modifié avec le nouveau contenu chargé du json
@@ -20,6 +21,14 @@ export default function appState() {
 	},
 	set: function(value) {
 	    isCreating = value;
+	}
+    });
+    Object.defineProperty(this, 'isDragging', {
+	get: function() {
+	    return isDragging;
+	},
+	set: function(value) {
+	    isDragging = value;
 	}
     });
     Object.defineProperty(this, 'scaleFac', {

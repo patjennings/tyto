@@ -11,7 +11,7 @@ var st = new appState();
 
 export default function zoomed() {
 
-    console.log("zoom");
+    // console.log("zoom");
 
     var t = d3.event.translate;
     var s = d3.event.scale; 
