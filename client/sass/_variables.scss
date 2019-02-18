@@ -1,0 +1,50 @@
+@import "fonts"; // CSS font file created with gulp-inline-fonts
+
+$baseRem: 1rem;
+$basePt: 9pt;
+
+$totalWidth: 1366px; // Can be fix or floating value
+$columns: 8; // The column-width of your grid in pixels — should be even like 6, 8, 12, 14, etc.
+$gutter: 32px; // The gutter-width of your grid in pixels
+
+$break-small: 480px;
+$break-medium: 800px;
+$break-large: 1170px;
+
+$hoverSpeed: 0.2s;
+$hoverEase: ease-in-out;
+
+//-- typo:start --//
+$colorGreenLow: #74a467;
+$colorGreen: #1ACC58;
+$colorGreenLight: #b3d2a5;
+$colorRedLow: #cd444d;
+$colorRed: #D44C57;
+$colorRedLight: #DC7580;
+$colorYellowLow: #c3b615;
+$colorYellow: #e3d851;
+$colorYellowLight: #E8E18A;
+$colorBlueLow: #518ece;
+$colorBlue: #74a5d8;
+$colorBlueLight: #9DBADE;
+
+$colorTextDark: #333333;
+$colorTextBlue: #485B73;
+$colorTextGrey: #777777;
+$colorTextLightGrey: #C1C1C1;
+
+$colorDark: #121212;
+$colorGreyDark: #323232;
+$colorGrey: #565656;
+$colorLightGrey: #CCCCCC;
+$colorLighterGrey: #EFEFEF;
+$colorTransparentGrey: #F5F5F5;
+$colorAlmostWhite: #FAFAFA;
+$colorWhite: #FFFFFF;
+//-- colors:end --//
+
+//-- typo:start --//
+$serif: 'serif', Times, serif;
+$sansSerif: 'sans', Arial, serif;
+$mono: 'mono', Courier, monospace;
+//-- typo:end --//

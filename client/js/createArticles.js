@@ -39,7 +39,7 @@ export default function createArticles(){
 	.attr("height", 800)
 	.append("xhtml:body")
  	.attr("class", "inner-card")
-	.html(function(d) { return "<div class='title'><p>"+d.title+"</p>"; })
+	.html(function(d) { return "<div class='title'><h3>"+d.title+"</h3>"; })
 	.append("div")
 	.attr("class", "content")
 

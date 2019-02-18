@@ -1,1 +1,1 @@
-sass --watch --trace sass:css
+sass --watch --trace client/sass:dist/css

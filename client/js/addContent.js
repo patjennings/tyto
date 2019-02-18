@@ -5,6 +5,7 @@ import app from './app';
 
 let isCreating = null;
 var st = new appState();
+var simplemde;
 
 export default function create(currentPosition){
     var long = currentPosition[1];
@@ -21,9 +22,12 @@ export default function create(currentPosition){
     var elements = "<div id='input-container' style='transform: translate("+proj[0]+"px, "+proj[1]+"px);'><input id='content-title' placeholder='Titre'></input><textarea id='content-content' rows='6' placeholder='Contenu'>"+content+"</textarea><input id='content-position-long' type='hidden' value='"+long+"'/><input id='content-position-lat' type='hidden' value='"+lat+"'/><div class='btn-container'><button type='submit' value='ok' class='btn highlight' id='document-validate'>Valider</button><button value='cancel' class='btn' id='document-cancel'>Annuler</button></div></div>";
     
     $(".map").append(elements);
+    startMarkdownEditor();
     save();
     
     // save/create file
+
+    
 }
 
 
@@ -37,10 +41,10 @@ function save(){
 	var titleValue = document.getElementById("content-title").value;
 	var longValue = document.getElementById("content-position-long").value;
 	var latValue = document.getElementById("content-position-lat").value;
-	var contentValue = document.getElementById("content-content").value;
+	var contentValue = simplemde.value();
 	var contentFormatted = "title: "+titleValue+"\nposition: "+longValue+", "+latValue+"\n\n---\n"+contentValue; // le title intégré dans la desc du markdown
 	
-	request("POST", "includes/saveMarkdownDocument.php", "title="+titleValue+"&content="+contentFormatted, app);
+	request("POST", "includes/SaveMarkdownDocument.php", "title="+titleValue+"&content="+contentFormatted, app);
     }, false);
     
     btnCancel.addEventListener('click', function() {
@@ -49,4 +53,16 @@ function save(){
 	st.isCreating = false;
 	// console.log(this);
     }, false);
+}
+
+function startMarkdownEditor(){
+    // var editor = new Editor({
+    // 	element: document.getElementById("content-content")
+    // });
+
+    // editor.render();
+
+    simplemde = new SimpleMDE({ 
+        element: document.getElementById("content-content") 
+    });
 }

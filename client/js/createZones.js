@@ -12,7 +12,7 @@ export default function createZones(){
 	.enter().append("g")
 	.attr("class", "zone")
 	.append("text")
-	.attr("font-family", "Liberation Mono")
+	.attr("font-family", "lato")
 	.attr("font-size", "16px")
 	.attr("text-anchor", "middle")
 	.text(function(d){ return d.title})

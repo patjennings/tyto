@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAAA,IAAI;EACA,aAAa,EAAE,IAAI",
-"sources": ["../sass/article.scss"],
-"names": [],
-"file": "article.css"
-}

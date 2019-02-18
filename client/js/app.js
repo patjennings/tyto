@@ -13,7 +13,7 @@ import request from './request';
 let content = null;
 
 (function(window){
-    var appData = request("GET", "includes/list-content.php", null, writeAppData); // on télécharge les données
+    var appData = request("GET", "list-content.php", null, writeAppData); // on télécharge les données
     // app();
 })(window);
 
@@ -25,6 +25,8 @@ export function writeAppData(data){
 }
 
 export default function app(){
+
+    
 
     var st = new appState();
     st.isCreating = false;
