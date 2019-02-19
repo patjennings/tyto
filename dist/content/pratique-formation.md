@@ -1,8 +1,12 @@
 title: Pratique, formation
-position: 36.8911, 25.5230
+position: 36.8936232765435, 25.530049906490525
 relations: 0
 
 ---
+
+
+
+
 J'ai l'impression qu'on s'accorde sur les grandes lignes. L'outil peut devenir au mieux envahissant, au pire toxique ; et il ne sert à rien de pester indéfiniment contre Adobe ou les gros éditeurs. On peut au moins porter un regard critique sur cça, à défaut de pouvoir s'en émanciper maintenant. Mais il faut absolument cesser de voir en ces outils l'alpha et l'oméga de la pratique — comme on peut le voir beaucoup en ce moment, avec Sketch et les UX designers. Bon, on est d'accord. Cela étant dit, il y a des sujets sur lesquels j'ai envie de te proposer quelques points de vue.
 
 ## Temps de réponse des éditeurs

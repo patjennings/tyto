@@ -1,8 +1,11 @@
 title: Basse déf
-position: 36.8700, 25.5200
+
+position: 36.85018324634313, 25.41750228731496
 relations: 0
 
 ---
+
+
 
 Depuis que le dernier smartphone en ma possession s'est éclaté sur le sol d'une terrasse, l'été dernier, je me suis procuré un téléphone relativement simple. Je me sers donc désormais de celui-ci pour mes prises de notes photographiques. Et j'ai découvert plusieurs aspects intéressants à cet appareil, qui permet des prises de vue beaucoup moins abouties que les smartphones. *Le fait de prendre des photos à une résolution maximum de 640x480 pousse à adopter une attitude différente dans la prise de notes.* Lors de la prise de vue, on voit sur la prévisualisation de l'écran de l'appareil que les lumières basses sont bouchées, et que ça crame tout de suite dans les lumières hautes. Bref, l'image sera de mauvaise facture. Donc, on doit bien considérer ce que l'on veut voir de cette prise de note. Pas de fioritures. Et, finalement, on ne se laisse pas enivrer en cours de route par des vélléités plastiques. Vraisemblablement, aucun effet lumineux impromptu ne viendra faire ressembler notre image à un plan de Wim Wenders.
 *Au fond, quand on parcourt à nouveau toutes ces mauvaises images, on tente de se remémorer ce que l'on a bien voulu capturer là, et, étrangement, on retrouve souvent.* C'est comme si l'idée flottait longtemps à la surface. On ne se laisse pas envivrer par des vélléités plasqtiques à la prise de vue, disai-je plus haut, mais cela est encore plus vrai lorsqu'on compulse son répertoire : on ne se promène pas dans des photos, mais dans des idées, qui restent assez fraîches. **La haute-définition** et son **pouvoir séducteur** ne viennent pas se placer devant l'intention capturée. Si cette note doit donner lieu à une nouvelle image, celle-ci reste à faire, entièrement.

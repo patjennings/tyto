@@ -29,7 +29,7 @@ export default function zoomed() {
 	// La hauteur dynamique du contenant (.inner-card)
 	var rectHeight = vars.g.selectAll(".inner-card").node().getBoundingClientRect().height
 	
-	return "translate(" + (proj[0]-(340/2)) +", "+(proj[1]-(rectHeight/2))+ ")";
+	return "translate(" + (proj[0]-(vars.cardsWidth/2)) +", "+(proj[1]-(rectHeight/2))+ ")";
     })
     vars.g.selectAll(".zone").attr("transform", function(d) {
 	return "translate(" + vars.projection([

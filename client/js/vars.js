@@ -109,4 +109,6 @@ export var svg = d3.select("body")
 
 export var g = svg.append("g");
 
+export var cardsWidth = 340;
+
 // export var content = "";

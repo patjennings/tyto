@@ -2,6 +2,7 @@ import * as vars from "./vars";
 import appState from "./vars";
 import request from './request';
 import app from './app';
+import addBox from './addBox';
 
 let isCreating = null;
 var st = new appState();
@@ -17,9 +18,9 @@ export default function create(currentPosition){
 	lat,
 	long
     ])
-    var content = "";
-    
-    var elements = "<div id='input-container' style='transform: translate("+proj[0]+"px, "+proj[1]+"px);'><input id='content-title' placeholder='Titre'></input><textarea id='content-content' rows='6' placeholder='Contenu'>"+content+"</textarea><input id='content-position-long' type='hidden' value='"+long+"'/><input id='content-position-lat' type='hidden' value='"+lat+"'/><div class='btn-container'><button type='submit' value='ok' class='btn highlight' id='document-validate'>Valider</button><button value='cancel' class='btn' id='document-cancel'>Annuler</button></div></div>";
+    // var content = "";
+
+    var elements = addBox(proj, long, lat);
     
     $(".map").append(elements);
     startMarkdownEditor();

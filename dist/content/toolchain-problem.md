@@ -1,8 +1,9 @@
 title: Toolchain problem
-position: 36.8897, 25.5223
+position: 36.88573382940917, 25.501816227097557
 relations: 0
 
 ---
+
 
 Tu parles ici de la question primordiale de l’outil, du conditionnement de la matière qu’il travail en fonction de ses propres propriétés plastiques. Si on suit cette métaphore, on aurait un spectre d’outils partant du plus fondamental/mou/gestalt/proto-forme genre glaise primordiale dans l’outil de programmation pure - langage objet - potentialité infini, au plus rigide/métal moulé/préfabriqué/sur rail/normé dans la suite Adobe telle qu’elle est plus ou moins déjà, et est censé devenir dans les prochaines années. Sur le papier, la toolchain d’Adobe est conçue comme un ensemble interconnecté de fonctionnalités graphiques élémentaires devant permettre une grande combinatoire d’opérations graphiques. Adobe a les moyens d’adapter très rapidement cette toolchain en fonction des exigences/pratiques du "marché", mais le “marché” se situant dans une temporalité bien plus étendue, et on assiste à un effet de feedback où cette même toolchain en vient à guider ces exigences/pratiques. Pour moi c est l’exemple de la toolbox des coins arrondis dont tu parlais, où du vectoriel, bien que je ne sois pas entièrement d’accord avec toi à ce sujet. Par ailleurs on observe ce même travers chez Google et ses devkits, on est passé d’une solution offerte à une industrie en plein appel d’air, à une standardisation de cette même industrie.
 

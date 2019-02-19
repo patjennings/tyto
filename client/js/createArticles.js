@@ -23,6 +23,10 @@ export default function createArticles(){
 	.attr("opacity", "0")
     
     vars.g.selectAll(".card")
+	.attr("id",function(d) {
+	    return d.raw;
+	})
+	    
 	.attr("transform", function(d) {
 	    var proj = vars.projection([
 		d.location.longitude,
@@ -32,11 +36,11 @@ export default function createArticles(){
 	    // La hauteur dynamique du contenant (.inner-card)
 	    var rectHeight = vars.g.selectAll(".card").node().getBoundingClientRect().height
 	    
-	    return "translate(" + (proj[0]-(340/2)) +", "+(proj[1]-(rectHeight/2))+ ")";
+	    return "translate(" + (proj[0]-(vars.cardsWidth/2)) +", "+(proj[1]-(rectHeight/2))+ ")";
 	})
 	.append("svg:foreignObject")
-	.attr("width", 340)
-	.attr("height", 800)
+	.attr("width", vars.cardsWidth)
+	.attr("height", vars.cardsWidth)
 	.append("xhtml:body")
  	.attr("class", "inner-card")
 	.html(function(d) { return "<div class='title'><h3>"+d.title+"</h3>"; })

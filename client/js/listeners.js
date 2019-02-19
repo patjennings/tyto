@@ -2,6 +2,8 @@ import zoomed from "./zoom";
 import * as vars from "./vars";
 import appState from "./vars";
 import addContent from "./addContent";
+import request from "./request";
+import app from "./app";
 
 let ctrlPushed = false;
 
@@ -25,7 +27,9 @@ export default function listeners(){
     d3.select("body").select("svg")
 	.on('mousemove', function() {
 	    st.currentPosition = vars.projection.invert(d3.mouse(this));
-	    // console.log(st.currentPosition);
+	    // console.log("position géographique :"+st.currentPosition);
+	    // console.log("position écran :"+vars.projection(st.currentPosition));
+	    // console.log("=======");
 	    // console.log(">>>>>> "+ctrlPushed);
 	})
 	.on('click', function() {
@@ -44,7 +48,6 @@ export default function listeners(){
 
     // puis on l'appelle
     vars.g.call(zoom);
-
     vars.g.selectAll(".card").call(dragListener);
 }
 
@@ -56,10 +59,21 @@ var dragListener = d3.behavior.drag()
         // it's important that we suppress the mouseover event on the node being dragged. Otherwise it will absorb the mouseover event and the underlying node will not detect it d3.select(this).attr('pointer-events', 'none');
     })
     .on("drag", function(d) {
-	console.log(d);
+	// console.log(d);
+	var card = d3.select(this);
+	card.attr("transform", function(d) {
+	    return "translate(" + vars.projection(st.currentPosition) + ")";
+	    
+	})
     })
     .on("dragend", function(d) {
-	console.log("end drag");
+	var card = d3.select(this);
+	var titleRaw = card.attr("id");
+	// console.log();
+
+	// et là, on doit écrire avec php dans le markdown pour modifier la position avec st.currentPosition
+	request("POST", "includes/UpdateMarkdownDocument.php", "titleraw="+titleRaw+"&newlongitude="+st.currentPosition[0]+"&newlatitude="+st.currentPosition[1], app);
+
     });
 
 function endDrag() {
