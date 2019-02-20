@@ -13,21 +13,28 @@ import request from './request';
 let content = null;
 
 (function(window){
-    var appData = request("GET", "list-content.php", null, writeAppData); // on télécharge les données
-    // app();
+    // qd c'est prêt, on commence
+    app();
 })(window);
+
+export default function app(){
+    requestAppData();
+}
+
+function requestAppData(){
+    // on télécharge les données
+    var appData = request("GET", "list-content.php", null, writeAppData); 
+}
 
 export function writeAppData(data){
     // on relance app(), et on recharge tout
     var st = new appState();
     st.appData = JSON.parse(data);
-    app();
+    launcher();
 }
 
-export default function app(){
 
-    
-    console.log();
+function launcher(){
     var st = new appState();
     st.isCreating = false;
     st.isDragging = false;
@@ -73,12 +80,7 @@ export default function app(){
 	listeners();
 	// createPoints(); // affiche les points et permet de vérifier le centrage des cartes.
     });
-
-    
-
-    
 }
-
 
 
 
