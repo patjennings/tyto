@@ -47,8 +47,8 @@ export default function listeners(){
 	.on("zoom", zoomed);
 
     // puis on l'appelle
-    vars.g.call(zoom);
-    vars.g.selectAll(".card").call(dragListener);
+    d3.select("svg").call(zoom);
+    d3.select("svg").selectAll(".card").call(dragListener);
 }
 
 

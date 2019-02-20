@@ -5,7 +5,8 @@ import * as vars from "./vars";
 
 export default function createZones(){
     
-    vars.g.append("g")
+    d3.select("svg")
+	.append("g")
 	.attr("id", "zones")
 	.selectAll("text")
 	.data(vars.zones)
@@ -17,7 +18,8 @@ export default function createZones(){
 	.attr("text-anchor", "middle")
 	.text(function(d){ return d.title})
 
-    vars.g.selectAll(".zone")
+    d3.select("svg")
+	.selectAll(".zone")
 	.attr("transform", function(d) {
 	    return "translate(" + vars.projection([
 		d.location.longitude,

@@ -18,20 +18,22 @@ export default function zoomed() {
     vars.projection.translate(t).scale(s);
 
     // transforme les pays
-    vars.g.selectAll("path").attr("d", vars.path);
+    d3.select("svg").selectAll("path").attr("d", vars.path);
     
     // transforme les points au zoom et translate
-    vars.g.selectAll(".card").attr("transform", function(d) {
+    d3.select("svg").selectAll(".card").attr("transform", function(d) {
 	var proj = vars.projection([
 	    d.location.longitude,
 	    d.location.latitude
 	])
 	// La hauteur dynamique du contenant (.inner-card)
-	var rectHeight = vars.g.selectAll(".inner-card").node().getBoundingClientRect().height
-	
+ 
+	var rectHeight = d3.select("svg").selectAll(".card").node().getBoundingClientRect().height
+	// console.log("translate(" + (proj[0]-(vars.cardsWidth/2)) +", "+(proj[1]-(rectHeight/2))+ ")");
 	return "translate(" + (proj[0]-(vars.cardsWidth/2)) +", "+(proj[1]-(rectHeight/2))+ ")";
+ // ON S'OCCUPE de ça APRÈS !!!!!!!!!!!!
     })
-    vars.g.selectAll(".zone").attr("transform", function(d) {
+    d3.select("svg").selectAll(".zone").attr("transform", function(d) {
 	return "translate(" + vars.projection([
 	    d.location.longitude,
 	    d.location.latitude
@@ -40,7 +42,7 @@ export default function zoomed() {
 	.selectAll("text")
 	.attr("font-size", scale(s, 50000, 1536308, 12, 24)+"px");
 
-    // vars.g.selectAll(".point").attr("transform", function(d) {
+    // d3.select("svg").selectAll(".point").attr("transform", function(d) {
     // 	return "translate(" + vars.projection([
     // 	    d.location.longitude,
     // 	    d.location.latitude
@@ -50,5 +52,5 @@ export default function zoomed() {
     st.scaleFac = s;
     console.log(st.scaleFac);
     
-    draw(s);
+    draw(st.scaleFac);
 }

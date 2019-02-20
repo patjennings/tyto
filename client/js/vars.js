@@ -6,6 +6,7 @@ let isDragging = null; // false
 let scaleFac = null; // doit être modifié //40000.503614997007
 let currentPosition = null;      // doit être modifié //[0, 0]
 let appData = null;      // doit être modifié avec le nouveau contenu chargé du json
+let firstStart = true;
 
 // cette fonction contient modifie les états de l'application, avec des getters et des setters
 // pour pouvoir vivre tout au long du déroulement
@@ -55,6 +56,14 @@ export default function appState() {
 	    appData = value;
 	}
     });
+    Object.defineProperty(this, 'firstStart', {
+	get: function() {
+	    return firstStart;
+	},
+	set: function(value) {
+	    firstStart = value;
+	}
+    });
   // this.getArchive = function() { return archive; };
 }
 
@@ -102,13 +111,4 @@ export var projection = d3.geo.mercator()
 export var path = d3.geo.path()
     .projection(projection);
 
-export var svg = d3.select("body")
-    .append("svg")
-    .attr("width", width)
-    .attr("height", height);
-
-export var g = svg.append("g");
-
 export var cardsWidth = 340;
-
-// export var content = "";

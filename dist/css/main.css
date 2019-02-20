@@ -70,6 +70,9 @@ html, body {
   stroke-linecap: round;
   pointer-events: none; }
 
+.card {
+  border: 1px solid #000; }
+
 .inner-card {
   background-color: #FFFFFF99;
   width: 320px;

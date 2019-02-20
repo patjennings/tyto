@@ -10,19 +10,26 @@ export default function createArticles(){
 
     var st = new appState();
     
-    vars.g.append("g")
+    d3.select("svg")
+	.append("g")
 	.attr("id", "articles")
 	.selectAll("rect")
 	.data(st.appData)
-	.enter().append("g")
+	.enter()
+	.append("g")
 	.attr("class", "card")
 	.append("rect")
-	.attr("width", 96)
-	.attr("height", 128)
-	.attr("fill", "#FFFFFF")
-	.attr("opacity", "0")
-    
-    vars.g.selectAll(".card")
+	// .attr("class", "inner-card")
+	.attr("width", vars.cardsWidth)
+    	.attr("height", 100)
+	.attr("fill", "#FC0")
+	.attr("opacity", "0.1")
+
+
+    // w/o foreignobject
+    d3.select("svg")
+	.selectAll(".card")
+	
 	.attr("id",function(d) {
 	    return d.raw;
 	})
@@ -34,19 +41,15 @@ export default function createArticles(){
 	    ])
 	    
 	    // La hauteur dynamique du contenant (.inner-card)
-	    var rectHeight = vars.g.selectAll(".card").node().getBoundingClientRect().height
+	    var rectHeight = d3.select("svg").selectAll(".card").node().getBoundingClientRect().height
 	    
 	    return "translate(" + (proj[0]-(vars.cardsWidth/2)) +", "+(proj[1]-(rectHeight/2))+ ")";
 	})
-	.append("svg:foreignObject")
-	.attr("width", vars.cardsWidth)
-	.attr("height", vars.cardsWidth)
-	.append("xhtml:body")
- 	.attr("class", "inner-card")
-	.html(function(d) { return "<div class='title'><h3>"+d.title+"</h3>"; })
-	.append("div")
-	.attr("class", "content")
+	.append("text").style("font-size", "12px").style("color", "#000")
+	.text(function(d) { return d.title;})
+	
 
+    console.log(">>>>>>> "+st.scaleFac);
     draw();
 }
 

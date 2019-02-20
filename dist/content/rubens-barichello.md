@@ -1,8 +1,24 @@
 title: rubens Barichello
 
-position: 36.860575771464845, 25.519991924997218
+position: 36.88038779045142, 25.57359548979044
 relations: 0
 
 ---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 le pilote

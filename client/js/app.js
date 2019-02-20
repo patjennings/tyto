@@ -38,12 +38,22 @@ function launcher(){
     var st = new appState();
     st.isCreating = false;
     st.isDragging = false;
-    st.scaleFac = 40000.503614997007;
-    st.currentPosition = [0, 0];
-
-    console.log(st.appData);
+    if(st.scaleFac == null) st.scaleFac = 40000.503614997007;
+    if(st.currentPosition == null) st.currentPosition = [0, 0];
     
-    vars.g.append("rect")
+    let svg = d3.select("svg");
+    
+    if(svg){
+	d3.select("svg").remove(); // on réinitialise tout
+	d3.select("body")
+	    .append("svg")
+	    .attr("width", vars.width)
+	    .attr("height", vars.height)
+    }
+    
+    d3.select("svg")
+	.append("g")
+	.append("rect")
 	.attr("class", "background")
 	.attr("width", vars.width)
 	.attr("height", vars.height);
@@ -63,7 +73,8 @@ function launcher(){
     d3.json(vars.mapPath, function(error, json) {
     	// if (error) throw error;
 	
-    	vars.g.append("g")
+    	d3.select("svg")
+	    .append("g")
     	    .attr("id", "states")
     	    .selectAll("path")
     	    .data(json.features)
@@ -75,11 +86,16 @@ function launcher(){
     	// .on("click", clicked);
 
     	// On lance les fonctions une fois que la carte est chargée et affichée
-    	createArticles(); // création des articles
+	// if(st.firstStart == true){ // si c'est le premier démarrage
+	createArticles(); // création des articles
     	createZones(); // création des titres de zones
 	listeners();
+	// }
+    	
+	// st.firstStart = false;
 	// createPoints(); // affiche les points et permet de vérifier le centrage des cartes.
     });
+    
 }
 
 
