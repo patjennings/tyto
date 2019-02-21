@@ -1,3 +1,4 @@
+// permet de couper les lignes à une longueur définie
 export default function textWrap(text, width) {
   text.each(function() {
     var text = d3.select(this),

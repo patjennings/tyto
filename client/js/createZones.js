@@ -1,5 +1,5 @@
-import * as vars from "./vars";
-import appState from "./vars";
+import * as globals from "./globals";
+import appState from "./globals";
 /////////////////////////
 // Ajouter les zones
 /////////////////////////
@@ -25,7 +25,7 @@ export default function createZones(){
     d3.select("svg")
 	.selectAll(".zone")
 	.attr("transform", function(d) {
-	    return "translate(" + vars.projection([
+	    return "translate(" + globals.projection([
 		d.location.longitude,
 		d.location.latitude
 	    ]) + ")";

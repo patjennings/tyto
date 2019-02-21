@@ -29,7 +29,7 @@ html, body {
     background-color: #FFFFFF99;
     width:320px;
     // padding: 8px;
-    font-family: "lato", monospace;
+    font-family: "lato", sans-serif;
     // border: 1px solid #000000;
     font-size: 0.75rem;
     line-height: 1.6;
@@ -89,7 +89,7 @@ html, body {
 }
 
 #zones{
-    font-family: "lato", monospace;
+    font-family: "lato", sans-serif;
     // border: 1px solid #000000;
     font-size: 0.75rem;
     line-height: 1.6;
@@ -107,6 +107,7 @@ html, body {
     z-index: 999;
     top: 0;
     left: 0; // (largeur/2)-largeur
+    bottom: 0;
     width: 480px;
     padding: 24px;
     // padding: 16px;
@@ -122,6 +123,16 @@ html, body {
     }
     .btn-container{
 	
+    }
+
+    .CodeMirror,
+    .editor-statusbar,
+    .editor-toolbar{
+	font-family: "lato", sans-serif;
+    }
+
+    .CodeMirror{
+	height: 75%;
     }
 }
 

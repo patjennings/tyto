@@ -1,7 +1,7 @@
-import * as vars from "./vars";
-import appState from "./vars";
-import scale from './utils';
-import textWrap from './textWrap';
+import * as globals from "./globals";
+import appState from "./globals";
+import scale from './utils/scale';
+import textWrap from './utils/textWrap';
 
 ///////////////////////////////////////////
 // affiche le contenu relatif au niveau de zooms
@@ -99,7 +99,7 @@ function drawContentBox(level, displayContentText){
 	    .attr("fill", "#000")
 	    .attr("x", "8")
 	    .attr("dy", "32px")
-	    .call(textWrap, vars.cardsWidth)
+	    .call(textWrap, globals.cardsWidth)
 
 	
     }

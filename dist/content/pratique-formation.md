@@ -1,8 +1,9 @@
 title: Pratique, formation
-position: 36.88581089327381, 25.531801018066364
+position: 36.887653639362256, 25.52360870262239
 relations: 0
 
 ---
+
 
 
 

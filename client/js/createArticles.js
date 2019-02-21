@@ -1,5 +1,5 @@
-import * as vars from "./vars";
-import appState from "./vars";
+import * as globals from "./globals";
+import appState from "./globals";
 import draw from './draw';
 
 /////////////////////////
@@ -36,7 +36,7 @@ export default function createArticles(){
 	})
 	    
 	.attr("transform", function(d) {
-	    var proj = vars.projection([
+	    var proj = globals.projection([
 		d.location.longitude,
 		d.location.latitude
 	    ])

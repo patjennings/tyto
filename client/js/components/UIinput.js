@@ -1,15 +1,15 @@
-import * as vars from "./vars";
-import appState from "./vars";
+// import * as globals from "./globals";
+// import appState from "./globals";
 // import request from './request';
 // import app from './app';
 
-export default function addBox(type, proj, articleLat, articleLong){
+export default function UIinput(type, proj, articleLat, articleLong){
     var e;
     if(type=="content"){
 	// e = "<div id='input-container' style='transform: translate("+proj[0]+"px, "+proj[1]+"px);'>";
 	e = "<div id='input-container'>";
 	e += "<input id='content-title' placeholder='Titre'></input>";
-	e += "<textarea id='content-content' rows='6' placeholder='Contenu de cet article'></textarea>";
+	e += "<textarea id='content-content' rows='18' placeholder='Contenu de cet article'></textarea>";
 	e += "<input id='content-position-long' type='hidden' value='"+articleLong+"'/>";
 	e += "<input id='content-position-lat' type='hidden' value='"+articleLat+"'/>";
 	e += "<div class='btn-container'>";

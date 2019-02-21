@@ -1,5 +1,3 @@
-import * as vars from "./vars";
-
 function fallbackCopyTextToClipboard(text) {
     var textArea = document.createElement("textarea");
     textArea.value = text;
@@ -18,7 +16,7 @@ function fallbackCopyTextToClipboard(text) {
     document.body.removeChild(textArea);
 }
 
-export function copyTextToClipboard(text) {
+export default function copyTextToClipboard(text) {
     if (!navigator.clipboard) {
 	fallbackCopyTextToClipboard(text);
 	return;
@@ -28,9 +26,4 @@ export function copyTextToClipboard(text) {
     }, function(err) {
 	console.error('Async: Could not copy text: ', err);
     });
-}
-
-// this is the map() function from processing
-export default function scale(num, in_min, in_max, out_min, out_max){
-    return (num - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }

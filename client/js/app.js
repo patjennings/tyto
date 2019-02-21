@@ -1,9 +1,9 @@
-import * as vars from "./vars";
-import appState from "./vars";
+import * as globals from "./globals";
+import appState from "./globals";
 import addContent from "./addContent";
 import zoom from "./zoom";
-import copyTextToClipboard from './utils';
-import scale from './utils';
+import copyTextToClipboard from './utils/copyTextToClipboard';
+import scale from './utils/scale';
 import draw from './draw';
 import createArticles from './createArticles';
 import createZones from './createZones';
@@ -54,22 +54,22 @@ function launcher(){
 	d3.select("svg").remove(); // on réinitialise tout
 	d3.select("body")
 	    .append("svg")
-	    .attr("width", vars.width)
-	    .attr("height", vars.height)
+	    .attr("width", globals.width)
+	    .attr("height", globals.height)
     }
     
     d3.select("svg")
 	.append("g")
 	.append("rect")
 	.attr("class", "background")
-	.attr("width", vars.width)
-	.attr("height", vars.height);
+	.attr("width", globals.width)
+	.attr("height", globals.height);
     
     // console.log(st.zonesData);
     // function displayInformations(zoom){
 
     // 	infos = document.getElementById("position");
-    // 	infos.value = vars.currentPosition[1].toFixed(4)+", "+vars.currentPosition[0].toFixed(4);
+    // 	infos.value = globals.currentPosition[1].toFixed(4)+", "+globals.currentPosition[0].toFixed(4);
 
     // }
 
@@ -77,7 +77,7 @@ function launcher(){
     // Afficher la carte
     ////////////////////////
 
-    d3.json(vars.mapPath, function(error, json) {
+    d3.json(globals.mapPath, function(error, json) {
     	// if (error) throw error;
 	
     	d3.select("svg")
@@ -86,7 +86,7 @@ function launcher(){
     	    .selectAll("path")
     	    .data(json.features)
     	    .enter().append("path")
-    	    .attr("d", vars.path)
+    	    .attr("d", globals.path)
 	    .attr("id", function(d,i){ return i})
 	    .style("stroke", "#999999")
 	    .style("fill", "rgba(255,255,255,0.5)");

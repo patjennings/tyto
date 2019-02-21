@@ -76,7 +76,7 @@ html, body {
 .inner-card {
   background-color: #FFFFFF99;
   width: 320px;
-  font-family: "lato", monospace;
+  font-family: "lato", sans-serif;
   font-size: 0.75rem;
   line-height: 1.6;
   /* Titles */ }
@@ -104,7 +104,7 @@ html, body {
     font-weight: 600; }
 
 #zones {
-  font-family: "lato", monospace;
+  font-family: "lato", sans-serif;
   font-size: 0.75rem;
   line-height: 1.6; }
 
@@ -119,6 +119,7 @@ html, body {
   z-index: 999;
   top: 0;
   left: 0;
+  bottom: 0;
   width: 480px;
   padding: 24px;
   background: #fff;
@@ -128,5 +129,11 @@ html, body {
     margin-bottom: 16px; }
   #input-container #content-content {
     margin-bottom: 16px; }
+  #input-container .CodeMirror,
+  #input-container .editor-statusbar,
+  #input-container .editor-toolbar {
+    font-family: "lato", sans-serif; }
+  #input-container .CodeMirror {
+    height: 75%; }
 
 /*# sourceMappingURL=main.css.map */

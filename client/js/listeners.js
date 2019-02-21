@@ -1,6 +1,6 @@
 import zoomed from "./zoom";
-import * as vars from "./vars";
-import appState from "./vars";
+import * as globals from "./globals";
+import appState from "./globals";
 import addContent from "./addContent";
 import addZone from "./addZone";
 import request from "./request";
@@ -27,7 +27,7 @@ export default function listeners(){
 	}
 	if(event.keyCode == 27) {
 	    console.log("esc called");
-	    removeAddBox();    
+	    removeUIinput();    
 	}
     }, false);
 
@@ -39,10 +39,10 @@ export default function listeners(){
 
     d3.select("body").select("svg")
 	.on('mousemove', function() {
-	    st.currentPosition = vars.projection.invert(d3.mouse(this));
+	    st.currentPosition = globals.projection.invert(d3.mouse(this));
 	})
 	.on('click', function() {
-	    st.currentPosition = vars.projection.invert(d3.mouse(this));
+	    st.currentPosition = globals.projection.invert(d3.mouse(this));
 
 	    if(ctrlPushed == true && altPushed == false && st.isCreating == false){ // si on peut créer un doc ET que la touche ctrl est enfoncée
 		console.log("here");
@@ -58,8 +58,8 @@ export default function listeners(){
 
     // on déclare le zoom
     var zoom = d3.behavior.zoom()
-	.translate(vars.projection.translate())
-	.scale(vars.projection.scale())
+	.translate(globals.projection.translate())
+	.scale(globals.projection.scale())
 	// .wheelDelta(wheelDelta)
 	.on("zoom", zoomed);
 
@@ -83,7 +83,7 @@ var dragListener = d3.behavior.drag()
 	// console.log(d);
 	var card = d3.select(this);
 	card.attr("transform", function(d) {
-	    return "translate(" + vars.projection(st.currentPosition) + ")";
+	    return "translate(" + globals.projection(st.currentPosition) + ")";
 	    
 	})
     })
@@ -108,7 +108,8 @@ function wheelDelta() {
     return -d3.event.deltaY * (d3.event.deltaMode ? 120 : 1) / 1500;
 }
 
-function removeAddBox(){
+export function removeUIinput(){
+    console.log("stop la création");
     var box = document.getElementById("input-container");
     box.parentNode.removeChild(box);
     d3.select("svg").selectAll(".creation-spot").remove();
