@@ -5,10 +5,12 @@ export default function textWrap(text, width) {
         word,
         line = [],
         lineNumber = 0,
-        lineHeight = 24, // px
+        lineHeight = 20, // px
         y = text.attr("y"),
+	x = text.attr("x"),
+	// x = 8,
         dy = parseFloat(text.attr("dy")),
-        tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", lineHeight + "px");
+        tspan = text.text(null).append("tspan").attr("x", x).attr("y", y).attr("dy", dy+lineHeight + "px");
     while (word = words.pop()) {
       line.push(word);
       tspan.text(line.join(" "));
@@ -16,7 +18,7 @@ export default function textWrap(text, width) {
         line.pop();
         tspan.text(line.join(" "));
         line = [word];
-        tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", lineHeight + "px").text(word);
+        tspan = text.append("tspan").attr("x", x).attr("y", y).attr("dy", lineHeight + "px").text(word);
       }
     }
   });

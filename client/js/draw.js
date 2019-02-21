@@ -44,7 +44,39 @@ function drawContentBox(level, displayContentText){
     // titre
     d3.select("svg").selectAll(".card")
 	.append("text")
+	.attr("font-family", "lato")
+	.attr("font-size", "13px")
+	.attr("fill", "#000")
+	.attr("dx", "8")
+	.attr("y", "16")
+	.attr("font-weight", "700")
 	.text(function(d) { return d.title; })
+
+    // lien
+
+    d3.select("svg").selectAll(".card")
+	.append("svg:foreignObject")
+	.attr("width", 48)
+	.attr("height", 20)
+	.attr("x", 8)
+	.attr("y", 20)
+	.attr("style", "font-size: 12px; font-family: lato; font-weight: 400;")
+	// .append("xhtml:body")
+ 	// .attr("class", "link")
+	.html(function(d) { return "<div class='link'><a href='article.php?path="+d.path+"'>go></p>"; })
+	.append("div")
+	// .attr("class", "content")
+
+    // d3.select("svg").selectAll(".card")
+    // 	.append("text")
+    // 	.attr("class", "link")
+    // 	.text("go >")
+    // 	.attr("href", function(d) { return d.path; })
+    // 	.attr("font-family", "lato")
+    // 	.attr("font-size", "13px")
+    // 	.attr("fill", "#00F")
+    // 	.attr("x", "8")
+    // 	.attr("dy", "34px")
 
     // contenu
     if(level !== "sky"){
@@ -62,7 +94,13 @@ function drawContentBox(level, displayContentText){
 		}
 		
 	    })
-	    .attr("dy", "14px")
+	    .attr("font-family", "lato")
+	    .attr("font-size", "13px")
+	    .attr("fill", "#000")
+	    .attr("x", "8")
+	    .attr("dy", "32px")
 	    .call(textWrap, vars.cardsWidth)
+
+	
     }
 }

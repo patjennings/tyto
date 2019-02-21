@@ -6,7 +6,7 @@ import addBox from './addBox';
 
 let isCreating = null;
 var st = new appState();
-var simplemde;
+// var simplemde;
 
 export default function create(currentPosition){
     var long = currentPosition[1];
@@ -20,13 +20,11 @@ export default function create(currentPosition){
     ])
     // var content = "";
 
-    var elements = addBox("content", proj, long, lat);
+    var elements = addBox("zone", proj, long, lat);
     
     $(".map").append(elements);
-    startMarkdownEditor();
     save();
-    
-    // save/create file    
+ 
 }
 
 
@@ -43,7 +41,7 @@ function save(){
 	var contentValue = simplemde.value();
 	var contentFormatted = "title: "+titleValue+"\nposition: "+latValue+", "+longValue+"\n\n---\n"+contentValue; // le title intégré dans la desc du markdown
 	
-	request("POST", "includes/SaveMarkdownDocument.php", "title="+titleValue+"&content="+contentFormatted, app);
+	request("POST", "includes/SaveZone.php", "title="+titleValue+"&content="+contentFormatted, app);
     }, false);
     
     btnCancel.addEventListener('click', function() {
@@ -52,16 +50,4 @@ function save(){
 	st.isCreating = false;
 	// console.log(this);
     }, false);
-}
-
-function startMarkdownEditor(){
-    // var editor = new Editor({
-    // 	element: document.getElementById("content-content")
-    // });
-
-    // editor.render();
-
-    simplemde = new SimpleMDE({ 
-        element: document.getElementById("content-content") 
-    });
 }

@@ -6,6 +6,7 @@ let isDragging = null; // false
 let scaleFac = null; // doit être modifié //40000.503614997007
 let currentPosition = null;      // doit être modifié //[0, 0]
 let appData = null;      // doit être modifié avec le nouveau contenu chargé du json
+let zonesData = null;
 let firstStart = true;
 
 // cette fonction contient modifie les états de l'application, avec des getters et des setters
@@ -56,6 +57,14 @@ export default function appState() {
 	    appData = value;
 	}
     });
+    Object.defineProperty(this, 'zonesData', {
+	get: function() {
+	    return zonesData;
+	},
+	set: function(value) {
+	    zonesData = value;
+	}
+    });
     Object.defineProperty(this, 'firstStart', {
 	get: function() {
 	    return firstStart;
@@ -70,36 +79,36 @@ export default function appState() {
 var st = new appState();
 
 export var mapPath = "dist/assets/schinoussa.geojson";
-export var zones = [
-    {
-	title: "Plaine de la politique",
-	location: {
-            latitude: 36.8675,
-            longitude: 25.5300
-        }
-    },
-    {
-	title: "Marais du sexy",
-	location: {
-            latitude: 36.8811,
-            longitude: 25.5327
-        }
-    },
-    {
-	title: "Baie de l'intime",
-	location: {
-            latitude: 36.8545,
-            longitude: 25.5336
-        }
-    },
-    {
-	title: "Forêt du nécessaire",
-	location: {
-            latitude: 36.8765,
-            longitude: 25.5173
-        }
-    }
-];
+// export var zones = [
+//     {
+// 	title: "Plaine de la politique",
+// 	location: {
+//             latitude: 36.8675,
+//             longitude: 25.5300
+//         }
+//     },
+//     {
+// 	title: "Marais du sexy",
+// 	location: {
+//             latitude: 36.8811,
+//             longitude: 25.5327
+//         }
+//     },
+//     {
+// 	title: "Baie de l'intime",
+// 	location: {
+//             latitude: 36.8545,
+//             longitude: 25.5336
+//         }
+//     },
+//     {
+// 	title: "Forêt du nécessaire",
+// 	location: {
+//             latitude: 36.8765,
+//             longitude: 25.5173
+//         }
+//     }
+// ];
 
 export var width = screen.availWidth;
 export var height = screen.availHeight;

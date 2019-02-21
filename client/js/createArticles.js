@@ -13,17 +13,18 @@ export default function createArticles(){
     d3.select("svg")
 	.append("g")
 	.attr("id", "articles")
-	.selectAll("rect")
+	.selectAll("g")
 	.data(st.appData)
 	.enter()
 	.append("g")
 	.attr("class", "card")
-	.append("rect")
-	// .attr("class", "inner-card")
-	.attr("width", vars.cardsWidth)
-    	.attr("height", 100)
-	.attr("fill", "#FC0")
-	.attr("opacity", "0.1")
+    
+    d3.selectAll(".card")
+	.append("circle")
+	.attr("cx", 0)
+    	.attr("cy", 0)
+    	.attr("r", 4)
+	.attr("fill", "#000000")
 
 
     // w/o foreignobject
@@ -41,15 +42,16 @@ export default function createArticles(){
 	    ])
 	    
 	    // La hauteur dynamique du contenant (.inner-card)
-	    var rectHeight = d3.select("svg").selectAll(".card").node().getBoundingClientRect().height
+	    // var itemHeight = d3.select("svg").selectAll(".card").node().getBoundingClientRect().height
 	    
-	    return "translate(" + (proj[0]-(vars.cardsWidth/2)) +", "+(proj[1]-(rectHeight/2))+ ")";
+	    return "translate(" + (proj[0]) +", "+(proj[1])+ ")";
 	})
-	.append("text").style("font-size", "12px").style("color", "#000")
+	.append("text")
+	// .attr("font-weight", "700")
 	.text(function(d) { return d.title;})
 	
 
-    console.log(">>>>>>> "+st.scaleFac);
+    // console.log(">>>>>>> "+st.scaleFac);
     draw();
 }
 

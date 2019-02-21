@@ -8,6 +8,7 @@
     <body class="map">
 	<script src="dist/includes/jquery-3.3.1.min.js" type="text/javascript"></script>
 	<script src="dist/includes/d3.v3.min.js"></script>
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.10.0/d3.js"></script> -->
 	<!-- <script src="https://d3js.org/d3-dispatch.v1.min.js"></script> -->
 	<!-- <script src="https://d3js.org/d3-selection.v1.min.js"></script> -->
 	<!-- <script src="https://d3js.org/d3-drag.v1.min.js"></script> -->

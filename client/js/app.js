@@ -23,16 +23,25 @@ export default function app(){
 
 function requestAppData(){
     // on télécharge les données
-    var appData = request("GET", "list-content.php", null, writeAppData); 
+    var appData = request("GET", "list-content.php", null, writeAppData);
+    
 }
 
 export function writeAppData(data){
     // on relance app(), et on recharge tout
     var st = new appState();
     st.appData = JSON.parse(data);
-    launcher();
+
+    var zonesData = request("GET", "dist/zones.json", null, writeZonesData); 
 }
 
+export function writeZonesData(data){
+    // on relance app(), et on recharge tout
+    var st = new appState();
+    st.zonesData = JSON.parse(data);
+    
+    launcher();
+}
 
 function launcher(){
     var st = new appState();
@@ -58,7 +67,7 @@ function launcher(){
 	.attr("width", vars.width)
 	.attr("height", vars.height);
     
-
+    // console.log(st.zonesData);
     // function displayInformations(zoom){
 
     // 	infos = document.getElementById("position");

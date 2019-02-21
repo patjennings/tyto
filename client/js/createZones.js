@@ -1,15 +1,19 @@
 import * as vars from "./vars";
+import appState from "./vars";
 /////////////////////////
 // Ajouter les zones
 /////////////////////////
 
 export default function createZones(){
+
+    var st = new appState();
+    // console.log("++++++++ "+st.zonesData);
     
     d3.select("svg")
 	.append("g")
 	.attr("id", "zones")
 	.selectAll("text")
-	.data(vars.zones)
+	.data(st.zonesData)
 	.enter().append("g")
 	.attr("class", "zone")
 	.append("text")

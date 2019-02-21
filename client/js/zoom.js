@@ -28,10 +28,9 @@ export default function zoomed() {
 	])
 	// La hauteur dynamique du contenant (.inner-card)
  
-	var rectHeight = d3.select("svg").selectAll(".card").node().getBoundingClientRect().height
+	// var rectHeight = d3.select("svg").selectAll(".card").node().getBoundingClientRect().height
 	// console.log("translate(" + (proj[0]-(vars.cardsWidth/2)) +", "+(proj[1]-(rectHeight/2))+ ")");
-	return "translate(" + (proj[0]-(vars.cardsWidth/2)) +", "+(proj[1]-(rectHeight/2))+ ")";
- // ON S'OCCUPE de ça APRÈS !!!!!!!!!!!!
+	return "translate(" + (proj[0]) +", "+(proj[1])+ ")";
     })
     d3.select("svg").selectAll(".zone").attr("transform", function(d) {
 	return "translate(" + vars.projection([
@@ -40,7 +39,7 @@ export default function zoomed() {
 	]) + ")";
     })
 	.selectAll("text")
-	.attr("font-size", scale(s, 50000, 1536308, 12, 24)+"px");
+	// .attr("font-size", scale(s, 50000, 1536308, 12, 24)+"px"); // la taille des zones s'adapte au zoom
 
     // d3.select("svg").selectAll(".point").attr("transform", function(d) {
     // 	return "translate(" + vars.projection([
@@ -50,7 +49,7 @@ export default function zoomed() {
     // })
 
     st.scaleFac = s;
-    console.log(st.scaleFac);
+    // console.log(st.scaleFac);
     
     draw(st.scaleFac);
 }

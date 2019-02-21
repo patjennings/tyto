@@ -118,8 +118,8 @@ html, body {
   position: absolute;
   z-index: 999;
   top: 0;
-  left: -175px;
-  width: 350px;
+  left: 0;
+  width: 480px;
   padding: 24px;
   background: #fff;
   display: flex;
