@@ -37,31 +37,16 @@ export default function listeners(){
 	console.log(ctrlPushed);
     }, false);
 
-    // clicke sur les liens vers les articles
-    // d3.select("svg")
-    // d3.selectAll(".link")
-    // 	.on('click', function() {
-    // 	    console.log(d3.select(this).attr("href"))
-    // 	    var url = "article.php?path=";
-    //         url += d3.select(this).attr("href");
-    //         $(location).attr('href', url);
-    //         window.location = url;  
-    // 	});
-    
-
     d3.select("body").select("svg")
 	.on('mousemove', function() {
 	    st.currentPosition = vars.projection.invert(d3.mouse(this));
-	    // console.log("position géographique :"+st.currentPosition);
-	    // console.log("position écran :"+vars.projection(st.currentPosition));
-	    // console.log("=======");
-	    // console.log(">>>>>> "+ctrlPushed);
 	})
 	.on('click', function() {
 	    st.currentPosition = vars.projection.invert(d3.mouse(this));
 
 	    if(ctrlPushed == true && altPushed == false && st.isCreating == false){ // si on peut créer un doc ET que la touche ctrl est enfoncée
 		console.log("here");
+		// si trop bas ou trop à droite, transformation
 		addContent(st.currentPosition);
 	    }
 	    if(ctrlPushed == true && altPushed == true && st.isCreating == false){
@@ -126,6 +111,7 @@ function wheelDelta() {
 function removeAddBox(){
     var box = document.getElementById("input-container");
     box.parentNode.removeChild(box);
+    d3.select("svg").selectAll(".creation-spot").remove();
     st.isCreating = false;
     return;
 }

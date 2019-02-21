@@ -24,14 +24,12 @@ export default function app(){
 function requestAppData(){
     // on télécharge les données
     var appData = request("GET", "list-content.php", null, writeAppData);
-    
 }
 
 export function writeAppData(data){
     // on relance app(), et on recharge tout
     var st = new appState();
     st.appData = JSON.parse(data);
-
     var zonesData = request("GET", "dist/zones.json", null, writeZonesData); 
 }
 

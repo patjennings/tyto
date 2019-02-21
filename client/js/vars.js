@@ -79,36 +79,6 @@ export default function appState() {
 var st = new appState();
 
 export var mapPath = "dist/assets/schinoussa.geojson";
-// export var zones = [
-//     {
-// 	title: "Plaine de la politique",
-// 	location: {
-//             latitude: 36.8675,
-//             longitude: 25.5300
-//         }
-//     },
-//     {
-// 	title: "Marais du sexy",
-// 	location: {
-//             latitude: 36.8811,
-//             longitude: 25.5327
-//         }
-//     },
-//     {
-// 	title: "Baie de l'intime",
-// 	location: {
-//             latitude: 36.8545,
-//             longitude: 25.5336
-//         }
-//     },
-//     {
-// 	title: "Forêt du nécessaire",
-// 	location: {
-//             latitude: 36.8765,
-//             longitude: 25.5173
-//         }
-//     }
-// ];
 
 export var width = screen.availWidth;
 export var height = screen.availHeight;

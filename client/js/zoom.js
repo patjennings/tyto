@@ -48,6 +48,13 @@ export default function zoomed() {
     // 	]) + ")";
     // })
 
+    d3.select("svg").selectAll(".creation-spot").attr("transform", function() {
+	return "translate(" + vars.projection([
+	    d3.select(this).attr("latitude"),
+	    d3.select(this).attr("longitude")
+	]) + ")";
+    })
+    
     st.scaleFac = s;
     // console.log(st.scaleFac);
     

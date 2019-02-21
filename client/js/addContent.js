@@ -13,6 +13,35 @@ export default function create(currentPosition){
     var lat = currentPosition[0];
     st.isCreating = true;
 
+    console.log(long+" / "+lat);
+
+    // point où l'article sera créé
+    d3.select("svg")
+	.append("g")
+	.attr("longitude", long)
+    	.attr("latitude", lat)
+	.attr("class", "creation-spot")
+	.attr("transform", function() {
+	    var proj = vars.projection([
+		lat,
+		long
+	    ])
+	    
+	    // La hauteur dynamique du contenant (.inner-card)
+	    // var itemHeight = d3.select("svg").selectAll(".card").node().getBoundingClientRect().height
+	    
+	    return "translate(" + (proj[0]) +", "+(proj[1])+ ")";
+	})
+    d3.select(".creation-spot").append("circle")
+    	.attr("cx", 0)
+    	.attr("cy", 0)
+    	.attr("r", 4)
+    	.attr("fill", "#FF0000")
+    d3.select(".creation-spot").append("circle")
+    	.attr("r", 16)
+	.attr("fill", "#FF0000")
+	.attr("opacity", 0.2)
+
     // create layer w/ input + save button
     var proj = vars.projection([
 	lat,
