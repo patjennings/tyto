@@ -1,5 +1,7 @@
 title: Comment devenir artiste
-position: 36.87670649151966, 25.534081886659358
+position: 36.8718551223636, 25.534115036930302
+relations: 0
 
 ---
+
 Otl Aicher, Mark Rothko
