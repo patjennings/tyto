@@ -65,7 +65,7 @@ export default function listeners(){
 
     // puis on l'appelle
     d3.select("svg").call(zoom);
-    d3.select("svg").selectAll(".card").call(dragListener);
+    d3.select("#articles").selectAll(".card").call(dragListener);
 }
 
 function control(){
@@ -80,7 +80,7 @@ var dragListener = d3.behavior.drag()
         // it's important that we suppress the mouseover event on the node being dragged. Otherwise it will absorb the mouseover event and the underlying node will not detect it d3.select(this).attr('pointer-events', 'none');
     })
     .on("drag", function(d) {
-	// console.log(d);
+	console.log("draggggiiiiiing");
 	var card = d3.select(this);
 	card.attr("transform", function(d) {
 	    return "translate(" + globals.projection(st.currentPosition) + ")";

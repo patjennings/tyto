@@ -21,9 +21,10 @@ html, body {
     pointer-events: none;
 }
 
-
 .card{
     border: 1px solid #000;
+    position: absolute;
+    // pointer-events: none;
 }
 .inner-card{
     background-color: #FFFFFF99;

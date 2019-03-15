@@ -33,7 +33,7 @@ export default function draw(){
     }*/
 }
 
-
+console.time("draWContentBox");
 function drawContentBox(level, displayContentText){
     console.log(level);
     
@@ -104,3 +104,4 @@ function drawContentBox(level, displayContentText){
 	
     }
 }
+console.timeEnd("draWContentBox");

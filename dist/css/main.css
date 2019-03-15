@@ -71,7 +71,8 @@ html, body {
   pointer-events: none; }
 
 .card {
-  border: 1px solid #000; }
+  border: 1px solid #000;
+  position: absolute; }
 
 .inner-card {
   background-color: #FFFFFF99;
