@@ -25,8 +25,6 @@ export default function request(method, uri, sendData = null, callback = request
     var async = (callback!==null);
     var timestamp = new Date();
     var uniqueURI = uri+ (uri.indexOf("?") > 0 ? "&" : "?")+ "timestamp="+ timestamp.getTime();
-
-    // console.log(uri);
     
     if(method === 'GET'){
         if(sendData!=null){uniqueURI+="?"+sendData;}

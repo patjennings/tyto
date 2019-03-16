@@ -71,38 +71,32 @@ html, body {
   pointer-events: none; }
 
 .card {
-  border: 1px solid #000;
-  position: absolute; }
-
-.inner-card {
-  background-color: #FFFFFF99;
-  width: 320px;
   font-family: "lato", sans-serif;
-  font-size: 0.75rem;
-  line-height: 1.6;
-  /* Titles */ }
-  .inner-card .title {
-    padding: 0 1rem; }
-    .inner-card .title p {
-      margin: 0; }
-  .inner-card .content {
-    padding: 0 1rem; }
-    .inner-card .content em {
-      font-weight: normal;
-      font-style: normal;
-      background: #f8f9db; }
-    .inner-card .content strong {
-      font-weight: normal;
-      font-style: normal;
-      background: #ffe0e0; }
-  .inner-card.sky .title {
-    font-weight: 500; }
-  .inner-card.top .title {
-    font-weight: 600; }
-  .inner-card.middle .title {
-    font-weight: 600; }
-  .inner-card.low .title {
-    font-weight: 600; }
+  border: 1px solid #000;
+  position: absolute;
+  font-size: 0.75rem; }
+  .card body .card-title {
+    margin-bottom: 0.75rem; }
+  .card body .card-content em {
+    font-weight: normal;
+    font-style: normal;
+    background: #f8f9db; }
+  .card body .card-content strong {
+    font-weight: normal;
+    font-style: normal;
+    background: #ffe0e0; }
+  .card.sky .card-title {
+    font-size: 0.75rem; }
+  .card.sky .card-content {
+    font-size: 0.75rem; }
+  .card.bird .card-title {
+    font-size: 1rem; }
+  .card.bird .card-content {
+    font-size: 0.85rem; }
+  .card.ground .card-title {
+    font-size: 1.425rem; }
+  .card.ground .card-content {
+    font-size: 1rem; }
 
 #zones {
   font-family: "lato", sans-serif;
