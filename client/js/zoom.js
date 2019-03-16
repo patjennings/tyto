@@ -1,7 +1,6 @@
 import * as globals from "./globals";
 import appState from "./globals";
 import scale from './utils/scale';
-import draw from './draw';
 import {updateArticles} from './createArticles';
 import {updateZones} from './createZones';
 
@@ -31,6 +30,4 @@ export default function zoomed() {
     })
     
     st.scaleFac = s;
-    draw(st.scaleFac);
-
 }

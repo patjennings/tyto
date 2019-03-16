@@ -4,7 +4,6 @@ import addContent from "./addContent";
 import zoom from "./zoom";
 import copyTextToClipboard from './utils/copyTextToClipboard';
 import scale from './utils/scale';
-import draw from './draw';
 import createArticles from './createArticles';
 import createZones from './createZones';
 import listeners from './listeners';
