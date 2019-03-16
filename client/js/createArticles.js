@@ -70,6 +70,7 @@ export function updateArticles(newProjection = null){
     
 }
 
+// get content, related to zoom level
 function getContent(data){
     if(st.scaleFac < steps[0].level){
 	linkDisplay = false;
