@@ -7,7 +7,6 @@ import appState from "./globals";
 export default function createZones(){
 
     var st = new appState();
-    // console.log("++++++++ "+st.zonesData);
     
     d3.select("svg")
 	.append("g")
@@ -30,6 +29,15 @@ export default function createZones(){
 		d.location.latitude
 	    ]) + ")";
 	})	
+}
+
+export function updateZones(newProjection = null){
+    d3.select("svg").selectAll(".zone").attr("transform", function(d) {
+	return "translate(" + globals.projection([
+	    d.location.longitude,
+	    d.location.latitude
+	]) + ")";
+    })
 }
 
 ///////
