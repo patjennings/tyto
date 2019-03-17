@@ -1,5 +1,6 @@
 import * as globals from "./globals";
 import appState from "./globals";
+import listeners from "./listeners";
 
 var st = new appState();
 let linkDisplay = false;
@@ -11,7 +12,10 @@ let linkDisplay = false;
 export default function displayPosts(data){
 
     st.postsData = JSON.parse(data); // on récupère les données des contenus
-    
+    console.log(st.postsData);
+
+    d3.select("#articles").remove() // On supprime si #articles existe, comme lors d'un déplacement de contenu > on reset
+        
     d3.select("svg")
 	.append("g")
 	.attr("id", "articles")
@@ -70,6 +74,7 @@ export default function displayPosts(data){
 	.html(function(d){return linkDisplay ? getLink(d) : null;})
 
     adjustFoHeight();
+    listeners(); // on active les écouteurs
 }
 
 // Permet d'ajuster automatiquement la hauteur du foreignObject en se basant sur le body

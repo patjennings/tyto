@@ -1,4 +1,4 @@
-import zoomed from "./zoom";
+// import scaleMap from "./scaleMap";
 import * as globals from "./globals";
 import appState from "./globals";
 import addPost from "./addPost";

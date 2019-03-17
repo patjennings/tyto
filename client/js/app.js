@@ -1,7 +1,6 @@
 import * as globals from "./globals";
 import appState from "./globals";
 import addPost from "./addPost";
-import zoom from "./zoom";
 import copyTextToClipboard from './utils/copyTextToClipboard';
 import scale from './utils/scale';
 import displayPosts from './displayPosts';
@@ -10,11 +9,9 @@ import listeners from './listeners';
 import request from './request';
 
 let content = null;
-
 let st = new appState();
 
 (function(window){
-    // qd c'est prêt, on commence
     app();
 })(window);
 
@@ -64,16 +61,15 @@ function displayMap(){
 	
 	requestPosts(); // création des articles
 	requestZones(); // création des titres de zones
-	listeners(); // on active les écouteurs
     });
 }
 
-function requestPosts(){
+export function requestPosts(){
     // on télécharge les données
     var postsData = request("GET", "list-content.php", null, displayPosts);
 }
 
-function requestZones(){
+export function requestZones(){
     // on télécharge les données
     var zonesData = request("GET", "dist/zones.json", null, displayZones);
 }

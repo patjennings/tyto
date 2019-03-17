@@ -1,17 +1,15 @@
-import zoomed from "./zoom";
+import scaleMap from "./scaleMap";
 import * as globals from "./globals";
 import appState from "./globals";
 import addPost from "./addPost";
 import addZone from "./addZone";
 import request from "./request";
 import displayPosts from "./displayPosts"
-import app from "./app";
+import app, {requestPosts} from "./app";
 
 let ctrlPushed = false;
 let altPushed = false;
-
 var st = new appState();
-
 var selectedNode = null;
 
 export default function listeners(){
@@ -60,7 +58,7 @@ export default function listeners(){
 	.translate(globals.projection.translate())
 	.scale(globals.projection.scale())
 	// .wheelDelta(wheelDelta)
-	.on("zoom", zoomed);
+	.on("zoom", scaleMap);
 
     // puis on l'appelle
     d3.select("svg").call(zoom);
@@ -88,7 +86,7 @@ var dragListener = d3.behavior.drag()
 	console.log("Stop dragging element");
 
 	// et là, on modifie la position dans le fichier lié à l'item draggé/droppé
-	request("POST", "includes/UpdateMarkdownDocument.php", "titleraw="+titleRaw+"&newlongitude="+st.currentPosition[0]+"&newlatitude="+st.currentPosition[1], displayPosts);
+	request("POST", "includes/UpdateMarkdownDocument.php", "titleraw="+titleRaw+"&newlongitude="+st.currentPosition[0]+"&newlatitude="+st.currentPosition[1], requestPosts);
 
     });
 

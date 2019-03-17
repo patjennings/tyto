@@ -1,4 +1,4 @@
-import zoomed from "./zoom";
+import scaleMap from "./scaleMap";
 
 // toutes ces variables sont modifiées dans init.js, via l'objet appState()
 let isCreating = null; // on est en train de créer un article // false
@@ -129,8 +129,8 @@ export var width = screen.availWidth;
 export var height = screen.availHeight;
 
 export var projection = d3.geo.mercator()
-    .scale(485035.40798408084)
-    .translate([ -214842.9723933363,336774.3379795616]);
+    .scale(485035)
+    .translate([ -215431, 336666]);
 
 export var path = d3.geo.path()
     .projection(projection);

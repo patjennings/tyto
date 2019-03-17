@@ -1,8 +1,10 @@
 title: LA baie des délices
-position: 36.88227116231861, 25.51469423324375
+position: 36.88492310564948, 25.511190219524934
 relations: 0
 
 ---
+
+
 
 
 

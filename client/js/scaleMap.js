@@ -10,8 +10,7 @@ var st = new appState();
 // Fonction qui gère l'affichage lors des zooms
 /////////////////////////////////////////////////////
 
-export default function zoomed() {
-
+export default function scaleMap() {
     var t = d3.event.translate;
     var s = d3.event.scale; 
     globals.projection.translate(t).scale(s);
