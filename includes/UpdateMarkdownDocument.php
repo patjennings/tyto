@@ -35,10 +35,12 @@ $newContent .= $contentSplitted['content']['low'];
 
 
 // on écrit tout dans le fichier
-file_put_contents($filepath, $newContent);
+if(file_put_contents($filepath, $newContent)){
+    echo "Mise à jour effectuée :  ".$filepath;
+} else {
+    echo "Erreur pendant l'écriture dans le fichier";
+}
 
-// if ($titleraw) {
-    
-// }
+// echo qqchose pour tracer
 
 ?>

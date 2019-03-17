@@ -1,11 +1,11 @@
 import * as globals from "./globals";
 import appState from "./globals";
-import addContent from "./addContent";
+import addPost from "./addPost";
 import zoom from "./zoom";
 import copyTextToClipboard from './utils/copyTextToClipboard';
 import scale from './utils/scale';
-import createArticles from './createArticles';
-import createZones from './createZones';
+import displayPosts from './displayPosts';
+import displayZones from './displayZones';
 import listeners from './listeners';
 import request from './request';
 
@@ -93,8 +93,8 @@ function launcher(){
 
     	// On lance les fonctions une fois que la carte est chargée et affichée
 	// if(st.firstStart == true){ // si c'est le premier démarrage
-	createArticles(); // création des articles
-    	createZones(); // création des titres de zones
+	displayPosts(); // création des articles
+    	displayZones(); // création des titres de zones
 	listeners();
 	// }
     	

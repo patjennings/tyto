@@ -39,10 +39,8 @@ export default function request(method, uri, sendData = null, callback = request
         o.onreadystatechange = function (){
             if(o.readyState==4&&o.status==200){
                 callback(o.responseText);
-                console.log("request is successful");
-		console.log(o.responseText);
-		// console.log(callback);
-		// return o.responseText;
+                // console.log("Request is successful");
+		console.log("Réponse : "+o.responseText);
             }else if(o.readyState==4&&o.status!=200){
                 console.log("There was an error during this request")
             }

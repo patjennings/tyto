@@ -1,7 +1,7 @@
 import zoomed from "./zoom";
 import * as globals from "./globals";
 import appState from "./globals";
-import addContent from "./addContent";
+import addPost from "./addPost";
 import addZone from "./addZone";
 import request from "./request";
 import app from "./app";
@@ -19,14 +19,14 @@ export default function listeners(){
     window.addEventListener('keydown', (event) => {
 	if(event.ctrlKey) {
 	    ctrlPushed = true;
-	    console.log(ctrlPushed);
+	    // console.log(ctrlPushed);
 	}
 	if(event.altKey) {
 	    altPushed = true;
-	    console.log(altPushed);
+	    // console.log(altPushed);
 	}
 	if(event.keyCode == 27) {
-	    console.log("esc called");
+	    // console.log("esc called");
 	    removeUIinput();    
 	}
     }, false);
@@ -34,7 +34,7 @@ export default function listeners(){
     window.addEventListener('keyup', (event) => {
 	ctrlPushed = false;
 	altPushed = false;
-	console.log(ctrlPushed);
+	// console.log(ctrlPushed);
     }, false);
 
     d3.select("body").select("svg")
@@ -45,12 +45,10 @@ export default function listeners(){
 	    st.currentPosition = globals.projection.invert(d3.mouse(this));
 
 	    if(ctrlPushed == true && altPushed == false && st.isCreating == false){ // si on peut créer un doc ET que la touche ctrl est enfoncée
-		console.log("here");
 		// si trop bas ou trop à droite, transformation
-		addContent(st.currentPosition);
+		addPost(st.currentPosition);
 	    }
 	    if(ctrlPushed == true && altPushed == true && st.isCreating == false){
-		console.log("here");
 		addZone(st.currentPosition);
 	    }
 	    return;
@@ -68,10 +66,6 @@ export default function listeners(){
     d3.select("#articles").selectAll(".card").call(dragListener);
 }
 
-function control(){
-    console.log("click listener ok");
-}
-
 
 var dragListener = d3.behavior.drag()
     .on("dragstart", function(d) {
@@ -80,17 +74,17 @@ var dragListener = d3.behavior.drag()
         // it's important that we suppress the mouseover event on the node being dragged. Otherwise it will absorb the mouseover event and the underlying node will not detect it d3.select(this).attr('pointer-events', 'none');
     })
     .on("drag", function(d) {
-	console.log("draggggiiiiiing");
 	var card = d3.select(this);
 	card.attr("transform", function(d) {
 	    return "translate(" + globals.projection(st.currentPosition) + ")";
 	    
 	})
+	console.log("Start dragging element")
     })
     .on("dragend", function(d) {
 	var card = d3.select(this);
 	var titleRaw = card.attr("id");
-	console.log(titleRaw);
+	console.log("Stop dragging element");
 
 	// et là, on modifie la position dans le fichier lié à l'item draggé/droppé
 	request("POST", "includes/UpdateMarkdownDocument.php", "titleraw="+titleRaw+"&newlongitude="+st.currentPosition[0]+"&newlatitude="+st.currentPosition[1], app);
@@ -109,7 +103,7 @@ function wheelDelta() {
 }
 
 export function removeUIinput(){
-    console.log("stop la création");
+    // console.log("stop la création");
     var box = document.getElementById("input-container");
     box.parentNode.removeChild(box);
     d3.select("svg").selectAll(".creation-spot").remove();

@@ -4,7 +4,7 @@ import appState from "./globals";
 // Ajouter les zones
 /////////////////////////
 
-export default function createZones(){
+export default function displayZones(){
 
     var st = new appState();
     

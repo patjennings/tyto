@@ -1,12 +1,12 @@
 import zoomed from "./zoom";
 import * as globals from "./globals";
 import appState from "./globals";
-import addContent from "./addContent";
+import addPost from "./addPost";
 import addZone from "./addZone";
 import request from "./request";
 import app from "./app";
 import {removeUIinput} from "./listeners";
-import {simplemde} from "./addContent";
+import {simplemde} from "./addPost";
 
 let ctrlPushed = false;
 let altPushed = false;
@@ -21,7 +21,7 @@ export default function listenersSave(target){
     var btnCancel = document.getElementById("document-cancel");
     
     btnValidate.addEventListener('click', function() {
-	console.log("save file");
+	// console.log("save file");
 
 	var titleValue = document.getElementById("content-title").value;
 	var longValue = document.getElementById("content-position-long").value;

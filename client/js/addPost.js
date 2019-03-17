@@ -10,13 +10,12 @@ let isCreating = null;
 var st = new appState();
 export var simplemde;
 
-export default function addContent(currentPosition){
+export default function addPost(currentPosition){
     var long = currentPosition[1];
     var lat = currentPosition[0];
     st.isCreating = true;
 
     UISpotCreation("#4980ef", lat, long); // marquer l'endroit où la zone est créée
-
 
     // create layer w/ input + save button
     var proj = globals.projection([
@@ -24,8 +23,7 @@ export default function addContent(currentPosition){
 	long
     ])
 
-    var elements = UIinput("content", proj, long, lat);
-    
+    var elements = UIinput("content", proj, long, lat);    
     $(".map").append(elements);
     startMarkdownEditor();
 

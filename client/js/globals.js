@@ -9,6 +9,25 @@ let appData = null;      // doit être modifié avec le nouveau contenu chargé 
 let zonesData = null;
 let firstStart = true;
 
+let steps = [
+    {
+	name: "space",
+	level: 0
+    },
+    {
+	name: "sky",
+	level: 13
+    },
+    {
+	name: "bird",
+	level: 50
+    },
+    {
+	name: "ground",
+	level: 260
+    }
+];
+
 // cette fonction contient modifie les états de l'application, avec des getters et des setters
 // pour pouvoir vivre tout au long du déroulement
 // s'applique sur les trois variables déclarées au dessus
@@ -71,6 +90,14 @@ export default function appState() {
 	},
 	set: function(value) {
 	    firstStart = value;
+	}
+    });
+    Object.defineProperty(this, 'steps', {
+	get: function() {
+	    return steps;
+	},
+	set: function(value) {
+	    steps = value;
 	}
     });
   // this.getArchive = function() { return archive; };

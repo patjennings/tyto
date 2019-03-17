@@ -1,8 +1,8 @@
 import * as globals from "./globals";
 import appState from "./globals";
 import scale from './utils/scale';
-import {updateArticles} from './createArticles';
-import {updateZones} from './createZones';
+import {updateArticles} from './displayPosts';
+import {updateZones} from './displayZones';
 
 var st = new appState();
 
@@ -16,6 +16,8 @@ export default function zoomed() {
     var s = d3.event.scale; 
     globals.projection.translate(t).scale(s);
 
+    st.scaleFac = s; // on actualise le facteur d'échelle
+    
     // transforme les pays
     d3.select("svg").selectAll("path").attr("d", globals.path);
     
@@ -29,5 +31,5 @@ export default function zoomed() {
 	]) + ")";
     })
     
-    st.scaleFac = s;
+    
 }

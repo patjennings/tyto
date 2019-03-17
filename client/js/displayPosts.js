@@ -3,60 +3,13 @@ import appState from "./globals";
 
 var st = new appState();
 let linkDisplay = false;
-let steps = [
-    {
-	name: "sky",
-	level: 1300000
-    },
-    {
-	name: "bird",
-	level: 5000000
-    },
-    {
-	name: "ground",
-	level: 26000000
-    }
-]
 
 /////////////////////////
 // Ajouter les articles
 //////////////////////////
 
-export default function createArticles(){
-    // --------
-    // FULL DIV
-    // --------
-    // d3.selectAll(".articles")
-    // 	.data(st.appData)
-    // 	.enter()
-    // 	.append("div")
-    // 	.attr("class", "card")
-
-    // d3.selectAll(".card")	
-    // 	.attr("id",function(d) {
-    // 	    return d.raw;
-    // 	})
-    // 	.attr("style", function(d) {
-    // 	    var proj = globals.projection([
-    // 		d.location.longitude,
-    // 		d.location.latitude
-    // 	    ])
+export default function displayPosts(){
     
-    
-    // 	    // return "translate(" + (proj[0]) +"px, "+(proj[1])+ "px)";
-    // 	    return "left: "+(proj[0])+"px; top: "+(proj[1])+"px;"
-    // 	})
-    // 	.append("text")
-    // // .attr("font-weight", "700")
-    // 	.text(function(d) { return d.title;})
-    // d3.selectAll(".card")
-    // 	.append("div")
-    // 	.attr("class", "content")
-    // 	.html(function(d){return getContent(d);})
-
-    // --------
-    // SVG
-    // --------
     d3.select("svg")
 	.append("g")
 	.attr("id", "articles")
@@ -150,31 +103,46 @@ export function updateArticles(newProjection = null){
 
 // return the  content, related to zoom level
 function getContent(data){
-    if(st.scaleFac < steps[0].level){
+    if(st.scaleFac < toD3Scale(st.steps[1].level)){
+	logger(st.steps[0].name, toD3Scale(st.steps[0].level), st.scaleFac)
 	linkDisplay = false;
 	d3.selectAll(".card")
-	    .attr("class", "card "+steps[0].name)
+	    .attr("class", "card "+st.steps[0].name)
 	return null;
     }
-    else if(st.scaleFac >= steps[0].level && st.scaleFac < steps[1].level){
+    else if(st.scaleFac > toD3Scale(st.steps[1].level) && st.scaleFac < toD3Scale(st.steps[2].level)){
+	logger(st.steps[1].name, toD3Scale(st.steps[1].level), st.scaleFac)
 	linkDisplay = false;
 	d3.selectAll(".card")
-	    .attr("class", "card "+steps[1].name)
+	    .attr("class", "card "+st.steps[1].name)
 	return data.content.top;
 
     }
-    else if(st.scaleFac >= steps[1].level && st.scaleFac < steps[2].level){
+    else if(st.scaleFac > toD3Scale(st.steps[2].level) && st.scaleFac < toD3Scale(st.steps[3].level)){	
+	logger(st.steps[2].name, toD3Scale(st.steps[2].level), st.scaleFac)
 	linkDisplay = true;
 	d3.selectAll(".card")
-	    .attr("class", "card "+steps[2].name)
+	    .attr("class", "card "+st.steps[2].name)
 	return data.content.middle;
 
     }
-    else{
+    else if(st.scaleFac > toD3Scale(st.steps[3].level)){
+	logger(st.steps[3].name, toD3Scale(st.steps[3].level), st.scaleFac)
 	linkDisplay = true;
 	d3.selectAll(".card")
-	    .attr("class", "card "+steps[2].name)
+	    .attr("class", "card "+st.steps[3].name)
 	return data.content.low;
 
     }
+}
+
+function toD3Scale(initialScale){
+    // get readable scale from my vars to unreadable scale for D3
+    return initialScale*100000;
+}
+
+function logger(stName, stLevel, stCur){
+    console.log(
+	"Zoom level :"+stName+"("+stLevel/10000+") while at : "+stCur/10000
+    );
 }
