@@ -4,9 +4,11 @@ import appState from "./globals";
 // Ajouter les zones
 /////////////////////////
 
-export default function displayZones(){
+var st = new appState();
 
-    var st = new appState();
+export default function displayZones(data){
+
+    st.zonesData = JSON.parse(data); // on récupère les données des zones
     
     d3.select("svg")
 	.append("g")

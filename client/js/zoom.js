@@ -1,7 +1,7 @@
 import * as globals from "./globals";
 import appState from "./globals";
 import scale from './utils/scale';
-import {updateArticles} from './displayPosts';
+import {updatePosts} from './displayPosts';
 import {updateZones} from './displayZones';
 
 var st = new appState();
@@ -21,7 +21,7 @@ export default function zoomed() {
     // transforme les pays
     d3.select("svg").selectAll("path").attr("d", globals.path);
     
-    updateArticles();
+    updatePosts();
     updateZones();
 
     d3.select("svg").selectAll(".creation-spot").attr("transform", function() {

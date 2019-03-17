@@ -5,9 +5,14 @@ let isCreating = null; // on est en train de créer un article // false
 let isDragging = null; // false
 let scaleFac = null; // doit être modifié //40000.503614997007
 let currentPosition = null;      // doit être modifié //[0, 0]
-let appData = null;      // doit être modifié avec le nouveau contenu chargé du json
+let postsData = null;      // doit être modifié avec le nouveau contenu chargé du json
 let zonesData = null;
 let firstStart = true;
+const rootDir = "http://localhost/tyto/";
+
+
+
+const postsDir = rootDir+"dist/content/";
 
 let steps = [
     {
@@ -34,8 +39,6 @@ let steps = [
 
 export default function appState() {    
     
-    // var archive = [];
-
     Object.defineProperty(this, 'isCreating', {
 	get: function() {
 	    return isCreating;
@@ -68,12 +71,12 @@ export default function appState() {
 	    currentPosition = value;
 	}
     });
-    Object.defineProperty(this, 'appData', {
+    Object.defineProperty(this, 'postsData', {
 	get: function() {
-	    return appData;
+	    return postsData;
 	},
 	set: function(value) {
-	    appData = value;
+	    postsData = value;
 	}
     });
     Object.defineProperty(this, 'zonesData', {
@@ -92,6 +95,22 @@ export default function appState() {
 	    firstStart = value;
 	}
     });
+    Object.defineProperty(this, 'rootDir', {
+	get: function() {
+	    return rootDir;
+	},
+	set: function(value) {
+	    rootDir = value;
+	}
+    });
+    Object.defineProperty(this, 'postsDir', {
+	get: function() {
+	    return postsDir;
+	},
+	set: function(value) {
+	    postsDir = value;
+	}
+    });
     Object.defineProperty(this, 'steps', {
 	get: function() {
 	    return steps;
@@ -100,7 +119,6 @@ export default function appState() {
 	    steps = value;
 	}
     });
-  // this.getArchive = function() { return archive; };
 }
 
 var st = new appState();

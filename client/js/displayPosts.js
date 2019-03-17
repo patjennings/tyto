@@ -8,13 +8,15 @@ let linkDisplay = false;
 // Ajouter les articles
 //////////////////////////
 
-export default function displayPosts(){
+export default function displayPosts(data){
+
+    st.postsData = JSON.parse(data); // on récupère les données des contenus
     
     d3.select("svg")
 	.append("g")
 	.attr("id", "articles")
 	.selectAll("g")
-	.data(st.appData)
+	.data(st.postsData)
     	.enter()
     	.append("g")
     	.attr("class", "card")
@@ -65,7 +67,7 @@ export default function displayPosts(){
 	.select("body")
 	.append("div")
         .attr("class", "card-link")
-	.html(function(d){return linkDisplay ? "The link" : null;})
+	.html(function(d){return linkDisplay ? getLink(d) : null;})
 
     adjustFoHeight();
 }
@@ -81,7 +83,7 @@ function adjustFoHeight(){
 
 }
 
-export function updateArticles(newProjection = null){
+export function updatePosts(newProjection = null){
     // transforme les points au zoom et translate
     d3.selectAll(".card").attr("transform", function(d) {
 	var proj = globals.projection([
@@ -96,7 +98,7 @@ export function updateArticles(newProjection = null){
     
     d3.selectAll(".card")
 	.select(".card-link")
-	.html(function(d){return linkDisplay ? "The link" : null;})
+	.html(function(d){return linkDisplay ? getLink(d) : null;})
 
     adjustFoHeight();
 }
@@ -134,6 +136,11 @@ function getContent(data){
 	return data.content.low;
 
     }
+}
+
+function getLink(data){
+    const link = "<a href='"+st.rootDir+"article.php?path="+st.rootDir+data.path+"'>Link</a>";
+    return link;
 }
 
 function toD3Scale(initialScale){

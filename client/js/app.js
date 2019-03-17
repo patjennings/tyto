@@ -11,37 +11,19 @@ import request from './request';
 
 let content = null;
 
+let st = new appState();
+
 (function(window){
     // qd c'est prêt, on commence
     app();
 })(window);
 
 export default function app(){
-    requestAppData();
+    configure();
+    displayMap(); // Afficher la carte
 }
 
-function requestAppData(){
-    // on télécharge les données
-    var appData = request("GET", "list-content.php", null, writeAppData);
-}
-
-export function writeAppData(data){
-    // on relance app(), et on recharge tout
-    var st = new appState();
-    st.appData = JSON.parse(data);
-    var zonesData = request("GET", "dist/zones.json", null, writeZonesData); 
-}
-
-export function writeZonesData(data){
-    // on relance app(), et on recharge tout
-    var st = new appState();
-    st.zonesData = JSON.parse(data);
-    
-    launcher();
-}
-
-function launcher(){
-    var st = new appState();
+function configure(){
     st.isCreating = false;
     st.isDragging = false;
     if(st.scaleFac == null) st.scaleFac = 40000.503614997007;
@@ -63,21 +45,11 @@ function launcher(){
 	.attr("class", "background")
 	.attr("width", globals.width)
 	.attr("height", globals.height);
-    
-    // console.log(st.zonesData);
-    // function displayInformations(zoom){
+}
 
-    // 	infos = document.getElementById("position");
-    // 	infos.value = globals.currentPosition[1].toFixed(4)+", "+globals.currentPosition[0].toFixed(4);
-
-    // }
-
-    //////////////////////
-    // Afficher la carte
-    ////////////////////////
-
+function displayMap(){
     d3.json(globals.mapPath, function(error, json) {
-    	// if (error) throw error;
+    	if (error) throw error;
 	
     	d3.select("svg")
 	    .append("g")
@@ -89,21 +61,22 @@ function launcher(){
 	    .attr("id", function(d,i){ return i})
 	    .style("stroke", "#999999")
 	    .style("fill", "rgba(255,255,255,0.5)");
-    	// .on("click", clicked);
-
-    	// On lance les fonctions une fois que la carte est chargée et affichée
-	// if(st.firstStart == true){ // si c'est le premier démarrage
-	displayPosts(); // création des articles
-    	displayZones(); // création des titres de zones
-	listeners();
-	// }
-    	
-	// st.firstStart = false;
-	// createPoints(); // affiche les points et permet de vérifier le centrage des cartes.
+	
+	requestPosts(); // création des articles
+	requestZones(); // création des titres de zones
+	listeners(); // on active les écouteurs
     });
-    
 }
 
+function requestPosts(){
+    // on télécharge les données
+    var postsData = request("GET", "list-content.php", null, displayPosts);
+}
+
+function requestZones(){
+    // on télécharge les données
+    var zonesData = request("GET", "dist/zones.json", null, displayZones);
+}
 
 
 

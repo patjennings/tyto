@@ -4,6 +4,7 @@ import appState from "./globals";
 import addPost from "./addPost";
 import addZone from "./addZone";
 import request from "./request";
+import displayPosts from "./displayPosts"
 import app from "./app";
 
 let ctrlPushed = false;
@@ -87,7 +88,7 @@ var dragListener = d3.behavior.drag()
 	console.log("Stop dragging element");
 
 	// et là, on modifie la position dans le fichier lié à l'item draggé/droppé
-	request("POST", "includes/UpdateMarkdownDocument.php", "titleraw="+titleRaw+"&newlongitude="+st.currentPosition[0]+"&newlatitude="+st.currentPosition[1], app);
+	request("POST", "includes/UpdateMarkdownDocument.php", "titleraw="+titleRaw+"&newlongitude="+st.currentPosition[0]+"&newlatitude="+st.currentPosition[1], displayPosts);
 
     });
 
