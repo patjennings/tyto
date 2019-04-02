@@ -1,8 +1,9 @@
 title: Juliiot Cazarre
-position: 36.89601460054764, 25.532557989078434
+position: 36.89125040563034, 25.537824309789276
 relations: 0
 
 ---
+
 
 
 

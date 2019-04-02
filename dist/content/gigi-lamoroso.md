@@ -1,8 +1,9 @@
 title: Gigi l'amoroso
-position: 36.89561313442966, 25.516937207541382
+position: 36.89049459979159, 25.53274484435057
 relations: 0
 
 ---
+
 
 
 
