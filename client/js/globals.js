@@ -9,12 +9,9 @@ let postsData = null;      // doit être modifié avec le nouveau contenu charg�
 let zonesData = null;
 let firstStart = true;
 const rootDir = "http://localhost/tyto/";
-
-
-
 const postsDir = rootDir+"dist/content/";
 
-let steps = [
+const steps = [
     {
 	name: "space",
 	level: 0
@@ -123,7 +120,7 @@ export default function appState() {
 
 var st = new appState();
 
-export var mapPath = "dist/assets/schinoussa.geojson";
+export var mapDataPath = "dist/assets/schinoussa.geojson";
 
 export var width = screen.availWidth;
 export var height = screen.availHeight;
@@ -132,7 +129,7 @@ export var projection = d3.geo.mercator()
     .scale(485035)
     .translate([ -215431, 336666]);
 
-export var path = d3.geo.path()
+export var pathProjection = d3.geo.path()
     .projection(projection);
 
 export var cardsWidth = 340;

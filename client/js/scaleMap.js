@@ -18,7 +18,7 @@ export default function scaleMap() {
     st.scaleFac = s; // on actualise le facteur d'échelle
     
     // transforme les pays
-    d3.select("svg").selectAll("path").attr("d", globals.path);
+    d3.select("svg").selectAll("path").attr("d", globals.pathProjection);
     
     updatePosts();
     updateZones();

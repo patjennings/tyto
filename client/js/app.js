@@ -17,12 +17,14 @@ let st = new appState();
 
 export default function app(){
     configure();
-    displayMap(); // Afficher la carte
+    displayMapBackground(globals.mapDataPath, globals.pathProjection); // Afficher la carte
+    console.log(globals.pathProjection);
 }
 
 function configure(){
     st.isCreating = false;
     st.isDragging = false;
+    
     if(st.scaleFac == null) st.scaleFac = 40000.503614997007;
     if(st.currentPosition == null) st.currentPosition = [0, 0];
     
@@ -44,8 +46,8 @@ function configure(){
 	.attr("height", globals.height);
 }
 
-function displayMap(){
-    d3.json(globals.mapPath, function(error, json) {
+function displayMapBackground(mapData, mapProjection){
+    d3.json(mapData, function(error, json) {
     	if (error) throw error;
 	
     	d3.select("svg")
@@ -54,7 +56,7 @@ function displayMap(){
     	    .selectAll("path")
     	    .data(json.features)
     	    .enter().append("path")
-    	    .attr("d", globals.path)
+    	    .attr("d", mapProjection)
 	    .attr("id", function(d,i){ return i})
 	    .style("stroke", "#999999")
 	    .style("fill", "rgba(255,255,255,0.5)");
