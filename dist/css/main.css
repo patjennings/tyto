@@ -3,49 +3,57 @@
   font-style: normal;
   font-stretch: normal;
   font-weight: 400;
-  src: local("Lato"), url("fonts/LatoLatin-Regular.woff") format("woff"); }
+  src: local("Lato"), url(assets/fonts/LatoLatin-Regular?name=src/fonts/LatoLatin-Regular.woff&context=/src/assets/fonts) format("woff"); }
+
 @font-face {
   font-family: "lato";
   font-style: italic;
   font-stretch: normal;
   font-weight: 400;
-  src: local("Lato"), url("fonts/LatoLatin-Italic.woff") format("woff"); }
+  src: local("Lato"), url(assets/fonts/LatoLatin-Italic?name=src/fonts/LatoLatin-Italic.woff&context=/src/assets/fonts) format("woff"); }
+
 @font-face {
   font-family: "lato";
   font-style: normal;
   font-stretch: normal;
   font-weight: 700;
-  src: local("Lato"), url("fonts/LatoLatin-Bold.woff") format("woff"); }
+  src: local("Lato"), url(assets/fonts/LatoLatin-Bold?name=src/fonts/LatoLatin-Bold.woff&context=/src/assets/fonts) format("woff"); }
+
 @font-face {
   font-family: "lato";
   font-style: italic;
   font-stretch: normal;
   font-weight: 700;
-  src: local("Lato"), url("fonts/LatoLatin-BoldItalic.woff") format("woff"); }
+  src: local("Lato"), url(assets/fonts/LatoLatin-BoldItalic?name=src/fonts/LatoLatin-BoldItalic.woff&context=/src/assets/fonts) format("woff"); }
+
 @font-face {
   font-family: "spectral";
   font-style: normal;
   font-stretch: normal;
   font-weight: 400;
-  src: local("Spectral"), url("fonts/Spectral-Regular.woff") format("woff"); }
+  src: local("Spectral"), url(assets/fonts/Spectral-Regular?name=src/fonts/Spectral-Regular.woff&context=/src/assets/fonts) format("woff"); }
+
 @font-face {
   font-family: "spectral";
   font-style: italic;
   font-stretch: normal;
   font-weight: 400;
-  src: local("Spectral"), url("fonts/Spectral-Italic.woff") format("woff"); }
+  src: local("Spectral"), url(assets/fonts/Spectral-Italic?name=src/fonts/Spectral-Italic.woff&context=/src/assets/fonts) format("woff"); }
+
 @font-face {
   font-family: "spectral";
   font-style: normal;
   font-stretch: normal;
   font-weight: 700;
-  src: local("Spectral"), url("fonts/Spectral-Bold.woff") format("woff"); }
+  src: local("Spectral"), url(assets/fonts/Spectral-Bold?name=src/fonts/Spectral-Bold.woff&context=/src/assets/fonts) format("woff"); }
+
 @font-face {
   font-family: "spectral";
   font-style: italic;
   font-stretch: normal;
   font-weight: 700;
-  src: local("Spectral"), url("fonts/Spectral-BoldItalic.woff") format("woff"); }
+  src: local("Spectral"), url(assets/fonts/Spectral-BoldItalic?name=src/fonts/Spectral-BoldItalic.woff&context=/src/assets/fonts) format("woff"); }
+
 /* FUNCTIONS */
 .row {
   margin-bottom: 3rem; }
@@ -131,4 +139,3 @@ html, body {
   #input-container .CodeMirror {
     height: 75%; }
 
-/*# sourceMappingURL=main.css.map */

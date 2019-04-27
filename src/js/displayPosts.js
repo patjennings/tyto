@@ -10,7 +10,6 @@ let linkDisplay = false;
 //////////////////////////
 
 export default function displayPosts(data){
-
     st.postsData = JSON.parse(data); // on récupère les données des contenus
     console.log(st.postsData);
 
@@ -144,7 +143,7 @@ function getContent(data){
 }
 
 function getLink(data){
-    const link = "<a href='"+st.rootDir+"article.php?path="+st.rootDir+data.path+"'>Link</a>";
+    const link = "<a href='"+st.rootDir+"server/article.php?path="+data.path+"'>Link</a>";
     return link;
 }
 

@@ -42,7 +42,7 @@ export default function request(method, uri, sendData = null, callback = request
                 // console.log("Request is successful");
 		console.log("Réponse : "+o.responseText);
             }else if(o.readyState==4&&o.status!=200){
-                console.log("There was an error during this request")
+                console.log("There was an error during this request for "+uri)
             }
         };
     }

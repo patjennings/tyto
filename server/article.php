@@ -1,6 +1,6 @@
 <?php
 $path = $_GET['path'];
-include("includes/Parsedown.php");
+include("utils/Parsedown.php");
 
 $fileContent = file_get_contents($path);
 $content = explode("---", $fileContent);

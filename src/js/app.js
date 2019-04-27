@@ -68,7 +68,7 @@ function displayMapBackground(mapData, mapProjection){
 
 export function requestPosts(){
     // on télécharge les données
-    var postsData = request("GET", "list-content.php", null, displayPosts);
+    var postsData = request("GET", "server/list-content.php", null, displayPosts);
 }
 
 export function requestZones(){

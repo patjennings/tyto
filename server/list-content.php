@@ -1,21 +1,23 @@
 <?php
 header('Content-Type: application/json');
 
-// $rootPath = "http://localhost/tyto";
-
 // ini_set('display_errors', 1);
 // ini_set('display_startup_errors', 1);
 // error_reporting(E_ALL);
 
-include("includes/Parsedown.php");
-include("includes/ForbiddenChar.php");
-include("includes/GetMarkdownContent.php");
+$conf = include("config.php");
 
-$fileList = glob("dist/content/*.md");
+include("utils/Parsedown.php");
+include("utils/ForbiddenChar.php");
+include("utils/GetMarkdownContent.php");
+
+$fileList = glob("../dist/content/*.md");
 $filesArray = array();
 
 $obj = array();
 $json;
+
+// echo $conf["baseUrl"];
 
 //Loop through the array that glob returned.
 foreach($fileList as $filename){
@@ -38,6 +40,7 @@ function writeJSON($title, $contentTop, $contentMiddle, $contentLow, $position, 
     
     global $obj;
     global $json;
+    global $conf;
 
     $relationsFormat = array();
 

@@ -3,14 +3,25 @@
 
 // $rootPath = "http://localhost/tyto";
 
+
+
+// getMarkdownContent("zrgzrt", "rty/rty/toto.md");
+
 // ini_set('display_errors', 1);
 // ini_set('display_startup_errors', 1);
 // error_reporting(E_ALL);
 
 function getMarkdownContent($content, $file){
+    global $conf;
+    
+    $path = explode("/", $file);
+    $path = array_pop($path);
+    $path = $conf["baseUrl"].$conf["contentPath"].$path;
 
     $data = explode("---", $content);
 
+    // echo $conf["baseUrl"];
+    
     // echo $content;
 
     /////////////////
@@ -79,7 +90,7 @@ function getMarkdownContent($content, $file){
 
     $contentArray = array(
         'title' => $getTitle,
-        'path' => $file,
+        'path' => $path,
         'raw' => $getRawTitle,
         'content' => array(
             'top' => $contentTop,

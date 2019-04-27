@@ -30,12 +30,12 @@ export default function listenersSave(target){
 	if(target == "content"){ // si c'est un article
 	    var contentValue = simplemde.value();
 	    var contentFormatted = "title: "+titleValue+"\nposition: "+latValue+", "+longValue+"\n\n---\n"+contentValue; // le title intégré dans la desc du markdown
-	    request("POST", "includes/SaveMarkdownDocument.php", "title="+titleValue+"&content="+contentFormatted, app);
+	    request("POST", "server/utils/SaveMarkdownDocument.php", "title="+titleValue+"&content="+contentFormatted, app);
 	}
 	if(target == "zone"){
 	    var longValue = document.getElementById("content-position-long").value;
 	    var latValue = document.getElementById("content-position-lat").value;
-	    request("POST", "includes/SaveZone.php", "title="+titleValue+"&latitude="+latValue+"&longitude="+longValue, app);
+	    request("POST", "server/utils/SaveZone.php", "title="+titleValue+"&latitude="+latValue+"&longitude="+longValue, app);
 	}
 	removeUIinput();
     }, false);
