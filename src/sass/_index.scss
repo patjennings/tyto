@@ -1,0 +1,121 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+.background {
+    fill: #e8e8e8;
+    pointer-events: all;
+}
+
+#states {
+    fill: #FFF;
+}
+
+#state-borders {
+    fill: none;
+    stroke: #e8e8e8;
+    stroke-width: 1.5px;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    pointer-events: none;
+}
+
+.card{
+    font-family: "lato", sans-serif;
+    border: 1px solid #000;
+    position: absolute;
+    font-size: 0.75rem;
+    // pointer-events: none;
+    body{
+	.card-title{
+	    margin-bottom: 0.75rem;
+	}
+	.card-content{
+	    em{
+		font-weight: normal;
+		font-style: normal;
+		background: #f8f9db;
+	    }
+	    strong{
+		font-weight: normal;
+		font-style: normal;
+		background: #ffe0e0;	    
+	    }
+	}
+	.card-link{}
+    }
+    &.sky{
+	.card-title{
+	    font-size: 0.75rem;
+	}
+	.card-content{
+	    font-size: 0.75rem;
+	}
+    }
+    &.bird{
+	.card-title{
+	    font-size: 1rem;
+	}
+	.card-content{
+	    font-size: 0.85rem;
+	}
+    }
+    &.ground{
+	.card-title{
+	    font-size: 1.425rem;
+	}
+	.card-content{
+	    font-size: 1rem;
+	}
+    }
+}
+
+#zones{
+    font-family: "lato", sans-serif;
+    // border: 1px solid #000000;
+    font-size: 0.75rem;
+    line-height: 1.6;
+}
+#infos{
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    bottom: 0;
+}
+
+
+#input-container{
+    position: absolute;
+    z-index: 999;
+    top: 0;
+    left: 0; // (largeur/2)-largeur
+    bottom: 0;
+    width: 480px;
+    padding: 24px;
+    // padding: 16px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+
+    #content-title{
+	margin-bottom: 16px;
+    }    
+    #content-content{
+	margin-bottom: 16px;	
+    }
+    .btn-container{
+	
+    }
+
+    .CodeMirror,
+    .editor-statusbar,
+    .editor-toolbar{
+	font-family: "lato", sans-serif;
+    }
+
+    .CodeMirror{
+	height: 75%;
+    }
+}
+

@@ -32,6 +32,15 @@ rien : lourd
 pour ajouter un élément : `ctrl+click` à l'endroit souhaité
 
 ## reste à faire ##
-- ajouter fonctions basiques de preview/formattage markdown
-- possibilité de drag&dropper un élément + actualisation de la position dans le fichier lié
+- ~~ajouter fonctions basiques de preview/formattage markdown~~
+- ~~possibilité de drag&dropper un élément + actualisation de la position dans le fichier lié~~
 - possibilité d'éditer un élément
+- on drag à partir de l'endroit où l'on a cliqué sur la carte, i.e. on ne bouge pas l'origine de celle-ci sous la souris au clic/drag 
+- affichage de la page contenu, au clic sur une carte
+- ranger les dossiers de façon plus claire (dossier src ? Les js dans assets ?)
+
+### V2 ###
+Quelques features qui seront implémentés après une première version stable
+- découper les fichiers selon position = possibilité de repartir vers du texte entièrement. Tyto = outil de structuration
+- gestion de compte (login, sécurisation)
+- mode édition, mode consultation
