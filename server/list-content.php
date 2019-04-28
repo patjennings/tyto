@@ -11,7 +11,7 @@ include("utils/Parsedown.php");
 include("utils/ForbiddenChar.php");
 include("utils/GetMarkdownContent.php");
 
-$fileList = glob("../dist/content/*.md");
+$fileList = glob($conf["serverDir"]."dist/content/*.md");
 $filesArray = array();
 
 $obj = array();

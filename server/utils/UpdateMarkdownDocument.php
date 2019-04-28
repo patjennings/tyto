@@ -7,14 +7,16 @@
 include("Parsedown.php");
 include("ForbiddenChar.php");
 include("GetMarkdownContent.php");
-    
+
+$conf = include("../config.php");
+
 // Result
 if (isset($_POST['newlongitude'])) { $newlongitude = $_POST['newlongitude']; } // nouvelle position en paramètre
 if (isset($_POST['newlatitude'])) { $newlatitude = $_POST['newlatitude']; } // nouvelle position en paramètre
 if (isset($_POST['titleraw'])) { $titleraw = $_POST['titleraw']; } // identifiant du fichier en paramètre (nom de fichier)
 
 // on prend le fichier, on l'ouvre
-$filepath = "../dist/content/".$titleraw.".md";
+$filepath = $conf["serverDir"]."dist/content/".$titleraw.".md";
 $content = file_get_contents($filepath); 
 
 // on sépare tout : titre, position, relations, contenu, qu'on colle dans des variables

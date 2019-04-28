@@ -72,6 +72,12 @@ export default function displayPosts(data){
         .attr("class", "card-link")
 	.html(function(d){return linkDisplay ? getLink(d) : null;})
 
+    d3.selectAll(".card")
+	.select("body")
+	.append("div")
+        .attr("class", "card-edit")
+	.html(function(d){return linkDisplay ? editPost(d) : null;})
+
     adjustFoHeight();
     listeners(); // on active les écouteurs
 }
