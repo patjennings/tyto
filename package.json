@@ -25,7 +25,8 @@
     "scripts": {
 	"test": "mocha",
 	"start": "start-concurrently",
-	"start-webpack": "webpack"
+	"start-webpack": "webpack",
+	"build" : "webpack"
     },
     "repository": {
 	"type": "git",

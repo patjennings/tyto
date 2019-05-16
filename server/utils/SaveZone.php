@@ -9,7 +9,7 @@ if (isset($_POST['title'])) { $getTitle = $_POST['title']; }
 if (isset($_POST['latitude'])) { $getLat = $_POST['latitude']; }
 if (isset($_POST['longitude'])) { $getLong = $_POST['longitude']; }
 
-$json = file_get_contents("../dist/zones.json");
+$json = file_get_contents("../../dist/zones.json");
 $json = json_decode($json, true);
 
 // Les variables qui contiennent les infos du joueur
@@ -30,7 +30,7 @@ function addNewZone($json){
     array_push($json, $newNode); 
     $newJsonString = json_encode($json);
 
-    if(file_put_contents("../dist/zones.json", $newJsonString)) {
+    if(file_put_contents("../../dist/zones.json", $newJsonString)) {
         echo "Zone ".$title." créée";
     }
     else
