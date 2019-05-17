@@ -34,6 +34,7 @@ export function reset(){
     configure();
     displayMap(globals.mapDataPath, globals.pathProjection); // Afficher la carte
     displayNav();
+    console.log(globals.mapDataPath);
 }
 
 function clean(){

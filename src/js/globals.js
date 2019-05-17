@@ -13,6 +13,8 @@ const rootDir = "http://localhost/tyto/";
 // const rootDir = "http://tyto.thomasguesnon.net/";
 const postsDir = rootDir+"dist/content/";
 
+export var mapDataPath = "dist/spaces/"+space+"/map/map.geojson";
+
 const steps = [
     {
 	name: "space",
@@ -45,6 +47,7 @@ export default function appState() {
 	},
 	set: function(value) {
 	    space = value;
+	    mapDataPath = "dist/spaces/"+value+"/map/map.geojson";
 	}
     });
     Object.defineProperty(this, 'isCreating', {
@@ -131,7 +134,7 @@ export default function appState() {
 
 var st = new appState();
 
-export var mapDataPath = "dist/spaces/"+space+"/map/schinoussa.geojson";
+
 
 export var width = screen.availWidth;
 export var height = screen.availHeight;
