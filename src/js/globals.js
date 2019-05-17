@@ -1,6 +1,7 @@
 import scaleMap from "./scaleMap";
 
 // toutes ces variables sont modifiées dans init.js, via l'objet appState()
+let space = "frei";
 let isCreating = null; // on est en train de créer un article // false
 let isDragging = null; // false
 let scaleFac = null; // doit être modifié //40000.503614997007
@@ -8,8 +9,8 @@ let currentPosition = null;      // doit être modifié //[0, 0]
 let postsData = null;      // doit être modifié avec le nouveau contenu chargé du json
 let zonesData = null;
 let firstStart = true;
-// const rootDir = "http://localhost/tyto/";
-const rootDir = "http://tyto.thomasguesnon.net/";
+const rootDir = "http://localhost/tyto/";
+// const rootDir = "http://tyto.thomasguesnon.net/";
 const postsDir = rootDir+"dist/content/";
 
 const steps = [
@@ -36,7 +37,16 @@ const steps = [
 // s'applique sur les trois variables déclarées au dessus
 
 export default function appState() {    
-    
+
+
+    Object.defineProperty(this, 'space', {
+	get: function() {
+	    return space;
+	},
+	set: function(value) {
+	    space = value;
+	}
+    });
     Object.defineProperty(this, 'isCreating', {
 	get: function() {
 	    return isCreating;
@@ -121,7 +131,7 @@ export default function appState() {
 
 var st = new appState();
 
-export var mapDataPath = "dist/assets/schinoussa.geojson";
+export var mapDataPath = "dist/spaces/"+space+"/map/schinoussa.geojson";
 
 export var width = screen.availWidth;
 export var height = screen.availHeight;

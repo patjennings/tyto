@@ -27,7 +27,7 @@ export default function request(method, uri, sendData = null, callback = request
     var uniqueURI = uri+ (uri.indexOf("?") > 0 ? "&" : "?")+ "timestamp="+ timestamp.getTime();
     
     if(method === 'GET'){
-        if(sendData!=null){uniqueURI+="?"+sendData;}
+        if(sendData!=null){uniqueURI+="&"+sendData;}
         o.open(method, uniqueURI, async);
         o.send(null);
     }else if(method === 'POST'){
@@ -40,7 +40,8 @@ export default function request(method, uri, sendData = null, callback = request
             if(o.readyState==4&&o.status==200){
                 callback(o.responseText);
                 // console.log("Request is successful");
-		console.log("Réponse : "+o.responseText);
+		// console.log(uniqueURI);
+		// console.log("Réponse : "+o.responseText);
             }else if(o.readyState==4&&o.status!=200){
                 console.log("There was an error during this request for "+uri)
             }

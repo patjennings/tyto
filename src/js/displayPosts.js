@@ -1,6 +1,6 @@
 import * as globals from "./globals";
 import appState from "./globals";
-import listeners from "./listeners";
+import {d3Listen} from "./listeners";
 
 var st = new appState();
 let linkDisplay = false;
@@ -79,7 +79,7 @@ export default function displayPosts(data){
 	.html(function(d){return linkDisplay ? editPost(d) : null;})
 
     adjustFoHeight();
-    listeners(); // on active les écouteurs
+    d3Listen();
 }
 
 // Permet d'ajuster automatiquement la hauteur du foreignObject en se basant sur le body

@@ -1,3 +1,4 @@
+
 <?php
 header('Content-Type: application/json');
 
@@ -11,7 +12,9 @@ include("utils/Parsedown.php");
 include("utils/ForbiddenChar.php");
 include("utils/GetMarkdownContent.php");
 
-$fileList = glob($conf["serverDir"]."dist/content/*.md");
+$space = $_GET["space"];
+
+$fileList = glob($conf["serverDir"]."dist/spaces/".$space."/content/*.md");
 $filesArray = array();
 
 $obj = array();

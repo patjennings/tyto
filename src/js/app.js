@@ -5,7 +5,7 @@ import copyTextToClipboard from './utils/copyTextToClipboard';
 import scale from './utils/scale';
 import displayPosts from './displayPosts';
 import displayZones from './displayZones';
-import listeners from './listeners';
+import listeners, {d3Listen} from './listeners';
 import request from './request';
 
 let content = null;
@@ -16,12 +16,41 @@ let st = new appState();
 })(window);
 
 export default function app(){
+
+    // remove tout si ça existe
+    // clean();
+    // console.log("Boooootstrap");
     configure();
-    displayMapBackground(globals.mapDataPath, globals.pathProjection); // Afficher la carte
-    console.log(globals.pathProjection);
+    
+    displayMap(globals.mapDataPath, globals.pathProjection); // Afficher la carte
+    displayNav();
+
+    listeners(); // on active les écouteurs
+    // console.log(globals.pathProjection);
+
+}
+
+export function reset(){
+    configure();
+    displayMap(globals.mapDataPath, globals.pathProjection); // Afficher la carte
+    displayNav();
+}
+
+function clean(){
+    
+    // on cleane tout pour redessiner l'ensemble
+    const svg = document.getElementsByTagName("svg")[0];
+    console.log(svg);
+    if(svg){
+	if(svg.parentNode){
+	    svg.parentNode.removeChild(svg);
+	    console.log(svg);
+	}
+    }
 }
 
 function configure(){
+    
     st.isCreating = false;
     st.isDragging = false;
     
@@ -31,6 +60,7 @@ function configure(){
     let svg = d3.select("svg");
     
     if(svg){
+	console.log("déjà le svg");
 	d3.select("svg").remove(); // on réinitialise tout
 	d3.select("body")
 	    .append("svg")
@@ -46,7 +76,8 @@ function configure(){
 	.attr("height", globals.height);
 }
 
-function displayMapBackground(mapData, mapProjection){
+function displayMap(mapData, mapProjection){
+    console.log("display the map");
     d3.json(mapData, function(error, json) {
     	if (error) throw error;
 	
@@ -63,17 +94,38 @@ function displayMapBackground(mapData, mapProjection){
 	
 	requestPosts(); // création des articles
 	requestZones(); // création des titres de zones
+	
+	
     });
+}
+
+function displayNav(){
+    const wrapper = document.getElementById("root");
+    let nav = wrapper.querySelector(".nav");
+    
+    if(!nav){
+	wrapper.insertAdjacentHTML("afterbegin", "<div class='nav'></div>")
+	nav = wrapper.querySelector(".nav");
+
+	let output = "<ul>"
+	output += "<li id='welt' class='nav-item'>welt</li>"
+	output += "<li id='frei' class='nav-item'>frei</li>"
+	output += "</ul>"
+	
+	nav.innerHTML = output;
+    }
+    // console.log(nav);
 }
 
 export function requestPosts(){
     // on télécharge les données
-    var postsData = request("GET", "server/list-content.php", null, displayPosts);
+    var postsData = request("GET", "server/list-content.php", "space="+st.space, displayPosts);
+    
 }
 
 export function requestZones(){
     // on télécharge les données
-    var zonesData = request("GET", "dist/zones.json", null, displayZones);
+    var zonesData = request("GET", "dist/spaces/"+st.space+"/zones.json", null, displayZones);
 }
 
 

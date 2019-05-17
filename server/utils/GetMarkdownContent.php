@@ -13,10 +13,11 @@
 
 function getMarkdownContent($content, $file){
     global $conf;
+    global $space;
     
     $path = explode("/", $file);
     $path = array_pop($path);
-    $path = $conf["baseUrl"].$conf["contentPath"].$path;
+    $path = $conf["baseUrl"].$conf["contentPath"].$space."/content/".$path;
 
     $data = explode("---", $content);
 

@@ -5,37 +5,20 @@ import addPost from "./addPost";
 import addZone from "./addZone";
 import request from "./request";
 import displayPosts from "./displayPosts"
-import app, {requestPosts} from "./app";
+import app, {requestPosts, reset} from "./app";
 
 let ctrlPushed = false;
 let altPushed = false;
 var st = new appState();
 var selectedNode = null;
 
-export default function listeners(){
-    
-    // Ctrl key listener, pour utiliser avec le click lors de la création de documents
-    window.addEventListener('keydown', (event) => {
-	if(event.ctrlKey) {
-	    ctrlPushed = true;
-	    // console.log(ctrlPushed);
-	}
-	if(event.altKey) {
-	    altPushed = true;
-	    // console.log(altPushed);
-	}
-	if(event.keyCode == 27) {
-	    // console.log("esc called");
-	    removeUIinput();    
-	}
-    }, false);
+// export function removeListeners(){
+//     console.log("ok, prêt à remove les listeners");
+//     window.removeEventListener('keydown', () => console.log("keydown removed"));
+// }
 
-    window.addEventListener('keyup', (event) => {
-	ctrlPushed = false;
-	altPushed = false;
-	// console.log(ctrlPushed);
-    }, false);
-
+export function d3Listen(){
+    // console.log("les listeners d3 démarrent");
     d3.select("body").select("svg")
 	.on('mousemove', function() {
 	    st.currentPosition = globals.projection.invert(d3.mouse(this));
@@ -57,7 +40,7 @@ export default function listeners(){
     var zoom = d3.behavior.zoom()
 	.translate(globals.projection.translate())
 	.scale(globals.projection.scale())
-	// .wheelDelta(wheelDelta)
+    // .wheelDelta(wheelDelta)
 	.on("zoom", scaleMap);
 
     // puis on l'appelle
@@ -65,7 +48,52 @@ export default function listeners(){
     d3.select("#articles").selectAll(".card").call(dragListener);
 }
 
+export default function listeners(){
+    console.log("les listeners démarrent");
+    // Ctrl key listener, pour utiliser avec le click lors de la création de documents
+    window.addEventListener('keydown', (event) => {
+	if(event.ctrlKey) {
+	    ctrlPushed = true;
+	    console.log(ctrlPushed);
+	}
+	if(event.altKey) {
+	    altPushed = true;
+	    // console.log(altPushed);
+	}
+	if(event.keyCode == 27) {
+	    // console.log("esc called");
+	    removeUIinput();    
+	}
+    }, false);
 
+    window.addEventListener('keyup', (event) => {
+	ctrlPushed = false;
+	altPushed = false;
+	// console.log(ctrlPushed);
+    }, false);
+
+    // ----------
+    // NAVIGATION
+    // ----------
+    const navItems = document.querySelectorAll(".nav-item");
+    // const navItem = document.getElementById("welt");
+    
+    navItems.forEach(i => {
+    	i.addEventListener('click', (event) => {
+    	    let elem = event.target
+    	    // console.log(elem);
+    	    let newSpace = event.target.attributes[0].value;
+    	    // elem.setAttribute("class", elem.className+" active")
+    	    st.space = newSpace;
+    	    console.log(i);
+    	    reset();
+    	}, false)
+    }) 
+}
+
+// ------
+// UTILS
+// ------
 var dragListener = d3.behavior.drag()
     .on("dragstart", function(d) {
 	st.draggingNode = true;
@@ -86,7 +114,7 @@ var dragListener = d3.behavior.drag()
 	console.log("Stop dragging element");
 
 	// et là, on modifie la position dans le fichier lié à l'item draggé/droppé
-	request("POST", "server/utils/UpdateMarkdownDocument.php", "titleraw="+titleRaw+"&newlongitude="+st.currentPosition[0]+"&newlatitude="+st.currentPosition[1], requestPosts);
+	request("POST", "server/utils/UpdateMarkdownDocument.php", "titleraw="+titleRaw+"&newlongitude="+st.currentPosition[0]+"&newlatitude="+st.currentPosition[1]+"&space="+st.space, requestPosts);
 
     });
 
