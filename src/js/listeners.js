@@ -12,11 +12,6 @@ let altPushed = false;
 var st = new appState();
 var selectedNode = null;
 
-// export function removeListeners(){
-//     console.log("ok, prêt à remove les listeners");
-//     window.removeEventListener('keydown', () => console.log("keydown removed"));
-// }
-
 export function d3Listen(){
     // console.log("les listeners d3 démarrent");
     d3.select("body").select("svg")

@@ -99,7 +99,7 @@ function displayMap(mapData, mapProjection){
     });
 }
 
-function displayNav(){
+async function displayNav(){
     const wrapper = document.getElementById("root");
     let nav = wrapper.querySelector(".nav");
     
@@ -107,12 +107,17 @@ function displayNav(){
 	wrapper.insertAdjacentHTML("afterbegin", "<div class='nav'></div>")
 	nav = wrapper.querySelector(".nav");
 
-	let output = "<ul>"
-	output += "<li id='welt' class='nav-item'>welt</li>"
-	output += "<li id='frei' class='nav-item'>frei</li>"
-	output += "</ul>"
+	let navList = await request("GET", "server/list-spaces.php", null, null);
+	navList = JSON.parse(navList) // on parse le json pour avoir un tableau
 	
+	let output = "<ul>"
+	navList.forEach(n => {
+	    output += "<li id='"+n+"' class='nav-item'>"+n+"</li>"
+	})
+	output += "</ul>"
 	nav.innerHTML = output;
+
+	listeners() // on relance le listener
     }
     // console.log(nav);
 }
