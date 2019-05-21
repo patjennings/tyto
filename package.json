@@ -26,7 +26,8 @@
 	"test": "mocha",
 	"start": "start-concurrently",
 	"start-webpack": "webpack",
-	"build" : "webpack"
+	"build" : "webpack:prod",
+	"webpack:prod": "webpack --config webpack.config.js -p",
     },
     "repository": {
 	"type": "git",
