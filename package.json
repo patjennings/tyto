@@ -23,10 +23,10 @@
 	"webpack-cli": "^3.2.3"
     },
     "scripts": {
-	"test": "mocha",
-	"start": "start-concurrently",
-	"start-webpack": "webpack",
-	"build" : "webpack --config webpack.config.js -p"
+	"test" : "mocha",
+	"start" : "start-concurrently",
+	"start-webpack" : "webpack",
+	"build" : "webpack"
     },
     "repository": {
 	"type": "git",

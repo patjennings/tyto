@@ -28,23 +28,23 @@ module.exports = {
             },
 	    {
 		test: /\.(woff(2)?|ttf|eot|otf|svg)(\?v=\d+\.\d+\.\d+)?$/,
-		use: 
-                    lder: 'file-loader',
-                    oions: {
-		     	name: '[name]?name=[path][name].[ext]&context=/src/assets/fonts',
-		     	outputPath: 'assets/fonts/'
+		use: [{
+                    loader: 'file-loader',
+                    options: {
+			name: '[name]?name=[path][name].[ext]&context=/src/assets/fonts',
+			outputPath: 'assets/fonts/'
                     }
 		}]
             }
 
-        ]
+	]
     },
     plugins: [
-        new MiniCssExtractPlugin({
+	new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
             // both options are optional
             filename: "css/[name].css",
             chunkFilename: "css/[id].css"
-        })
+	})
     ]
 };
