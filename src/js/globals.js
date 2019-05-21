@@ -1,4 +1,5 @@
 import scaleMap from "./scaleMap";
+import {conf} from "./conf"
 
 // toutes ces variables sont modifiées dans init.js, via l'objet appState()
 let space = "frei";
@@ -9,8 +10,8 @@ let currentPosition = null;      // doit être modifié //[0, 0]
 let postsData = null;      // doit être modifié avec le nouveau contenu chargé du json
 let zonesData = null;
 let firstStart = true;
-// const rootDir = "http://localhost/tyto/";
-const rootDir = "http://tyto.thomasguesnon.net/";
+const rootDir = conf.path;
+console.log(rootDir);
 const postsDir = rootDir+"dist/content/";
 
 export var mapDataPath = "dist/spaces/"+space+"/map/map.geojson";

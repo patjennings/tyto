@@ -28,11 +28,11 @@ module.exports = {
             },
 	    {
 		test: /\.(woff(2)?|ttf|eot|otf|svg)(\?v=\d+\.\d+\.\d+)?$/,
-		use: [{
-                    loader: 'file-loader',
-                    options: {
-			name: '[name]?name=[path][name].[ext]&context=/src/assets/fonts',
-			outputPath: 'assets/fonts/'
+		use: 
+                    lder: 'file-loader',
+                    oions: {
+		     	name: '[name]?name=[path][name].[ext]&context=/src/assets/fonts',
+		     	outputPath: 'assets/fonts/'
                     }
 		}]
             }

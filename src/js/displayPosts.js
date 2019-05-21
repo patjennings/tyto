@@ -158,6 +158,10 @@ function toD3Scale(initialScale){
     return initialScale*100000;
 }
 
+function editPost(data){
+    console.log(data);
+}
+
 function logger(stName, stLevel, stCur){
     console.log(
 	"Zoom level :"+stName+"("+stLevel/10000+") while at : "+stCur/10000
