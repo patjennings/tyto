@@ -91,7 +91,17 @@ export default function listeners(){
 // ------
 var dragListener = d3.behavior.drag()
     .on("dragstart", function(d) {
+	var card = d3.select(this);
 	st.draggingNode = true;
+	card.append("circle")
+	    .attr("cx", 0)
+    	    .attr("cy", 0)
+    	    .attr("r", 24)
+	    .attr("fill", "#ffffff")
+	    .attr("opacity", "0.5")
+	
+	card.classed("card isDragged", true)
+
         d3.event.sourceEvent.stopPropagation();
         // it's important that we suppress the mouseover event on the node being dragged. Otherwise it will absorb the mouseover event and the underlying node will not detect it d3.select(this).attr('pointer-events', 'none');
     })
@@ -99,8 +109,8 @@ var dragListener = d3.behavior.drag()
 	var card = d3.select(this);
 	card.attr("transform", function(d) {
 	    return "translate(" + globals.projection(st.currentPosition) + ")";
-	    
 	})
+	
 	console.log("Start dragging element")
     })
     .on("dragend", function(d) {

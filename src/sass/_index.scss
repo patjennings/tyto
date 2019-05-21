@@ -3,6 +3,7 @@ html, body {
     padding: 0;
     overflow: hidden;
     color: #FFF;
+    font-family: "Helvetica", "Liberation Sans", "Arial", sans-serif;
 }
 .background {
     fill: #333333;
@@ -23,25 +24,40 @@ html, body {
 }
 
 .card{
-    font-family: "lato", sans-serif;
-    border: 1px solid #000;
+    
+    // border: 1px solid #000;
     position: absolute;
     font-size: 0.75rem;
+    opacity: 1;
+
+    @include transition(all, 0.15s, ease-in-out);
+
+
     // pointer-events: none;
+
+    &.isDragged{
+	opacity: 0.5;
+    }
+    
     body{
+	background: rgba(0,0,0,0.5);
+	@include border-radius(6px);
+	padding: 8px;
+	
 	.card-title{
 	    margin-bottom: 0.75rem;
+	    font-weight: 700;
 	}
 	.card-content{
 	    em{
 		font-weight: normal;
 		font-style: normal;
-		background: #f8f9db;
+		background: #200c6a;
 	    }
 	    strong{
 		font-weight: normal;
 		font-style: normal;
-		background: #ffe0e0;	    
+		background: #860c18;	    
 	    }
 	}
 	.card-link{}
@@ -81,6 +97,10 @@ html, body {
 
     .zone{
 	color: white;
+	text-transform: uppercase;
+	font-family: "Liberation Sans";
+	font-size: 13px;
+	font-weight: 700;
     }
 }
 #infos{

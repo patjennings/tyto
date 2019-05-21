@@ -90,8 +90,7 @@ function displayMap(mapData, mapProjection){
     	    .enter().append("path")
     	    .attr("d", mapProjection)
 	    .attr("id", function(d,i){ return i})
-	    .style("stroke", "#999999")
-	    .style("fill", "rgba(255,255,255,0.5)");
+	    .style("fill", "#555555");
 	
 	requestPosts(); // création des articles
 	requestZones(); // création des titres de zones

@@ -62,7 +62,8 @@ html, body {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  color: #FFF; }
+  color: #FFF;
+  font-family: "Helvetica", "Liberation Sans", "Arial", sans-serif; }
 
 .background {
   fill: #333333;
@@ -80,20 +81,35 @@ html, body {
   pointer-events: none; }
 
 .card {
-  font-family: "lato", sans-serif;
-  border: 1px solid #000;
   position: absolute;
-  font-size: 0.75rem; }
-  .card body .card-title {
-    margin-bottom: 0.75rem; }
-  .card body .card-content em {
-    font-weight: normal;
-    font-style: normal;
-    background: #f8f9db; }
-  .card body .card-content strong {
-    font-weight: normal;
-    font-style: normal;
-    background: #ffe0e0; }
+  font-size: 0.75rem;
+  opacity: 1;
+  -webkit-transition: all 0.15s ease-in-out;
+  -moz-transition: all 0.15s ease-in-out;
+  -o-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out; }
+  .card.isDragged {
+    opacity: 0.5; }
+  .card body {
+    background: rgba(0, 0, 0, 0.5);
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+    -khtml-border-radius: 6px;
+    border-radius: 6px;
+    padding: 8px; }
+    .card body .card-title {
+      margin-bottom: 0.75rem;
+      font-weight: 700; }
+    .card body .card-content em {
+      font-weight: normal;
+      font-style: normal;
+      background: #200c6a; }
+    .card body .card-content strong {
+      font-weight: normal;
+      font-style: normal;
+      background: #860c18; }
   .card.sky .card-title {
     font-size: 0.75rem; }
   .card.sky .card-content {
@@ -113,7 +129,11 @@ html, body {
   font-size: 0.75rem;
   line-height: 1.6; }
   #zones .zone {
-    color: white; }
+    color: white;
+    text-transform: uppercase;
+    font-family: "Liberation Sans";
+    font-size: 13px;
+    font-weight: 700; }
 
 #infos {
   position: fixed;

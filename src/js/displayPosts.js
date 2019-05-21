@@ -44,14 +44,22 @@ export default function displayPosts(data){
     	.attr("r", 4)
 	.attr("fill", "#ffffff")
 
+    d3.selectAll(".card")
+	.append("line")
+	.attr("class", "link")
+	.attr("stroke", "#ffffff")
+	.attr("x1", 0)   
+	.attr("y1", 0)   
+	.attr("x2", 16)  
+	.attr("y2", -16)
 
     d3.selectAll(".card")
 	.append("svg:foreignObject")
+	.attr("class", "content")
+	.attr("style", "position: relative;")
 	.attr("width", 256)
 	.attr("height", 200)
-	.attr("x", 4)
-	.attr("y", 4)
-	// .attr("style", "font-size: 12px; font-family: lato; font-weight: 400;")
+	.attr("x", 16)
 	.append("xhtml:body")
 	.append("div")
     	.attr("class", "card-title")
@@ -89,6 +97,10 @@ function adjustFoHeight(){
 	.attr("height", function(d){
 	    let bodyHeight = document.getElementById("wrapper-"+d.raw).clientHeight;
 	    return bodyHeight;
+	})
+	.attr("y", function(d){
+	    let bodyHeight = document.getElementById("wrapper-"+d.raw).clientHeight;
+	    return -((bodyHeight+12)/2);
 	})
 
 }
@@ -149,7 +161,7 @@ function getContent(data){
 }
 
 function getLink(data){
-    const link = "<a href='"+st.rootDir+"server/article.php?path="+data.path+"'>Link</a>";
+    const link = "<a href='"+st.rootDir+"server/article.php?path="+data.path+"' onClick=javascript: console.log(data.content.low)>Link</a>";
     return link;
 }
 
