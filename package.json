@@ -1,8 +1,7 @@
 {
     "name": "tyto",
-    "version": "1.0.0",
     "description": "l'idée qui a conduit à ce projet est celle de pouvoir mettre en relation des idées dans un espace géographique, un genre de _carte du tendre_. dans cet espace, on crée des blocs de contenu, que l'on formatte selon leur \"poids\" : ainsi, plus l'élément est léger, plus haut on le voit et, plus l'élément est lourd, plus il va falloir zoomer pour le voir. selon ce principe, on structure des idées qu'on pourra voir s'entrechoquer avec d'autres sur l'espace de la carte.",
-    "main": "index.js",
+    "main": "index.html",
     "dependencies": {
 	"babel-core": "^6.26.3",
 	"start-concurrently": "^1.0.1",
@@ -32,7 +31,7 @@
 	"type": "git",
 	"url": "git+https://gitlab.com/patjennings/content-slices-navigation.git"
     },
-    "author": "",
+    "author": "thomas guesnon",
     "license": "ISC",
     "bugs": {
 	"url": "https://gitlab.com/patjennings/content-slices-navigation/issues"
