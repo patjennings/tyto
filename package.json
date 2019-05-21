@@ -1,5 +1,6 @@
 {
     "name": "tyto",
+    "version": "1.0.0",
     "description": "l'idée qui a conduit à ce projet est celle de pouvoir mettre en relation des idées dans un espace géographique, un genre de _carte du tendre_. dans cet espace, on crée des blocs de contenu, que l'on formatte selon leur \"poids\" : ainsi, plus l'élément est léger, plus haut on le voit et, plus l'élément est lourd, plus il va falloir zoomer pour le voir. selon ce principe, on structure des idées qu'on pourra voir s'entrechoquer avec d'autres sur l'espace de la carte.",
     "main": "index.html",
     "dependencies": {
@@ -24,17 +25,17 @@
     "scripts": {
 	"test": "mocha",
 	"start": "start-concurrently",
-	"start-webpack": "webpack"
-	"build" : ""
+	"start-webpack": "webpack",
+	"build" : "webpack:prod"
     },
     "repository": {
 	"type": "git",
-	"url": "git+https://gitlab.com/patjennings/content-slices-navigation.git"
+	"url": "git+https://framagit.org/patjennings/tyto.git"
     },
     "author": "thomas guesnon",
     "license": "ISC",
     "bugs": {
-	"url": "https://gitlab.com/patjennings/content-slices-navigation/issues"
+	"url": "https://framagit.org/patjennings/tyto/issues"
     },
-    "homepage": "https://gitlab.com/patjennings/content-slices-navigation#README"
+    "homepage": "https://framagit.org/patjennings/tyto#README"
 }
