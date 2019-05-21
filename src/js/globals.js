@@ -9,8 +9,8 @@ let currentPosition = null;      // doit être modifié //[0, 0]
 let postsData = null;      // doit être modifié avec le nouveau contenu chargé du json
 let zonesData = null;
 let firstStart = true;
-const rootDir = "http://localhost/tyto/";
-// const rootDir = "http://tyto.thomasguesnon.net/";
+// const rootDir = "http://localhost/tyto/";
+const rootDir = "http://tyto.thomasguesnon.net/";
 const postsDir = rootDir+"dist/content/";
 
 export var mapDataPath = "dist/spaces/"+space+"/map/map.geojson";
