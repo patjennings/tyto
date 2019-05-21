@@ -61,10 +61,11 @@
 html, body {
   margin: 0;
   padding: 0;
-  overflow: hidden; }
+  overflow: hidden;
+  color: #FFF; }
 
 .background {
-  fill: #e8e8e8;
+  fill: #333333;
   pointer-events: all; }
 
 #states {
@@ -108,8 +109,11 @@ html, body {
 
 #zones {
   font-family: "lato", sans-serif;
+  color: white;
   font-size: 0.75rem;
   line-height: 1.6; }
+  #zones .zone {
+    color: white; }
 
 #infos {
   position: fixed;
@@ -120,7 +124,8 @@ html, body {
 .nav {
   position: absolute;
   top: 0;
-  left: 0; }
+  left: 0;
+  color: white; }
 
 #input-container {
   position: absolute;

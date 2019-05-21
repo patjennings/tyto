@@ -21,6 +21,7 @@ export default function displayZones(data){
 	.attr("font-family", "lato")
 	.attr("font-size", "16px")
 	.attr("text-anchor", "middle")
+	.attr("fill", "#ffffff")
 	.text(function(d){ return d.title})
 
     d3.select("svg")

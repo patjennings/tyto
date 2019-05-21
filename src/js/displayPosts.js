@@ -42,7 +42,7 @@ export default function displayPosts(data){
 	.attr("cx", 0)
     	.attr("cy", 0)
     	.attr("r", 4)
-	.attr("fill", "#000000")
+	.attr("fill", "#ffffff")
 
 
     d3.selectAll(".card")

@@ -2,9 +2,10 @@ html, body {
     margin: 0;
     padding: 0;
     overflow: hidden;
+    color: #FFF;
 }
 .background {
-    fill: #e8e8e8;
+    fill: #333333;
     pointer-events: all;
 }
 
@@ -74,8 +75,13 @@ html, body {
 #zones{
     font-family: "lato", sans-serif;
     // border: 1px solid #000000;
+    color: white;
     font-size: 0.75rem;
     line-height: 1.6;
+
+    .zone{
+	color: white;
+    }
 }
 #infos{
     position: fixed;
@@ -88,6 +94,7 @@ html, body {
     position: absolute;
     top: 0;
     left: 0;
+    color: white;
 }
 
 #input-container{
