@@ -35,16 +35,16 @@ export function d3Listen(){
     var zoom = d3.behavior.zoom()
 	.translate(globals.projection.translate())
 	.scale(globals.projection.scale())
-    // .wheelDelta(wheelDelta)
 	.on("zoom", scaleMap);
 
     // puis on l'appelle
     d3.select("svg").call(zoom);
-    d3.select("#articles").selectAll(".card").call(dragListener);
+    d3.select("#articles").selectAll(".card").select(".grip").call(dragListener);
 }
 
 export default function listeners(){
     console.log("les listeners démarrent");
+    
     // Ctrl key listener, pour utiliser avec le click lors de la création de documents
     window.addEventListener('keydown', (event) => {
 	if(event.ctrlKey) {
@@ -53,10 +53,8 @@ export default function listeners(){
 	}
 	if(event.altKey) {
 	    altPushed = true;
-	    // console.log(altPushed);
 	}
-	if(event.keyCode == 27) {
-	    // console.log("esc called");
+	if(event.keyCode == 27) { // ESC key
 	    removeUIinput();    
 	}
     }, false);
@@ -64,41 +62,64 @@ export default function listeners(){
     window.addEventListener('keyup', (event) => {
 	ctrlPushed = false;
 	altPushed = false;
-	// console.log(ctrlPushed);
     }, false);
 
+    
     // ----------
     // NAVIGATION
     // ----------
     const navItems = document.querySelectorAll(".nav-item");
-    // const navItem = document.getElementById("welt");
     
     navItems.forEach(i => {
     	i.addEventListener('click', (event) => {
     	    let elem = event.target
-    	    // console.log(elem);
     	    let newSpace = event.target.attributes[0].value;
-    	    // elem.setAttribute("class", elem.className+" active")
     	    st.space = newSpace;
-    	    console.log(i);
     	    reset();
     	}, false)
-    }) 
+    })
+
+    
+
+    // // ----------------
+    // // CLICK ON ITEMS
+    // // ----------------
+    // d3.selectAll(".card").select(".content")
+    // 	.on("mouseover", d => {
+    // 	    console.log(d.content.low);
+    // 	})
 }
 
+
+export function ArticleListeners(){
+    
+    // REMOVE ARTICLE
+    // ----------------
+    const articleOverlay = document.getElementById("overlay");
+    const activeArticle = document.getElementById("article");
+    
+    articleOverlay.addEventListener("click", e => {
+	articleOverlay.setAttribute("class", "hiding")
+	activeArticle.setAttribute("class", "hiding")
+	// et on supprime après avoir laissé l'anim jouer
+	window.setTimeout(d => {
+	    activeArticle.parentNode.removeChild(activeArticle);
+	    articleOverlay.parentNode.removeChild(articleOverlay);
+	}, 500)
+	
+    })
+}
 // ------
 // UTILS
 // ------
 var dragListener = d3.behavior.drag()
     .on("dragstart", function(d) {
-	var card = d3.select(this);
+	// lance un intervalle, puis met launch sur ok
+	var card = d3.select(this.parentNode);
 	st.draggingNode = true;
-	card.append("circle")
-	    .attr("cx", 0)
-    	    .attr("cy", 0)
-    	    .attr("r", 24)
-	    .attr("fill", "#ffffff")
-	    .attr("opacity", "0.5")
+	card.select(".grip")
+	    .attr("r", 48)
+	    .attr("opacity", "0.25")
 	
 	card.classed("card isDragged", true)
 
@@ -106,17 +127,14 @@ var dragListener = d3.behavior.drag()
         // it's important that we suppress the mouseover event on the node being dragged. Otherwise it will absorb the mouseover event and the underlying node will not detect it d3.select(this).attr('pointer-events', 'none');
     })
     .on("drag", function(d) {
-	var card = d3.select(this);
+	var card = d3.select(this.parentNode);
 	card.attr("transform", function(d) {
 	    return "translate(" + globals.projection(st.currentPosition) + ")";
 	})
-	
-	console.log("Start dragging element")
     })
     .on("dragend", function(d) {
-	var card = d3.select(this);
+	var card = d3.select(this.parentNode);
 	var titleRaw = card.attr("id");
-	console.log("Stop dragging element");
 
 	// et là, on modifie la position dans le fichier lié à l'item draggé/droppé
 	request("POST", "server/utils/UpdateMarkdownDocument.php", "titleraw="+titleRaw+"&newlongitude="+st.currentPosition[0]+"&newlatitude="+st.currentPosition[1]+"&space="+st.space, requestPosts);
@@ -128,10 +146,6 @@ function endDrag() {
     if (st.draggingNode !== null) {
         st.draggingNode = null;
     }
-}
-
-function wheelDelta() {
-    return -d3.event.deltaY * (d3.event.deltaMode ? 120 : 1) / 1500;
 }
 
 export function removeUIinput(){

@@ -58,6 +58,83 @@
 .row {
   margin-bottom: 3rem; }
 
+#overlay {
+  z-index: 998;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  -webkit-transition: all 0.25s ease-in;
+  -moz-transition: all 0.25s ease-in;
+  -o-transition: all 0.25s ease-in;
+  transition: all 0.25s ease-in; }
+  #overlay.hiding {
+    opacity: 0; }
+
+#article {
+  -webkit-animation: apparition .5s cubic-bezier(0.25, 0, 0.5, 1);
+  -moz-animation: apparition .5s cubic-bezier(0.25, 0, 0.5, 1);
+  -o-animation: apparition .5s cubic-bezier(0.25, 0, 0.5, 1);
+  animation: apparition .5s cubic-bezier(0.25, 0, 0.5, 1);
+  -webkit-transition: all 0.25s ease-in;
+  -moz-transition: all 0.25s ease-in;
+  -o-transition: all 0.25s ease-in;
+  transition: all 0.25s ease-in;
+  position: absolute;
+  top: 48px;
+  left: 128px;
+  background: rgba(0, 0, 0, 0.75);
+  padding: 48px;
+  z-index: 999;
+  width: 640px;
+  height: 100%;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  -khtml-border-radius: 4px;
+  border-radius: 4px; }
+
+@-webkit-keyframes apparition {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+@-moz-keyframes apparition {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+@-o-keyframes apparition {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+@keyframes apparition {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+  #article .meta {
+    color: #0044f2; }
+    #article .meta * {
+      margin-bottom: 0.5rem;
+      font-size: 0.875rem; }
+    #article .meta .tags {
+      color: green; }
+    #article .meta .infos .edited {
+      color: red; }
+  #article .content p {
+    line-height: 1.7rem; }
+  #article.hiding {
+    opacity: 0; }
+
 html, body {
   margin: 0;
   padding: 0;
@@ -83,14 +160,24 @@ html, body {
 .card {
   position: absolute;
   font-size: 0.75rem;
-  opacity: 1;
-  -webkit-transition: all 0.15s ease-in-out;
-  -moz-transition: all 0.15s ease-in-out;
-  -o-transition: all 0.15s ease-in-out;
-  transition: all 0.15s ease-in-out; }
+  opacity: 1; }
+  .card.hover body {
+    background: #0044f2; }
+  .card .grip {
+    cursor: pointer;
+    opacity: 0.1;
+    -webkit-transition: all 0.15s cubic-bezier(0.4, 0, 0.4, 1.35);
+    -moz-transition: all 0.15s cubic-bezier(0.4, 0, 0.4, 1.35);
+    -o-transition: all 0.15s cubic-bezier(0.4, 0, 0.4, 1.35);
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.4, 1.35); }
+    .card .grip:hover {
+      transform: scale(2);
+      opacity: 0.5;
+      background: #0044f2; }
   .card.isDragged {
     opacity: 0.5; }
   .card body {
+    cursor: pointer;
     background: rgba(0, 0, 0, 0.5);
     -moz-border-radius: 6px;
     -webkit-border-radius: 6px;
@@ -98,6 +185,10 @@ html, body {
     -o-border-radius: 6px;
     -khtml-border-radius: 6px;
     border-radius: 6px;
+    -webkit-transition: all 0.15s ease-in-out;
+    -moz-transition: all 0.15s ease-in-out;
+    -o-transition: all 0.15s ease-in-out;
+    transition: all 0.15s ease-in-out;
     padding: 8px; }
     .card body .card-title {
       margin-bottom: 0.75rem;
@@ -168,4 +259,40 @@ html, body {
     font-family: "lato", sans-serif; }
   #input-container .CodeMirror {
     height: 75%; }
+
+.nav {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  -khtml-border-radius: 4px;
+  border-radius: 4px;
+  width: 192px; }
+  .nav h2 {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 16px 0;
+    opacity: 0.5; }
+  .nav ul {
+    margin: 0;
+    padding: 0; }
+    .nav ul li {
+      list-style-type: none;
+      border-bottom: 1px solid #555555;
+      font-size: 14px;
+      background: #444444;
+      padding: 16px;
+      -webkit-transition: all 0.15s ease-in-out;
+      -moz-transition: all 0.15s ease-in-out;
+      -o-transition: all 0.15s ease-in-out;
+      transition: all 0.15s ease-in-out;
+      cursor: pointer; }
+      .nav ul li:hover {
+        background: #555555; }
+      .nav ul li:last-of-type {
+        border-bottom: none; }
 

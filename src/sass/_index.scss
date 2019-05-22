@@ -30,9 +30,26 @@ html, body {
     font-size: 0.75rem;
     opacity: 1;
 
-    @include transition(all, 0.15s, ease-in-out);
+   
+    
+    &.hover{
+	body{
+	    background: #0044f2;
+	}
 
+    }
 
+    .grip{
+	cursor: pointer;
+	opacity: 0.1;
+	@include transition(all, 0.15s, cubic-bezier(0.4, 0, .4, 1.35));
+	
+	&:hover{
+	    transform: scale(2);
+	    opacity: 0.5;
+	    background: #0044f2;
+	}
+    }
     // pointer-events: none;
 
     &.isDragged{
@@ -40,8 +57,10 @@ html, body {
     }
     
     body{
+	cursor: pointer;
 	background: rgba(0,0,0,0.5);
 	@include border-radius(6px);
+	@include transition(all, 0.15s, ease-in-out);
 	padding: 8px;
 	
 	.card-title{

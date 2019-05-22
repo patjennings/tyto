@@ -1,4 +1,5 @@
 import * as globals from "./globals";
+import UIArticle from "./components/UIArticle";
 import appState from "./globals";
 import {d3Listen} from "./listeners";
 
@@ -45,13 +46,22 @@ export default function displayPosts(data){
 	.attr("fill", "#ffffff")
 
     d3.selectAll(".card")
+	.append("circle")
+	.attr("class", "grip")
+	.attr("cx", 0)
+    	.attr("cy", 0)
+    	.attr("r", 24)
+	.attr("opacity", 0.05)
+	.attr("fill", "#ffffff")
+
+    d3.selectAll(".card")
 	.append("line")
 	.attr("class", "link")
 	.attr("stroke", "#ffffff")
 	.attr("x1", 0)   
 	.attr("y1", 0)   
-	.attr("x2", 16)  
-	.attr("y2", -16)
+	.attr("x2", 24)  
+	.attr("y2", -24)
 
     d3.selectAll(".card")
 	.append("svg:foreignObject")
@@ -59,7 +69,7 @@ export default function displayPosts(data){
 	.attr("style", "position: relative;")
 	.attr("width", 256)
 	.attr("height", 200)
-	.attr("x", 16)
+	.attr("x", 24)
 	.append("xhtml:body")
 	.append("div")
     	.attr("class", "card-title")
@@ -86,6 +96,25 @@ export default function displayPosts(data){
         .attr("class", "card-edit")
 	.html(function(d){return linkDisplay ? editPost(d) : null;})
 
+   // ----------------
+    // CLICK ON ITEMS
+    // ----------------
+    d3.selectAll(".card").select(".content")
+	.on("click", d => {
+	    // console.log(d.title);
+	    // console.log(d);
+	    UIArticle(d);
+	    
+	})
+	.on("mouseover", d => {
+	    const item = d3.event.currentTarget.parentNode;
+	    d3.select(item).classed("hover", true);
+	})
+	.on("mouseout", d => {
+	    const item = d3.event.currentTarget.parentNode;
+	    d3.select(item).classed("hover", false);
+	})
+    
     adjustFoHeight();
     d3Listen();
 }
@@ -127,6 +156,7 @@ export function updatePosts(newProjection = null){
 
 // return the  content, related to zoom level
 function getContent(data){
+    // console.log(data);
     if(st.scaleFac < toD3Scale(st.steps[1].level)){
 	logger(st.steps[0].name, toD3Scale(st.steps[0].level), st.scaleFac)
 	linkDisplay = false;
@@ -144,7 +174,7 @@ function getContent(data){
     }
     else if(st.scaleFac > toD3Scale(st.steps[2].level) && st.scaleFac < toD3Scale(st.steps[3].level)){	
 	logger(st.steps[2].name, toD3Scale(st.steps[2].level), st.scaleFac)
-	linkDisplay = true;
+	linkDisplay = false;
 	d3.selectAll(".card")
 	    .attr("class", "card "+st.steps[2].name)
 	return data.content.middle;
@@ -152,7 +182,7 @@ function getContent(data){
     }
     else if(st.scaleFac > toD3Scale(st.steps[3].level)){
 	logger(st.steps[3].name, toD3Scale(st.steps[3].level), st.scaleFac)
-	linkDisplay = true;
+	linkDisplay = false;
 	d3.selectAll(".card")
 	    .attr("class", "card "+st.steps[3].name)
 	return data.content.low;
@@ -161,7 +191,7 @@ function getContent(data){
 }
 
 function getLink(data){
-    const link = "<a href='"+st.rootDir+"server/article.php?path="+data.path+"' onClick=javascript: console.log(data.content.low)>Link</a>";
+    const link = "<a href='"+st.rootDir+"server/article.php?path="+data.path+"'>Link</a>";
     return link;
 }
 

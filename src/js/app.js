@@ -18,8 +18,6 @@ let st = new appState();
 export default function app(){
 
     // remove tout si ça existe
-    // clean();
-    // console.log("Boooootstrap");
     configure();
     
     displayMap(globals.mapDataPath, globals.pathProjection); // Afficher la carte
@@ -111,6 +109,7 @@ async function displayNav(){
 	navList = JSON.parse(navList) // on parse le json pour avoir un tableau
 	
 	let output = "<ul>"
+	output += "<h2>Spaces</h2>"
 	navList.forEach(n => {
 	    output += "<li id='"+n+"' class='nav-item'>"+n+"</li>"
 	})
