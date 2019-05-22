@@ -2,7 +2,7 @@ import scaleMap from "./scaleMap";
 import {conf} from "./conf"
 
 // toutes ces variables sont modifiées dans init.js, via l'objet appState()
-let space = "frei";
+let space = "space-1";
 let isCreating = null; // on est en train de créer un article // false
 let isDragging = null; // false
 let scaleFac = null; // doit être modifié //40000.503614997007
