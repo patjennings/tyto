@@ -136,8 +136,10 @@ var dragListener = d3.behavior.drag()
 	var card = d3.select(this.parentNode);
 	var titleRaw = card.attr("id");
 
+	
+	
 	// et là, on modifie la position dans le fichier lié à l'item draggé/droppé
-	request("POST", "server/utils/UpdateMarkdownDocument.php", "titleraw="+titleRaw+"&newlongitude="+st.currentPosition[0]+"&newlatitude="+st.currentPosition[1]+"&space="+st.space, requestPosts);
+	request("POST", "server/utils/UpdateMarkdownDocument.php", "titleraw="+titleRaw+"&newlongitude="+st.currentPosition[0]+"&newlatitude="+st.currentPosition[1]+"&space="+st.space+"&user="+st.user, requestPosts);
 
     });
 

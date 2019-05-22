@@ -2,6 +2,7 @@ import scaleMap from "./scaleMap";
 import {conf} from "./conf"
 
 // toutes ces variables sont modifiées dans init.js, via l'objet appState()
+let user = "thomas";
 let space = "space-1";
 let isCreating = null; // on est en train de créer un article // false
 let isDragging = null; // false
@@ -49,6 +50,14 @@ export default function appState() {
 	set: function(value) {
 	    space = value;
 	    mapDataPath = "dist/spaces/"+value+"/map/map.geojson";
+	}
+    });
+    Object.defineProperty(this, 'user', {
+	get: function() {
+	    return user;
+	},
+	set: function(value) {
+	    user = value;
 	}
     });
     Object.defineProperty(this, 'isCreating', {

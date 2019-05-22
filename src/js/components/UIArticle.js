@@ -22,15 +22,19 @@ export default function UIArticle(data){
 
     // metadata
     e += "<div class='meta'>";
-    e += "<div class='infos'>Created on {date} by {user}";
-    e += " | <span class='edited'>Edited on {date} by {user}</span>";
+    e += "<div class='infos'>Created on "+data.created.date+" by "+data.created.user;
+
+    if(data.lastUpdated.date !== null){
+	e += " | <span class='edited'>Edited on "+data.lastUpdated.date+" by "+data.lastUpdated.user+"</span>";
+    }
+    
     e += "</div>";
-    e += "<div class='tags'>{tag}, {tag}</div>";
+    e += "<div class='tags'>"+data.tags.join(", ")+"</div>";
     e += "<div class='position'>"+data.location.latitude+", "+data.location.longitude+"</div>";
     e += "</div>";
     
     // content
-    e += "<div class='content'>"+data.content.low+"</div>"
+    e += "<div class='content'>"+data.content.full+"</div>"
     e += "</div>";
 
     container.insertAdjacentHTML("afterbegin", l);

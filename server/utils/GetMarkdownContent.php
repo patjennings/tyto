@@ -21,10 +21,6 @@ function getMarkdownContent($content, $file){
 
     $data = explode("---", $content);
 
-    // echo $conf["baseUrl"];
-    
-    // echo $content;
-
     /////////////////
     // métadonnées
     //////////////////
@@ -32,25 +28,37 @@ function getMarkdownContent($content, $file){
     // à chaque titre, on supprime et on remplace par un car. spécial
     $p1 = "/title: /";
     $p2 = "/position: /";
-    $p3 = "/relations: /";
+    $p3 = "/created: /";
+    $p4 = "/lastupdated: /";
+    $p5 = "/tags: /";
+    $p6 = "/relations: /";
+    
     $removep1 = preg_replace($p1, "{{##}}", $data[0]);
     $removep2 = preg_replace($p2, "{{##}}", $removep1);
     $removep3 = preg_replace($p3, "{{##}}", $removep2);
+    $removep4 = preg_replace($p4, "{{##}}", $removep3);
+    $removep5 = preg_replace($p5, "{{##}}", $removep4);
+    $removep6 = preg_replace($p6, "{{##}}", $removep5);
 
     // Ce car. spécial, on explode la string avec
-    $metaExplode = explode("{{##}}", $removep3);
+    $metaExplode = explode("{{##}}", $removep6);
 
     $meta = array();
 
     foreach ($metaExplode as $item) {
-        if($item == ""){
-            // if empty, do nothing, that's crap
-        }else{
+        if($item !== ""){
             array_push($meta, $item); // on remplit le tableau des entrées
-        }
+        }            
     }
 
     $getTitle = $meta[0];
+
+// 0	""
+// 1	"egre\n"
+// 2	"36.884577759108716, 25.52793354925575\n"
+// 3	"thomas, 2019-05-22 23:32\nlastUpdated: \n"
+// 4	"tag1, tag2\n"
+// 5	"0\n\n"
     
     // titre raw
     $unwanted_array = getForbiddenChar();
@@ -58,13 +66,30 @@ function getMarkdownContent($content, $file){
     $getRawTitle = strtolower($getRawTitle);
     $getRawTitle = str_replace("\n", "", $getRawTitle);
 
+    // positions
     $meta[1] = str_replace(" ", "", $meta[1]); // on évacue les espaces
     $meta[1] = str_replace("\n", "", $meta[1]); // éventuellement, les sauts de lignes
     $getPosition = explode(",", $meta[1]); // et on éclate
-    $meta[2] = str_replace(" ", "", $meta[2]);
-    $meta[2] = str_replace("\n", "", $meta[2]);
-    $getRelations = explode(",", $meta[2]);
 
+    // created
+    // $meta[2] = str_replace(" ", "", $meta[2]); // on évacue les espaces
+    $meta[2] = str_replace("\n", "", $meta[2]); // éventuellement, les sauts de lignes
+    $getCreated = explode(",", $meta[2]); // et on éclate
+
+    // updated
+    // $meta[3] = str_replace(" ", "", $meta[3]); // on évacue les espaces
+    $meta[3] = str_replace("\n", "", $meta[3]); // éventuellement, les sauts de lignes
+    $getLastUpdated = explode(",", $meta[3]); // et on éclate
+
+    // tags
+    $meta[4] = str_replace(" ", "", $meta[4]); // on évacue les espaces
+    $meta[4] = str_replace("\n", "", $meta[4]); // éventuellement, les sauts de lignes
+    $getTags = explode(",", $meta[4]); // et on éclate
+
+    // relations
+    $meta[5] = str_replace(" ", "", $meta[5]);
+    $meta[5] = str_replace("\n", "", $meta[5]);
+    $getRelations = explode(",", $meta[5]);
     
     /////////////////////
     // contenu
@@ -79,8 +104,6 @@ function getMarkdownContent($content, $file){
     $contentTop = "";
     $contentMiddle = "";
     $contentLow = $data[1]; // là, donc, le contentLow, c'erst bien le contenu NON parsé
-
-    // echo var_dump($matchTop[3]);
     
     foreach($matchTop[1] as $part){
         $contentTop .= $part."... ";
@@ -90,9 +113,19 @@ function getMarkdownContent($content, $file){
     }
 
     $contentArray = array(
+        'all' => $meta,
         'title' => $getTitle,
         'path' => $path,
         'raw' => $getRawTitle,
+        'created' => array(
+            'user' => $getCreated[0],
+            'date' => $getCreated[1]
+        ),
+        'lastupdated' => array(
+            'user' => $getLastUpdated[0],
+            'date' => $getLastUpdated[1]
+        ),
+        'tags' => $getTags,
         'content' => array(
             'top' => $contentTop,
             'middle' => $contentMiddle,
@@ -102,7 +135,7 @@ function getMarkdownContent($content, $file){
             'latitude' => $getPosition[0],
             'longitude' => $getPosition[1]
         ),
-        'relations' => $relationsFormat
+        'relations' => $getRelations
     );
     
     return $contentArray;

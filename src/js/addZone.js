@@ -2,7 +2,8 @@ import * as globals from "./globals";
 import appState from "./globals";
 import request from './request';
 import app from './app';
-import UIinput from './components/UIinput';
+// import UIinput from './components/UIinput';
+import UIinputTerm from './components/UIinputTerm';
 import listenersSave from './listenersSave';
 import UISpotCreation from './components/UISpotCreation';
 
@@ -23,8 +24,8 @@ export default function addZone(currentPosition){
 	long
     ])
     
-    var elements = UIinput("zone", proj, long, lat);
+    var elements = UIinputTerm("zone", proj, long, lat);
     
-    $(".map").append(elements);
+    // $(".map").append(elements);
     listenersSave("zone");
 }

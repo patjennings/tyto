@@ -18,6 +18,7 @@ $unwanted_array = getForbiddenChar();
 $tNoAccents = strtr( $t, $unwanted_array);
 $tFrmt = strtolower($tNoAccents);
 
+
 if ($t) {
     if(file_put_contents("../../dist/spaces/".$space."/content/".$tFrmt.".md", $c)){
         echo "Fichier markdown ".$t.".md créé";

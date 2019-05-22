@@ -33,13 +33,22 @@ foreach($filesArray as $file){
     
     $contentSplitted = getMarkdownContent($content, $file); // retourne un array des valeurs du markdown
 
-    // echo var_dump($contentSplitted);
-
-    writeJSON($contentSplitted['title'], $contentSplitted['content']['top'], $contentSplitted['content']['middle'], $contentSplitted['content']['low'], $contentSplitted['location'], $contentSplitted['relations'], $contentSplitted['path'], $contentSplitted['raw']);
+    writeJSON($contentSplitted['all'],
+              $contentSplitted['title'],
+              $contentSplitted['content']['top'],
+              $contentSplitted['content']['middle'],
+              $contentSplitted['content']['low'],
+              $contentSplitted['location'],
+              $contentSplitted['created'],
+              $contentSplitted['lastupdated'],
+              $contentSplitted['tags'],
+              $contentSplitted['relations'],
+              $contentSplitted['path'],
+              $contentSplitted['raw']);
 }
 
 
-function writeJSON($title, $contentTop, $contentMiddle, $contentLow, $position, $relations, $path, $raw){
+function writeJSON($all, $title, $contentTop, $contentMiddle, $contentLow, $position, $created, $lastUpdated, $tags, $relations, $path, $raw){
     
     global $obj;
     global $json;
@@ -57,13 +66,18 @@ function writeJSON($title, $contentTop, $contentMiddle, $contentLow, $position, 
     
     $rq = array(
         'id' => 0,
+        'all' => $all,
         'title' => $title,
         'path' => $path,
         'raw' => $raw,
+        'created' => $created,
+        'lastUpdated' => $lastUpdated,
+        'tags' => $tags,
         'content' => array(
             'top' => $contentTop,
             'middle' => $contentMiddle,
-            'low' => truncate($contentLow, 1200)
+            'low' => truncate($contentLow, 1200),
+            'full' => $contentLow
         ),
         'location' => array(
             'latitude' => floatval($position['latitude']),
