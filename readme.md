@@ -13,7 +13,7 @@ $ php -S localhost:8000 # lancer php, et ouvrir http://localhost:8000 dans le na
 
 ## démo ##
 
-http://www.thomasguesnon.fr/platform/tyto/
+http://tyto.thomasguesnon.net/
 
 ## utilisation ##
 
