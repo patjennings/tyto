@@ -269,18 +269,27 @@ html, body {
   left: 0;
   color: white; }
 
+#help {
+  position: fixed;
+  z-index: 997;
+  right: 16px;
+  bottom: 16px;
+  font-size: 14px;
+  width: 640px;
+  line-height: 1.35rem; }
+
 #login {
   position: fixed;
   z-index: 997;
   left: 16px;
-  bottom: 48px;
+  bottom: -88px;
   font-size: 14px;
   width: 256px;
   line-height: 1.35rem;
-  -webkit-transition: all 0.15s ease-in-out;
-  -moz-transition: all 0.15s ease-in-out;
-  -o-transition: all 0.15s ease-in-out;
-  transition: all 0.15s ease-in-out; }
+  -webkit-transition: all 0.25s ease-out;
+  -moz-transition: all 0.25s ease-out;
+  -o-transition: all 0.25s ease-out;
+  transition: all 0.25s ease-out; }
   #login * {
     -webkit-transition: all 0.15s ease-in-out;
     -moz-transition: all 0.15s ease-in-out;
@@ -312,20 +321,25 @@ html, body {
     -o-border-radius: 3px;
     -khtml-border-radius: 3px;
     border-radius: 3px; }
-  #login.logged #login-form {
-    display: none; }
-  #login.logged #login-info {
-    opacity: 1;
-    color: #ccc;
-    background: none;
-    padding: 0; }
-  #login.caution label {
-    color: #ffff00; }
-  #login.caution #login-form #login-input {
-    border: 1px solid #ffff00;
-    background: #333300; }
-  #login.caution #login-info {
-    opacity: 1; }
+  #login.logged {
+    bottom: 16px; }
+    #login.logged #login-form {
+      display: none; }
+    #login.logged #login-info {
+      opacity: 1;
+      display: block;
+      color: #ccc;
+      background: none;
+      padding: 0; }
+  #login.caution {
+    bottom: 16px; }
+    #login.caution label {
+      color: #ffff00; }
+    #login.caution #login-form #login-input {
+      border: 1px solid #ffff00;
+      background: #333300; }
+    #login.caution #login-info {
+      opacity: 1; }
 
 #input-container {
   position: absolute;

@@ -94,7 +94,8 @@ function displayMap(mapData, mapProjection){
     	    .attr("id", "states")
     	    .selectAll("path")
     	    .data(json.features)
-    	    .enter().append("path")
+    	    .enter()
+	    .append("path")
     	    .attr("d", mapProjection)
 	    .attr("id", function(d,i){ return i})
 	    .style("fill", "#555555");
