@@ -6,6 +6,7 @@
 export default function UIinputTerm(type, proj, articleLat, articleLong){
     const container = document.getElementById("root");
     let e;
+    
     if(type=="content"){
 	e = "<div id='input-container' style='transform: translate("+proj[0]+"px, "+proj[1]+"px);'>";
 	// e = "<div id='input-container'>";
@@ -13,6 +14,7 @@ export default function UIinputTerm(type, proj, articleLat, articleLong){
 	e += "<textarea id='content-content' rows='18' placeholder='Contenu de cet article'></textarea>";
 	e += "<input id='content-position-long' type='hidden' value='"+articleLong+"'/>";
 	e += "<input id='content-position-lat' type='hidden' value='"+articleLat+"'/>";
+	e += "<input id='content-tags' placeholder='tags'></input>";
 	e += "<div class='btn-container'>";
 	e += "<button type='submit' value='ok' class='btn highlight' id='document-validate'>Valider</button>";
 	e += "<button value='cancel' class='btn' id='document-cancel'>Annuler</button>"
@@ -29,9 +31,7 @@ export default function UIinputTerm(type, proj, articleLat, articleLong){
 	e += "<button type='submit' value='ok' class='btn highlight' id='document-validate'>Valider</button>";
 	e += "<button value='cancel' class='btn' id='document-cancel'>Annuler</button>"
 	e += "</div>";
-	e += "</div>";
-
-    
+	e += "</div>";    
     }
     container.insertAdjacentHTML("afterbegin", e);
     

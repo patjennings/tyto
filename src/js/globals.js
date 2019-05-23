@@ -2,7 +2,7 @@ import scaleMap from "./scaleMap";
 import {conf} from "./conf"
 
 // toutes ces variables sont modifiées dans init.js, via l'objet appState()
-let user = "thomas";
+let user = null;
 let space = "space-1";
 let isCreating = null; // on est en train de créer un article // false
 let isDragging = null; // false
@@ -57,6 +57,9 @@ export default function appState() {
 	    return user;
 	},
 	set: function(value) {
+	    if(value == ""){
+		value = null;
+	    }
 	    user = value;
 	}
     });

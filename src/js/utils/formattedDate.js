@@ -3,7 +3,7 @@ export default function formattedDate(){
     const year = date.getFullYear()
     const month = regularMonth(date.getMonth())
     const day = date.getDate()
-    const hours = date.getHours()
+    const hours = twoDigitsHour(date.getHours())
     const minutes = date.getMinutes()
     
     const result = year+"-"+month+"-"+day+" "+hours+":"+minutes;
@@ -13,6 +13,17 @@ export default function formattedDate(){
 
 function regularMonth(month){
     let result = month+1;
+
+    if(result < 10){
+	result = "0"+result
+    }
+    else {
+	result = result.toString()
+    }
+    return result;
+}
+function twoDigitsHour(hour){
+    let result = hour;
 
     if(result < 10){
 	result = "0"+result

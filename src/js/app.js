@@ -7,6 +7,7 @@ import displayPosts from './displayPosts';
 import displayZones from './displayZones';
 import listeners, {d3Listen} from './listeners';
 import request from './request';
+import loginManager from './utils/loginManager';
 
 let content = null;
 let st = new appState();
@@ -19,6 +20,13 @@ export default function app(){
 
     // remove tout si ça existe
     configure();
+
+    console.log("user: "+st.user);
+    
+    // si on n'est pas loggé, on lance la gestion du login
+    if(st.user == null){
+    	loginManager();
+    }
     
     displayMap(globals.mapDataPath, globals.pathProjection); // Afficher la carte
     displayNav();
@@ -27,6 +35,7 @@ export default function app(){
     // console.log(globals.pathProjection);
 
 }
+
 
 export function reset(){
     configure();

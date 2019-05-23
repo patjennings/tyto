@@ -122,12 +122,6 @@ html, body {
 	font-weight: 700;
     }
 }
-#infos{
-    position: fixed;
-    z-index: 999;
-    left: 0;
-    bottom: 0;
-}
 
 .nav{
     position: absolute;
@@ -136,6 +130,86 @@ html, body {
     color: white;
 }
 
+// ------
+// LOGIN
+// ------
+#login{
+    position: fixed;
+    z-index: 997;
+    left: 16px;
+    bottom: 48px;
+    font-size: 14px;
+    width: 256px;
+    line-height: 1.35rem;
+    
+
+    @include transition(all, 0.15s, ease-in-out);
+
+    *{
+	@include transition(all, 0.15s, ease-in-out);
+    }
+
+    #login-form{
+	display: flex;
+	flex-direction: column;
+
+	label{
+	    margin-bottom: 8px;
+	    font-weight: 700;
+	}
+	#login-input{
+	    padding: 6px;
+	    @include border-radius(3px);
+	    border: 1px solid #999999;
+	    // background: #330000;
+	    // color: #ff0000;
+	}
+    }
+    #login-info{
+	opacity: 0;
+	color: #000;
+	background: #ffff00;
+	padding: 12px;
+	@include border-radius(3px);
+    }
+    
+
+    &.logged{
+	#login-form{
+	    display: none;
+	}
+	#login-info{
+	    opacity: 1;
+	    color: #ccc;
+	    background: none;
+	    padding: 0;
+	}
+    }
+    &.not-logged{
+	
+    }
+    &.caution{
+	label{
+	    color: #ffff00;
+	}
+	#login-form{
+	    #login-input{
+		border: 1px solid #ffff00;
+		background: #333300;
+		// color: #ff0000;
+	    }
+	}
+	#login-info{
+	    	opacity: 1;
+	}
+    }
+    
+}
+
+
+// ------------------
+// INPUT AN ARTICLE
+// ------------------
 #input-container{
     position: absolute;
     z-index: 999;

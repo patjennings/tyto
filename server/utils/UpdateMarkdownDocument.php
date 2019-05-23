@@ -43,6 +43,8 @@ $newContent .= "---";
 $newContent .= "\n";
 $newContent .= $contentSplitted['content']['low'];
 
+echo $newContent;
+
 // echo $newContent;
 
 // on écrit tout dans le fichier

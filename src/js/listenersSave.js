@@ -8,6 +8,7 @@ import app from "./app";
 import {removeUIinput} from "./listeners";
 import {simplemde} from "./addPost";
 import formattedDate from "./utils/formattedDate";
+import {loginAlert} from './utils/loginManager';
 
 let ctrlPushed = false;
 let altPushed = false;
@@ -27,8 +28,8 @@ export default function listenersSave(target){
 	var titleValue = document.getElementById("content-title").value;
 	var longValue = document.getElementById("content-position-long").value;
 	var latValue = document.getElementById("content-position-lat").value;
-	
-	
+	var tagsValue = document.getElementById("content-tags").value;
+
 	if(target == "content"){ // si c'est un article
 	    var contentValue = simplemde.value();
 	    // var contentValue = contentValue.value();
@@ -41,25 +42,37 @@ export default function listenersSave(target){
 	    contentFormatted += "position: "+latValue+", "+longValue+"\n";
 	    contentFormatted += "created: "+st.user+", "+moment+"\n";
 	    contentFormatted += "lastupdated: \n";
-	    contentFormatted += "tags: tag1, tag2\n";
+	    contentFormatted += "tags: "+tagsValue+"\n";
 	    contentFormatted += "relations: 0\n\n";
 	    contentFormatted += "---\n\n";
 	    contentFormatted += contentValue;
 
-	    // console.log(contentFormatted);
-	    
-	    request("POST", "server/utils/SaveMarkdownDocument.php", "title="+titleValue+"&content="+contentFormatted+"&space="+st.space, app);
+	    console.log(contentFormatted);
+	    if(st.user !== null){
+		request("POST", "server/utils/SaveMarkdownDocument.php", "title="+titleValue+"&content="+contentFormatted+"&space="+st.space, app);
+	    } else {
+		loginAlert();
+		app();
+	    }
+
 	}
-	if(target == "zone"){
+	else if(target == "zone"){
 	    var longValue = document.getElementById("content-position-long").value;
 	    var latValue = document.getElementById("content-position-lat").value;
-	    request("POST", "server/utils/SaveZone.php", "title="+titleValue+"&latitude="+latValue+"&longitude="+longValue+"&space="+st.space, app);
-	}
+
+	    if(st.user !== null){
+		request("POST", "server/utils/SaveZone.php", "title="+titleValue+"&latitude="+latValue+"&longitude="+longValue+"&space="+st.space, app);
+	    } else {
+		loginAlert();
+		app();
+	    }
+	} 
+	
 	removeUIinput();
     }, false);
 
 
-    
+
     btnCancel.addEventListener('click', function() {
 	removeUIinput();
     }, false);    

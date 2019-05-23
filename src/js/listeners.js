@@ -6,6 +6,7 @@ import addZone from "./addZone";
 import request from "./request";
 import displayPosts from "./displayPosts"
 import app, {requestPosts, reset} from "./app";
+import {loginAlert} from './utils/loginManager'
 
 let ctrlPushed = false;
 let altPushed = false;
@@ -23,10 +24,19 @@ export function d3Listen(){
 
 	    if(ctrlPushed == true && altPushed == false && st.isCreating == false){ // si on peut créer un doc ET que la touche ctrl est enfoncée
 		// si trop bas ou trop à droite, transformation
-		addPost(st.currentPosition);
+
+		if(st.user !== null){
+		    addPost(st.currentPosition);
+		} else {
+		    loginAlert();
+		}
 	    }
 	    if(ctrlPushed == true && altPushed == true && st.isCreating == false){
-		addZone(st.currentPosition);
+		if(st.user !== null){
+		    addZone(st.currentPosition);
+		} else {
+		    loginAlert();
+		}
 	    }
 	    return;
 	});
@@ -139,7 +149,15 @@ var dragListener = d3.behavior.drag()
 	
 	
 	// et là, on modifie la position dans le fichier lié à l'item draggé/droppé
-	request("POST", "server/utils/UpdateMarkdownDocument.php", "titleraw="+titleRaw+"&newlongitude="+st.currentPosition[0]+"&newlatitude="+st.currentPosition[1]+"&space="+st.space+"&user="+st.user, requestPosts);
+
+	if(st.user !== null){
+	    request("POST", "server/utils/UpdateMarkdownDocument.php", "titleraw="+titleRaw+"&newlongitude="+st.currentPosition[0]+"&newlatitude="+st.currentPosition[1]+"&space="+st.space+"&user="+st.user, requestPosts);
+
+	    } else {
+		loginAlert();
+		requestPosts();
+	    }
+	
 
     });
 

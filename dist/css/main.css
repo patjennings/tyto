@@ -227,17 +227,69 @@ html, body {
     font-size: 13px;
     font-weight: 700; }
 
-#infos {
-  position: fixed;
-  z-index: 999;
-  left: 0;
-  bottom: 0; }
-
 .nav {
   position: absolute;
   top: 0;
   left: 0;
   color: white; }
+
+#login {
+  position: fixed;
+  z-index: 997;
+  left: 16px;
+  bottom: 48px;
+  font-size: 14px;
+  width: 256px;
+  line-height: 1.35rem;
+  -webkit-transition: all 0.15s ease-in-out;
+  -moz-transition: all 0.15s ease-in-out;
+  -o-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out; }
+  #login * {
+    -webkit-transition: all 0.15s ease-in-out;
+    -moz-transition: all 0.15s ease-in-out;
+    -o-transition: all 0.15s ease-in-out;
+    transition: all 0.15s ease-in-out; }
+  #login #login-form {
+    display: flex;
+    flex-direction: column; }
+    #login #login-form label {
+      margin-bottom: 8px;
+      font-weight: 700; }
+    #login #login-form #login-input {
+      padding: 6px;
+      -moz-border-radius: 3px;
+      -webkit-border-radius: 3px;
+      -ms-border-radius: 3px;
+      -o-border-radius: 3px;
+      -khtml-border-radius: 3px;
+      border-radius: 3px;
+      border: 1px solid #999999; }
+  #login #login-info {
+    opacity: 0;
+    color: #000;
+    background: #ffff00;
+    padding: 12px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    border-radius: 3px; }
+  #login.logged #login-form {
+    display: none; }
+  #login.logged #login-info {
+    opacity: 1;
+    color: #ccc;
+    background: none;
+    padding: 0; }
+  #login.caution label {
+    color: #ffff00; }
+  #login.caution #login-form #login-input {
+    border: 1px solid #ffff00;
+    background: #333300; }
+  #login.caution #login-info {
+    opacity: 1; }
 
 #input-container {
   position: absolute;
