@@ -25,7 +25,6 @@ export default function request(method, uri, sendData = null, callback = request
     var async = (callback!==null);
     var timestamp = new Date();
     var uniqueURI = uri+ (uri.indexOf("?") > 0 ? "&" : "?")+ "timestamp="+ timestamp.getTime();
-    
     if(method === 'GET'){
         if(sendData!=null){uniqueURI+="&"+sendData;}
         o.open(method, uniqueURI, async);
@@ -39,8 +38,8 @@ export default function request(method, uri, sendData = null, callback = request
         o.onreadystatechange = function (){
             if(o.readyState==4&&o.status==200){
                 callback(o.responseText);
-                // console.log("Request is successful");
-		// console.log(uniqueURI);
+                console.log("Request is successful");
+		console.log(uniqueURI);
 		console.log("Réponse : "+o.responseText);
             }else if(o.readyState==4&&o.status!=200){
                 console.log("There was an error during this request for "+uri)

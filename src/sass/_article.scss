@@ -1,7 +1,7 @@
 .row{
     margin-bottom: 3rem;
 }
-#overlay{
+.overlay{
     z-index: 998;
     position: absolute;
     top: 0;
@@ -17,7 +17,7 @@
 	opacity: 0;
     }
 }
-#article{
+.article{
 
     overflow-y: scroll;
 

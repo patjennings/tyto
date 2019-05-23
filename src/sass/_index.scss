@@ -30,7 +30,21 @@ html, body {
     font-size: 0.75rem;
     opacity: 1;
 
-   
+    &.deleting{
+	@include animation('deletion .15s ease-in');
+	@include animation-delay(0.5s)
+	@include keyframes(deletion){
+	    0%{
+		opacity: 1;
+	    }
+	    100%{
+		opacity: 0;
+	    }
+	}
+
+    }
+
+    @include transition(all, 0.25s, ease-in);
     
     &.hover{
 	body{

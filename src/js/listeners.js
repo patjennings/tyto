@@ -105,18 +105,35 @@ export function ArticleListeners(){
     
     // REMOVE ARTICLE
     // ----------------
-    const articleOverlay = document.getElementById("overlay");
-    const activeArticle = document.getElementById("article");
+    const articleOverlay = document.querySelector(".overlay");
+    const activeArticle = document.querySelector(".article");
+    const deleteArticle = document.getElementById("delete");
     
     articleOverlay.addEventListener("click", e => {
-	articleOverlay.setAttribute("class", "hiding")
-	activeArticle.setAttribute("class", "hiding")
+	articleOverlay.setAttribute("class", "overlay hiding")
+	activeArticle.setAttribute("class", "article hiding")
 	// et on supprime après avoir laissé l'anim jouer
 	window.setTimeout(d => {
 	    activeArticle.parentNode.removeChild(activeArticle);
 	    articleOverlay.parentNode.removeChild(articleOverlay);
-	}, 500)
+	}, 500)	
+    })
+
+    deleteArticle.addEventListener("click", e => {
+	const titleRaw = activeArticle.getAttribute("id");
 	
+	// hiding
+	articleOverlay.setAttribute("class", "overlay hiding")
+	activeArticle.setAttribute("class", "article hiding")
+	d3.select("#articles").select("#"+titleRaw).classed("deleting", true);
+	
+	// et on supprime après avoir laissé l'anim jouer
+	window.setTimeout(d => {
+	    activeArticle.parentNode.removeChild(activeArticle);
+	    articleOverlay.parentNode.removeChild(articleOverlay);
+
+	    request("POST", "server/utils/DeleteMarkdownDocument.php", "title="+titleRaw+"&space="+st.space, requestPosts);
+	}, 650);
     })
 }
 // ------

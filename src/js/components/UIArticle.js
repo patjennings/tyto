@@ -1,9 +1,11 @@
-// import * as globals from "./globals";
-// import appState from "./globals";
+import * as globals from "../globals";
+import appState from "../globals";
 // import request from './request';
 // import app from './app';
 
 import {ArticleListeners} from '../listeners';
+
+let st = new appState();
 
 export default function UIArticle(data){
     const container = document.getElementById("root");
@@ -15,10 +17,15 @@ export default function UIArticle(data){
 	container.removeChild(overlay);
     }
 
-    let l = "<div id='overlay'></div>";
+    let l = "<div class='overlay'></div>";
     
-    let e = "<div id='article'>";
+    let e = "<div class='article' id='"+data.raw+"'>";
     e += "<h1>"+data.title+"</h1>"
+
+    if(st.user !== null){
+	e += "<button id='delete'>Delete article</button>";
+    }
+
 
     // metadata
     e += "<div class='meta'>";
