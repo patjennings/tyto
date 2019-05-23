@@ -28,10 +28,11 @@ export default function listenersSave(target){
 	var titleValue = document.getElementById("content-title").value;
 	var longValue = document.getElementById("content-position-long").value;
 	var latValue = document.getElementById("content-position-lat").value;
-	var tagsValue = document.getElementById("content-tags").value;
+
 
 	if(target == "content"){ // si c'est un article
 	    var contentValue = simplemde.value();
+	    var tagsValue = document.getElementById("content-tags").value;
 	    // var contentValue = contentValue.value();
 	    // var contentValue = document.getElementById("content-content").value;
 
@@ -47,7 +48,7 @@ export default function listenersSave(target){
 	    contentFormatted += "---\n\n";
 	    contentFormatted += contentValue;
 
-	    console.log(contentFormatted);
+	    // console.log(contentFormatted);
 	    if(st.user !== null){
 		request("POST", "server/utils/SaveMarkdownDocument.php", "title="+titleValue+"&content="+contentFormatted+"&space="+st.space, app);
 	    } else {
