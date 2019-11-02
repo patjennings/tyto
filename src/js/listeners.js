@@ -108,6 +108,7 @@ export function ArticleListeners(){
     const articleOverlay = document.querySelector(".overlay");
     const activeArticle = document.querySelector(".article");
     const deleteArticle = document.getElementById("delete");
+    const editArticle = document.getElementById("edit");
     
     articleOverlay.addEventListener("click", e => {
 	articleOverlay.setAttribute("class", "overlay hiding")
@@ -134,6 +135,11 @@ export function ArticleListeners(){
 
 	    request("POST", "server/utils/DeleteMarkdownDocument.php", "title="+titleRaw+"&space="+st.space, requestPosts);
 	}, 650);
+    })
+
+    editArticle.addEventListener("click", e => {
+	const titleRaw = activeArticle.getAttribute("id");
+	console.log("edit "+titleRaw);
     })
 }
 // ------

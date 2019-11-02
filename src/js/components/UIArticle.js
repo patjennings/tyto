@@ -24,6 +24,7 @@ export default function UIArticle(data){
 
     if(st.user !== null){
 	e += "<button id='delete'>Delete article</button>";
+	e += "<button id='edit'>Edit article</button>";
     }
 
 
