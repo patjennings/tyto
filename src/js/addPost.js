@@ -23,14 +23,9 @@ export default function addPost(currentPosition){
 	lat,
 	long
     ])
-    console.log(st.currentPosition);
-    // st.currentPosition = globals.projection.invert([long, lat]);
-    // move map to 
 
     var elements = UIinputTerm("content", proj, long, lat);    
-    // $(".map").append(elements);
     startMarkdownEditor();
-
     listenersSave("content");
 }
 

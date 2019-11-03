@@ -12,10 +12,9 @@ let linkDisplay = false;
 
 export default function displayPosts(data){
     st.postsData = JSON.parse(data); // on récupère les données des contenus
-    console.log(st.postsData);
 
     d3.select("#articles").remove() // On supprime si #articles existe, comme lors d'un déplacement de contenu > on reset
-        
+    
     d3.select("svg")
 	.append("g")
 	.attr("id", "articles")
@@ -96,15 +95,12 @@ export default function displayPosts(data){
         .attr("class", "card-edit")
 	.html(function(d){return linkDisplay ? editPost(d) : null;})
 
-   // ----------------
+    // ----------------
     // CLICK ON ITEMS
     // ----------------
     d3.selectAll(".card").select(".content")
 	.on("click", d => {
-	    // console.log(d.title);
-	    // console.log(d);
-	    UIArticle(d);
-	    
+	    UIArticle(d);	    
 	})
 	.on("mouseover", d => {
 	    const item = d3.event.currentTarget.parentNode;

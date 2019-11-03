@@ -9,7 +9,6 @@ export default function UIinputTerm(type, proj, articleLat, articleLong){
     
     if(type=="content"){
 	e = "<div id='input-container' style='transform: translate("+proj[0]+"px, "+proj[1]+"px);'>";
-	// e = "<div id='input-container'>";
 	e += "<input id='content-title' placeholder='Titre'></input>";
 	e += "<textarea id='content-content' rows='18' placeholder='Contenu de cet article'></textarea>";
 	e += "<input id='content-position-long' type='hidden' value='"+articleLong+"'/>";
@@ -21,12 +20,11 @@ export default function UIinputTerm(type, proj, articleLat, articleLong){
 	e += "</div>";
 	e += "</div>";
 
-    
+	
     } else if(type=="zone"){
 	e = "<div id='input-container' style='transform: translate("+proj[0]+"px, "+proj[1]+"px);'>";
-	// e = "<div id='input-container'>";
 	e += "<input id='content-title' placeholder='Titre'></input>";
-		e += "<input id='content-position-long' type='hidden' value='"+articleLong+"'/>";
+	e += "<input id='content-position-long' type='hidden' value='"+articleLong+"'/>";
 	e += "<input id='content-position-lat' type='hidden' value='"+articleLat+"'/>";
 	e += "<button type='submit' value='ok' class='btn highlight' id='document-validate'>Valider</button>";
 	e += "<button value='cancel' class='btn' id='document-cancel'>Annuler</button>"

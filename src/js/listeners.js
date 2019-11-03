@@ -6,7 +6,8 @@ import addZone from "./addZone";
 import request from "./request";
 import displayPosts from "./displayPosts"
 import app, {requestPosts, reset} from "./app";
-import {loginAlert} from './utils/loginManager'
+import {loginAlert} from './utils/loginManager';
+import UIArticle from "./components/UIArticle";
 
 let ctrlPushed = false;
 let altPushed = false;
@@ -101,7 +102,7 @@ export default function listeners(){
 }
 
 
-export function ArticleListeners(){
+export function ArticleListeners(data){
     
     // REMOVE ARTICLE
     // ----------------
@@ -139,7 +140,14 @@ export function ArticleListeners(){
 
     editArticle.addEventListener("click", e => {
 	const titleRaw = activeArticle.getAttribute("id");
-	console.log("edit "+titleRaw);
+
+	// lire le contenu
+	console.log(data.content.full);
+
+	// remplacer les éléments par des champs
+	UIArticle(data, true);
+	
+	// appeler un écouteur qui enregistre une fois le bouton valider clické
     })
 }
 // ------

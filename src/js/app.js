@@ -21,7 +21,7 @@ export default function app(){
     // remove tout si ça existe
     configure();
 
-    console.log("user: "+st.user);
+    // console.log("user: "+st.user);
     
     // si on n'est pas loggé, on lance la gestion du login
     if(st.user == null){
@@ -48,7 +48,7 @@ function clean(){
     
     // on cleane tout pour redessiner l'ensemble
     const svg = document.getElementsByTagName("svg")[0];
-    console.log(svg);
+    // console.log(svg);
     if(svg){
 	if(svg.parentNode){
 	    svg.parentNode.removeChild(svg);
