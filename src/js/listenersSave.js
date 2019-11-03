@@ -6,9 +6,10 @@ import addZone from "./addZone";
 import request from "./request";
 import app from "./app";
 import {removeUIinput} from "./listeners";
-import {simplemde} from "./addPost";
+// import {simplemde} from "./addPost";
 import formattedDate from "./utils/formattedDate";
 import {loginAlert} from './utils/loginManager';
+import UIArticle from "./components/UIArticle";
 
 let ctrlPushed = false;
 let altPushed = false;
@@ -17,13 +18,13 @@ var st = new appState();
 
 var selectedNode = null;
 
-export default function listenersSave(target){
+export default function listenersSave(target, data){
 
     var btnValidate = document.getElementById("document-validate");
     var btnCancel = document.getElementById("document-cancel");
-    
+
     btnValidate.addEventListener('click', function() {
-	// console.log("save file");
+	console.log("save file");
 
 	var titleValue = document.getElementById("content-title").value;
 	var longValue = document.getElementById("content-position-long").value;
@@ -31,10 +32,11 @@ export default function listenersSave(target){
 
 
 	if(target == "content"){ // si c'est un article
+	    var simplemde = new SimpleMDE({ 
+		element: document.getElementById("content-content") 
+	    });
 	    var contentValue = simplemde.value();
 	    var tagsValue = document.getElementById("content-tags").value;
-	    // var contentValue = contentValue.value();
-	    // var contentValue = document.getElementById("content-content").value;
 
 	    const moment = formattedDate();
 	    
@@ -48,7 +50,6 @@ export default function listenersSave(target){
 	    contentFormatted += "---\n\n";
 	    contentFormatted += contentValue;
 
-	    // console.log(contentFormatted);
 	    if(st.user !== null){
 		request("POST", "server/utils/SaveMarkdownDocument.php", "title="+titleValue+"&content="+contentFormatted+"&space="+st.space, app);
 	    } else {
@@ -57,7 +58,7 @@ export default function listenersSave(target){
 	    }
 
 	}
-	else if(target == "zone"){
+	else if(target == "zone"){ // si c'est une zone
 	    var longValue = document.getElementById("content-position-long").value;
 	    var latValue = document.getElementById("content-position-lat").value;
 
@@ -68,13 +69,10 @@ export default function listenersSave(target){
 		app();
 	    }
 	} 
-	
 	removeUIinput();
     }, false);
 
-
-
     btnCancel.addEventListener('click', function() {
 	removeUIinput();
-    }, false);    
+    }, false);
 }
