@@ -8,6 +8,11 @@ var emailjs =   require("emailjs/email");
 var validatePassword = require("./utils/validation").validatePassword;
 var saltAndHash =      require("./utils/validation").saltAndHash;
 
+// une focntion pour traiter/retourner la date
+
+// fontion pour découper le markdown aux différents niveaux et retourner les niveaux
+var sliceMarkdown = require("./utils/markdownProcessing").sliceMarkdown;
+
 var generateKey = require("./utils/validation").generateKey;
 
 // const APP_ROOT = "http://pisteurdetemps.thomasguesnon.net";
@@ -55,6 +60,13 @@ module.exports = function(app){
     app.get(':spaceid/content', nocache, function(req, res) {
 	
     });
+    app.get(':spaceid/export', nocache, function(req, res) {
+	// on crée un dossier sur le serveur, avec un nom généré
+	// on prend tous les contenus du space renseigné
+	// on crée les fichiers markdown
+	// on crée une archive, on les y colle 
+	// on télécharge l'archive sur l'ordi du client
+    });
     app.get(':spaceid/zones', nocache, function(req, res) {
 	
     });
@@ -64,7 +76,7 @@ module.exports = function(app){
 	
     });
     app.post('/space/:id', nocache, function(req, res) {
-	
+	// on crée un nouveau space si le nom n'existe pas déjà
     });
     app.put('/space/:id', nocache, function(req, res) {
 	
@@ -84,7 +96,7 @@ module.exports = function(app){
 		response.title = data.title;
 		response.created = data.created;
 		response.lastUpdated = data.lastUpdated;
-		response.content = data.content;
+		response.content = data.content; // on écrit en markdown
 		response.tags = data.tags;
 		response.location = data.location;
 		response.relations = data.relations;
@@ -92,13 +104,29 @@ module.exports = function(app){
 	    }
 	    res.send(response);
         });
-
+	
     });
     app.post('/content/:id', nocache, function(req, res) {
+	// on ajoute un post
+	// on met:
+	//     - title
+	//     -created > user, date
+	// - le contenu aux niveaux de zoom // en markdown
+	// - les tags
+	// - la location lat long
+	// - l'id du space
 	
+	var response = {}
+	response = sliceMarkdown("mon contenu");
+	res.send(response);
     });
     app.put('/content/:id', nocache, function(req, res) {
-	
+	// on update :
+	// - le title
+	// - lastUpdated > user, date
+	// - le nouveau content découpé auuxnivde zoom
+	// - les tags
+	// - la nouvelle location lat long
     });
     app.delete('/content/:id', nocache, function(req, res) {
 	

@@ -41,8 +41,6 @@ const steps = [
 // s'applique sur les trois variables déclarées au dessus
 
 export default function appState() {    
-
-
     Object.defineProperty(this, 'space', {
 	get: function() {
 	    return space;
