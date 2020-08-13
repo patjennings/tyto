@@ -19,7 +19,6 @@ export default function UIArticle(data, edit=false){
     }
 
     let l = "<div class='overlay'></div>";
-    
     let e = "<div class='article' id='"+data.raw+"'>";
 
     edit ? e += "<input value='"+data.title+"' id='content-title'/>" : e += "<h1>"+data.title+"</h1>";
@@ -58,13 +57,9 @@ export default function UIArticle(data, edit=false){
 	e += "</div>";
     }
 
-    
     container.insertAdjacentHTML("afterbegin", l);
     container.insertAdjacentHTML("afterbegin", e);
     
-
-
-
     if(edit){
 	startMarkdownEditor();
 	listenersUpdate(data);

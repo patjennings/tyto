@@ -1,25 +1,28 @@
-import scaleMap from "./scaleMap";
-import {conf} from "./conf"
+import mapScale from "./utils/mapScale";
+import {paths} from "./conf/conf"
 
 // toutes ces variables sont modifiées dans init.js, via l'objet appState()
 let user = null;
-let space = "space-1";
+let space = "";
+let spaceIndex = null; // default, le premier space dans la bdd
 let isCreating = null; // on est en train de créer un article // false
 let isDragging = null; // false
 let scaleFac = null; // doit être modifié //40000.503614997007
 let currentPosition = null;      // doit être modifié //[0, 0]
-let postsData = null;      // doit être modifié avec le nouveau contenu chargé du json
+let spacesData = null; // doit être modifié avec le nouveau contenu chargé du json
+let mapData = null;
+let postsData = null;      
 let zonesData = null;
 let firstStart = true;
-const rootDir = conf.path;
-console.log(rootDir);
-const postsDir = rootDir+"dist/content/";
+let logs = true;
+const rootDir = paths.appUrl;
+// const postsDir = rootDir+"dist/content/";
 
-export var mapDataPath = "dist/spaces/"+space+"/map/map.geojson";
+// export var mapDataPath = "dist/assets/maps/map-1.geojson";
 
 const steps = [
     {
-	name: "space",
+	name: "galaxy",
 	level: 0
     },
     {
@@ -47,7 +50,14 @@ export default function appState() {
 	},
 	set: function(value) {
 	    space = value;
-	    mapDataPath = "dist/spaces/"+value+"/map/map.geojson";
+	}
+    });
+    Object.defineProperty(this, 'spaceIndex', {
+	get: function() {
+	    return spaceIndex;
+	},
+	set: function(value) {
+	    spaceIndex = value;
 	}
     });
     Object.defineProperty(this, 'user', {
@@ -93,6 +103,22 @@ export default function appState() {
 	    currentPosition = value;
 	}
     });
+    Object.defineProperty(this, 'spacesData', {
+	get: function() {
+	    return spacesData;
+	},
+	set: function(value) {
+	    spacesData = value;
+	}
+    });
+    Object.defineProperty(this, 'mapData', {
+	get: function() {
+	    return mapData;
+	},
+	set: function(value) {
+	    mapData = value;
+	}
+    });
     Object.defineProperty(this, 'postsData', {
 	get: function() {
 	    return postsData;
@@ -115,6 +141,14 @@ export default function appState() {
 	},
 	set: function(value) {
 	    firstStart = value;
+	}
+    });
+    Object.defineProperty(this, 'logs', {
+	get: function() {
+	    return logs;
+	},
+	set: function(value) {
+	    logs = value;
 	}
     });
     Object.defineProperty(this, 'rootDir', {
@@ -144,9 +178,6 @@ export default function appState() {
 }
 
 var st = new appState();
-
-
-
 export var width = screen.availWidth;
 export var height = screen.availHeight;
 

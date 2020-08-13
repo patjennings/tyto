@@ -1,8 +1,8 @@
-import * as globals from "./globals";
-import appState from "./globals";
-import scale from './utils/scale';
-import {updatePosts} from './displayPosts';
-import {updateZones} from './displayZones';
+import * as globals from "../globals";
+import appState from "../globals";
+import scale from './scale';
+import {updatePosts} from '../displayPosts';
+import {updateZones} from '../displayZones';
 
 var st = new appState();
 

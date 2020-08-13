@@ -257,6 +257,10 @@ html, body {
     display: flex;
     flex-direction: column;
 
+    #content-rte{
+	color: black;
+    }
+
     #content-title{
 	margin-bottom: 16px;
     }    

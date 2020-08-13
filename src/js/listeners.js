@@ -1,13 +1,14 @@
-import scaleMap from "./scaleMap";
+import mapScale from "./utils/mapScale";
 import * as globals from "./globals";
 import appState from "./globals";
 import addPost from "./addPost";
 import addZone from "./addZone";
 import request from "./request";
 import displayPosts from "./displayPosts"
-import app, {requestPosts, reset} from "./app";
+import app, {requestPosts, reset, setActiveSpace} from "./app";
 import {loginAlert} from './utils/loginManager';
 import UIArticle from "./components/UIArticle";
+import logs from './utils/logs';
 
 let ctrlPushed = false;
 let altPushed = false;
@@ -46,7 +47,7 @@ export function d3Listen(){
     var zoom = d3.behavior.zoom()
 	.translate(globals.projection.translate())
 	.scale(globals.projection.scale())
-	.on("zoom", scaleMap);
+	.on("zoom", mapScale);
 
     // puis on l'appelle
     d3.select("svg").call(zoom);
@@ -54,13 +55,11 @@ export function d3Listen(){
 }
 
 export default function listeners(){
-    console.log("les listeners démarrent");
-    
+    logs(st.space);
     // Ctrl key listener, pour utiliser avec le click lors de la création de documents
     window.addEventListener('keydown', (event) => {
 	if(event.ctrlKey) {
 	    ctrlPushed = true;
-	    console.log(ctrlPushed);
 	}
 	if(event.altKey) {
 	    altPushed = true;
@@ -80,16 +79,17 @@ export default function listeners(){
     // NAVIGATION
     // ----------
     const navItems = document.querySelectorAll(".nav-item");
-    
-    navItems.forEach(i => {
-    	i.addEventListener('click', (event) => {
-    	    let elem = event.target
-    	    let newSpace = event.target.attributes[0].value;
-    	    st.space = newSpace;
+
+    // logs(navItems);
+
+    for(let i=0; i<navItems.length; i++){
+    	navItems[i].addEventListener('click', (event) => {
+    	    logs("cliiiiiiiiiiic : "+i);
+    	    // let elem = event.target
+    	    setActiveSpace(i);
     	    reset();
     	}, false)
-    })
-
+    }
     
 
     // // ----------------
@@ -142,7 +142,7 @@ export function ArticleListeners(data){
 	const titleRaw = activeArticle.getAttribute("id");
 
 	// lire le contenu
-	console.log(data.content.full);
+	// console.log(data.content.full);
 
 	// remplacer les éléments par des champs
 	UIArticle(data, true);

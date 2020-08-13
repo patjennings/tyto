@@ -352,6 +352,8 @@ html, body {
   background: #fff;
   display: flex;
   flex-direction: column; }
+  #input-container #content-rte {
+    color: black; }
   #input-container #content-title {
     margin-bottom: 16px; }
   #input-container #content-content {

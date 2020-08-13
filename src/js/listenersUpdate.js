@@ -53,50 +53,7 @@ export default function listenersUpdate(data){
 	contentFormatted += contentValue;
 
 	console.log(contentFormatted);
-
-	// if(st.user !== null){
-	//     // request("POST", "server/utils/SaveMarkdownDocument.php", "title="+titleValue+"&content="+contentFormatted+"&space="+st.space, app);
-	// } else {
-	//     loginAlert();
-	//     app();
-	// }
-
-
-	// if(target == "content"){ // si c'est un article
-	//     var contentValue = simplemde.value();
-	//     var tagsValue = document.getElementById("content-tags").value;
-
-	//     const moment = formattedDate();
-	    
-	//     // le title intégré dans la desc du markdown
-	//     var contentFormatted = "title: "+titleValue+"\n";
-	//     contentFormatted += "position: "+latValue+", "+longValue+"\n";
-	//     contentFormatted += "created: "+st.user+", "+moment+"\n";
-	//     contentFormatted += "lastupdated: \n";
-	//     contentFormatted += "tags: "+tagsValue+"\n";
-	//     contentFormatted += "relations: 0\n\n";
-	//     contentFormatted += "---\n\n";
-	//     contentFormatted += contentValue;
-
-	//     if(st.user !== null){
-	// 	request("POST", "server/utils/SaveMarkdownDocument.php", "title="+titleValue+"&content="+contentFormatted+"&space="+st.space, app);
-	//     } else {
-	// 	loginAlert();
-	// 	app();
-	//     }
-
-	// }
-	// else if(target == "zone"){ // si c'est une zone
-	//     var longValue = document.getElementById("content-position-long").value;
-	//     var latValue = document.getElementById("content-position-lat").value;
-
-	//     if(st.user !== null){
-	// 	request("POST", "server/utils/SaveZone.php", "title="+titleValue+"&latitude="+latValue+"&longitude="+longValue+"&space="+st.space, app);
-	//     } else {
-	// 	loginAlert();
-	// 	app();
-	//     }
-	// } 
+	
 	UIArticle(data);
     }, false);
 

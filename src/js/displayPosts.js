@@ -11,7 +11,8 @@ let linkDisplay = false;
 //////////////////////////
 
 export default function displayPosts(data){
-    st.postsData = JSON.parse(data); // on récupère les données des contenus
+    const dataParse = JSON.parse(data); // on récupère les données des contenus
+    st.postsData = dataParse.message;
 
     d3.select("#articles").remove() // On supprime si #articles existe, comme lors d'un déplacement de contenu > on reset
     
@@ -38,29 +39,29 @@ export default function displayPosts(data){
 	})
 
     d3.selectAll(".card")
-	.append("circle")
-	.attr("cx", 0)
+    	.append("circle")
+    	.attr("cx", 0)
     	.attr("cy", 0)
-    	.attr("r", 4)
-	.attr("fill", "#ffffff")
+    	.attr("r", 2)
+    	.attr("fill", "#ffffff")
 
     d3.selectAll(".card")
-	.append("circle")
-	.attr("class", "grip")
-	.attr("cx", 0)
+    	.append("circle")
+    	.attr("class", "grip")
+    	.attr("cx", 0)
     	.attr("cy", 0)
-    	.attr("r", 24)
-	.attr("opacity", 0.05)
-	.attr("fill", "#ffffff")
+    	.attr("r", 12)
+    	.attr("opacity", 0.05)
+    	.attr("fill", "#ffffff")
 
-    d3.selectAll(".card")
-	.append("line")
-	.attr("class", "link")
-	.attr("stroke", "#ffffff")
-	.attr("x1", 0)   
-	.attr("y1", 0)   
-	.attr("x2", 24)  
-	.attr("y2", -24)
+    // d3.selectAll(".card")
+    // 	.append("line")
+    // 	.attr("class", "link")
+    // 	.attr("stroke", "#ffffff")
+    // 	.attr("x1", 0)   
+    // 	.attr("y1", 0)   
+    // 	.attr("x2", 24)  
+    // 	.attr("y2", -24)
 
     d3.selectAll(".card")
 	.append("svg:foreignObject")
@@ -68,7 +69,7 @@ export default function displayPosts(data){
 	.attr("style", "position: relative;")
 	.attr("width", 256)
 	.attr("height", 200)
-	.attr("x", 24)
+	.attr("x", 8)
 	.append("xhtml:body")
 	.append("div")
     	.attr("class", "card-title")

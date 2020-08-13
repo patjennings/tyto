@@ -10,6 +10,7 @@ import {removeUIinput} from "./listeners";
 import formattedDate from "./utils/formattedDate";
 import {loginAlert} from './utils/loginManager';
 import UIArticle from "./components/UIArticle";
+import logs from "./utils/logs";
 
 let ctrlPushed = false;
 let altPushed = false;
@@ -24,46 +25,48 @@ export default function listenersSave(target, data){
     var btnCancel = document.getElementById("document-cancel");
 
     btnValidate.addEventListener('click', function() {
-	console.log("save file");
 
 	var titleValue = document.getElementById("content-title").value;
 	var longValue = document.getElementById("content-position-long").value;
 	var latValue = document.getElementById("content-position-lat").value;
 
-
 	if(target == "content"){ // si c'est un article
-	    var simplemde = new SimpleMDE({ 
-		element: document.getElementById("content-content") 
-	    });
-	    var contentValue = simplemde.value();
-	    var tagsValue = document.getElementById("content-tags").value;
+	    // var simplemde = new SimpleMDE({
+	    // 	element: document.getElementById("content-content")
+	    // });
+	    // const contentValue = simplemde.value();
 
+	    const contentValue = document.getElementById("content-content").value;
+	    const tagsValue = document.getElementById("content-tags").value;
 	    const moment = formattedDate();
-	    
-	    // le title intégré dans la desc du markdown
-	    var contentFormatted = "title: "+titleValue+"\n";
-	    contentFormatted += "position: "+latValue+", "+longValue+"\n";
-	    contentFormatted += "created: "+st.user+", "+moment+"\n";
-	    contentFormatted += "lastupdated: \n";
-	    contentFormatted += "tags: "+tagsValue+"\n";
-	    contentFormatted += "relations: 0\n\n";
-	    contentFormatted += "---\n\n";
-	    contentFormatted += contentValue;
+
+	    logs("title : "+titleValue);
+	    logs("location : "+longValue+", "+latValue);
+	    logs("content : "+contentValue);
+	    logs("tags : "+tagsValue);
+	    logs("moment : "+moment);
+	    logs("user : "+st.user);
 
 	    if(st.user !== null){
-		request("POST", "server/utils/SaveMarkdownDocument.php", "title="+titleValue+"&content="+contentFormatted+"&space="+st.space, app);
+		// __OLD__ request("POST", "server/utils/SaveMarkdownDocument.php", "title="+titleValue+"&content="+contentFormatted+"&space="+st.space, app);
+
+		/// requete, ajout d'article
 	    } else {
 		loginAlert();
 		app();
 	    }
-
 	}
+	
 	else if(target == "zone"){ // si c'est une zone
-	    var longValue = document.getElementById("content-position-long").value;
-	    var latValue = document.getElementById("content-position-lat").value;
+	    // var longValue = document.getElementById("content-position-long").value;
+	    // var latValue = document.getElementById("content-position-lat").value;
+
+	    logs("title : "+titleValue);
+	    logs("location : "+longValue+", "+latValue);
 
 	    if(st.user !== null){
-		request("POST", "server/utils/SaveZone.php", "title="+titleValue+"&latitude="+latValue+"&longitude="+longValue+"&space="+st.space, app);
+		// __OLD__ request("POST", "server/utils/SaveZone.php", "title="+titleValue+"&latitude="+latValue+"&longitude="+longValue+"&space="+st.space, app);
+		// requete ajout zone
 	    } else {
 		loginAlert();
 		app();
