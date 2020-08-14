@@ -357,6 +357,7 @@ html, body {
   #input-container #content-title {
     margin-bottom: 16px; }
   #input-container #content-content {
+    display: none;
     margin-bottom: 16px; }
   #input-container .CodeMirror,
   #input-container .editor-statusbar,

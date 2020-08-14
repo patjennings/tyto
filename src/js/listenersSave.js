@@ -36,7 +36,9 @@ export default function listenersSave(target, data){
 	    // });
 	    // const contentValue = simplemde.value();
 
-	    const contentValue = document.getElementById("content-content").value;
+	    const rteeditor = document.getElementById("rteeditor");
+	    // logs(rteeditor.contentWindow.document.body.innerHTML);
+	    const contentValue = rteeditor.contentWindow.document.body.innerHTML;
 	    const tagsValue = document.getElementById("content-tags").value;
 	    const moment = formattedDate();
 
