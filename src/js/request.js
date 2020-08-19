@@ -1,19 +1,20 @@
 import app from './app';
-import writeAppData from './app';
+import logs from './utils/logs';
 
 // AJAX requests
 function getRequestObject(){
     var o = null;
     if(window.XMLHttpRequest){
         o = new XMLHttpRequest();
-    }else if(window.ActiveXObject){
+    } else if(window.ActiveXObject){
         try{
             o = new ActiveXObject('Msxml2.XMLHTTP');
-        }catch(e1){
+        } catch(e1){
             try{
                 o = new ActiveXObject('Microsoft.XMLHTTP');
-            }catch(e2){
-
+            }
+	    catch(e2){
+		
             }
         }
     }
@@ -22,6 +23,7 @@ function getRequestObject(){
 
 export default function request(method, uri, sendData = null, callback = requestCallback){
     var o = getRequestObject();
+    
     var async = (callback!==null);
     var timestamp = new Date();
     var uniqueURI = uri+ (uri.indexOf("?") > 0 ? "&" : "?")+ "timestamp="+ timestamp.getTime();
@@ -29,18 +31,17 @@ export default function request(method, uri, sendData = null, callback = request
         if(sendData!=null){uniqueURI+="&"+sendData;}
         o.open(method, uniqueURI, async);
         o.send(null);
-    }else if(method === 'POST'){
-        o.open(method, uniqueURI, async);
-        o.setRequestHeader('Content-Type' , 'application/x-www-form-urlencoded');
+    } else if(method === 'POST'){
+	// o.withCredentials = true;
+        o.open(method, uri, async);
+        o.setRequestHeader('Content-Type', 'application/json');
+	o.setRequestHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
         o.send(sendData);
     }
     if(async){
         o.onreadystatechange = function (){
             if(o.readyState==4&&o.status==200){
                 callback(o.responseText);
-                // console.log("Request is successful");
-		// console.log(uniqueURI);
-		// console.log("Réponse : "+o.responseText);
             }else if(o.readyState==4&&o.status!=200){
                 // console.log("There was an error during this request for "+uri)
             }

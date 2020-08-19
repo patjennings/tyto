@@ -16,30 +16,20 @@ var st = new appState();
 var selectedNode = null;
 
 export function d3Listen(){
-    // console.log("les listeners d3 démarrent");
     d3.select("body").select("svg")
 	.on('mousemove', function() {
 	    st.currentPosition = globals.projection.invert(d3.mouse(this));
 	})
 	.on('click', function() {
 	    st.currentPosition = globals.projection.invert(d3.mouse(this));
-
-	    if(ctrlPushed == true && altPushed == false && st.isCreating == false){ // si on peut créer un doc ET que la touche ctrl est enfoncée
-		// si trop bas ou trop à droite, transformation
-
-		if(st.user !== null){
-		    addPost(st.currentPosition);
-		} else {
-		    loginAlert();
-		}
+	    if(ctrlPushed == true && altPushed == false && st.isCreating == false){ 
+		addPost(st.currentPosition);
 	    }
 	    if(ctrlPushed == true && altPushed == true && st.isCreating == false){
-		if(st.user !== null){
-		    addZone(st.currentPosition);
-		} else {
-		    loginAlert();
-		}
+		addZone(st.currentPosition);
 	    }
+	    ctrlPushed = false;
+	    altPushed = false;
 	    return;
 	});
 
@@ -55,8 +45,6 @@ export function d3Listen(){
 }
 
 export default function listeners(){
-    logs(st.space);
-    // Ctrl key listener, pour utiliser avec le click lors de la création de documents
     window.addEventListener('keydown', (event) => {
 	if(event.ctrlKey) {
 	    ctrlPushed = true;
@@ -72,6 +60,7 @@ export default function listeners(){
     window.addEventListener('keyup', (event) => {
 	ctrlPushed = false;
 	altPushed = false;
+	logs("ctrl ou alt relevé")
     }, false);
 
     
@@ -80,25 +69,12 @@ export default function listeners(){
     // ----------
     const navItems = document.querySelectorAll(".nav-item");
 
-    // logs(navItems);
-
     for(let i=0; i<navItems.length; i++){
     	navItems[i].addEventListener('click', (event) => {
-    	    logs("cliiiiiiiiiiic : "+i);
-    	    // let elem = event.target
     	    setActiveSpace(i);
     	    reset();
     	}, false)
     }
-    
-
-    // // ----------------
-    // // CLICK ON ITEMS
-    // // ----------------
-    // d3.selectAll(".card").select(".content")
-    // 	.on("mouseover", d => {
-    // 	    console.log(d.content.low);
-    // 	})
 }
 
 
@@ -114,6 +90,7 @@ export function ArticleListeners(data){
     articleOverlay.addEventListener("click", e => {
 	articleOverlay.setAttribute("class", "overlay hiding")
 	activeArticle.setAttribute("class", "article hiding")
+	
 	// et on supprime après avoir laissé l'anim jouer
 	window.setTimeout(d => {
 	    activeArticle.parentNode.removeChild(activeArticle);
@@ -133,21 +110,13 @@ export function ArticleListeners(data){
 	window.setTimeout(d => {
 	    activeArticle.parentNode.removeChild(activeArticle);
 	    articleOverlay.parentNode.removeChild(articleOverlay);
-
 	    request("POST", "server/utils/DeleteMarkdownDocument.php", "title="+titleRaw+"&space="+st.space, requestPosts);
 	}, 650);
     })
 
     editArticle.addEventListener("click", e => {
 	const titleRaw = activeArticle.getAttribute("id");
-
-	// lire le contenu
-	// console.log(data.content.full);
-
-	// remplacer les éléments par des champs
 	UIArticle(data, true);
-	
-	// appeler un écouteur qui enregistre une fois le bouton valider clické
     })
 }
 // ------
@@ -176,11 +145,6 @@ var dragListener = d3.behavior.drag()
     .on("dragend", function(d) {
 	var card = d3.select(this.parentNode);
 	var titleRaw = card.attr("id");
-
-	
-	
-	// et là, on modifie la position dans le fichier lié à l'item draggé/droppé
-
 	if(st.user !== null){
 	    request("POST", "server/utils/UpdateMarkdownDocument.php", "titleraw="+titleRaw+"&newlongitude="+st.currentPosition[0]+"&newlatitude="+st.currentPosition[1]+"&space="+st.space+"&user="+st.user, requestPosts);
 
@@ -188,8 +152,6 @@ var dragListener = d3.behavior.drag()
 		loginAlert();
 		requestPosts();
 	    }
-	
-
     });
 
 function endDrag() {

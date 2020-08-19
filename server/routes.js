@@ -138,19 +138,33 @@ module.exports = function(app){
         });
 	
     });
-    app.post('/content/:id', nocache, function(req, res) {
-	// on ajoute un post
-	// on met:
-	//     - title
-	//     -created > user, date
-	// - le contenu aux niveaux de zoom // en markdown
-	// - les tags
-	// - la location lat long
-	// - l'id du space
+    app.post('/content', nocache, function(req, res) {
+	var db = new models.content(); // on crée ce nouvel objet models pour accéder au schéma
+	var response = {};
+
+	db.title = req.body.title;
+	db.content = req.body.content;
+	db.location = req.body.location;
+	db.created = req.body.created;
+	db.lastUpdated = req.body.lastUpdated;
+	db.tags = req.body.tags;
+	db.space = req.body.space;
+	db.relations = req.body.relations;
 	
-	var response = {}
-	response = sliceMarkdown("mon contenu");
-	res.send(response);
+	// response = sliceMarkdown("mon contenu");
+
+	// console.log(db.moment);
+	
+	db.save(function(err, db){
+	    // save() will run insert() command of MongoDB.
+	    // it will add new data in collection.
+	    if(err) {
+		response = {"error" : true, "message" : "Error adding data"};
+	    } else {
+		response = {"error" : false, "message" : "Content added", "data" : db};
+	    }
+	    res.json(response);
+	});
     });
     app.put('/content/:id', nocache, function(req, res) {
 	// on update :

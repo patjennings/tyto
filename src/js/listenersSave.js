@@ -11,6 +11,8 @@ import formattedDate from "./utils/formattedDate";
 import {loginAlert} from './utils/loginManager';
 import UIArticle from "./components/UIArticle";
 import logs from "./utils/logs";
+import {paths} from './conf/conf';
+
 
 let ctrlPushed = false;
 let altPushed = false;
@@ -31,32 +33,47 @@ export default function listenersSave(target, data){
 	var latValue = document.getElementById("content-position-lat").value;
 
 	if(target == "content"){ // si c'est un article
-	    // var simplemde = new SimpleMDE({
-	    // 	element: document.getElementById("content-content")
-	    // });
-	    // const contentValue = simplemde.value();
-
 	    const rteeditor = document.getElementById("rteeditor");
-	    // logs(rteeditor.contentWindow.document.body.innerHTML);
 	    const contentValue = rteeditor.contentWindow.document.body.innerHTML;
-	    const tagsValue = document.getElementById("content-tags").value;
+	    // const tagsValue = document.getElementById("content-tags").value;
+	    const tagsValue = ["ok", "super"];
 	    const moment = formattedDate();
 
-	    logs("title : "+titleValue);
-	    logs("location : "+longValue+", "+latValue);
-	    logs("content : "+contentValue);
-	    logs("tags : "+tagsValue);
-	    logs("moment : "+moment);
-	    logs("user : "+st.user);
+	    const data = {
+		"title": titleValue,
+		"location": {
+		    "latitude": latValue,
+		    "longitude": longValue
+		},
+		"content":{
+		    "high": null,
+		    "medium": null,
+		    "low": null,
+		    "full": contentValue
+		},
+		"tags": tagsValue,
+		"created": {
+		    "user": st.user,
+		    "date": moment
+		},
+		"lastUpdated": {
+		    "user": null,
+		    "date": null
+		},
+		"relations": [
+		    "tag1", "tag2"
+		],
+		"space": st.space
+		
+	    };
+	    // logs(data);
+	    // JSON.stringify();
+	    
+	    // __OLD__ request("POST", "server/utils/SaveMarkdownDocument.php", "title="+titleValue+"&content="+contentFormatted+"&space="+st.space, app);
+	    request("POST", paths.apiUrl+"/content", JSON.stringify(data), app);
+	    // var zonesData = request("POST", paths.apiUrl+"/"+st.space+"/content", data, app);
 
-	    if(st.user !== null){
-		// __OLD__ request("POST", "server/utils/SaveMarkdownDocument.php", "title="+titleValue+"&content="+contentFormatted+"&space="+st.space, app);
-
-		/// requete, ajout d'article
-	    } else {
-		loginAlert();
-		app();
-	    }
+	    /// requete, ajout d'article
 	}
 	
 	else if(target == "zone"){ // si c'est une zone
@@ -66,13 +83,8 @@ export default function listenersSave(target, data){
 	    logs("title : "+titleValue);
 	    logs("location : "+longValue+", "+latValue);
 
-	    if(st.user !== null){
-		// __OLD__ request("POST", "server/utils/SaveZone.php", "title="+titleValue+"&latitude="+latValue+"&longitude="+longValue+"&space="+st.space, app);
-		// requete ajout zone
-	    } else {
-		loginAlert();
-		app();
-	    }
+	    // __OLD__ request("POST", "server/utils/SaveZone.php", "title="+titleValue+"&latitude="+latValue+"&longitude="+longValue+"&space="+st.space, app);
+	    // requete ajout zone
 	} 
 	removeUIinput();
     }, false);

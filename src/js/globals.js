@@ -1,11 +1,12 @@
 import mapScale from "./utils/mapScale";
-import {paths} from "./conf/conf"
+import {paths} from "./conf/conf";
 
 // toutes ces variables sont modifiées dans init.js, via l'objet appState()
 let user = null;
-let space = "";
+let space = null;
 let spaceIndex = null; // default, le premier space dans la bdd
 let isCreating = null; // on est en train de créer un article // false
+let isStyling = null;
 let isDragging = null; // false
 let scaleFac = null; // doit être modifié //40000.503614997007
 let currentPosition = null;      // doit être modifié //[0, 0]
@@ -15,12 +16,8 @@ let postsData = null;
 let zonesData = null;
 let firstStart = true;
 let logs = true;
-const rootDir = paths.appUrl;
-// const postsDir = rootDir+"dist/content/";
-
-// export var mapDataPath = "dist/assets/maps/map-1.geojson";
-
-const steps = [
+let rootDir = paths.appUrl;
+let steps = [
     {
 	name: "galaxy",
 	level: 0
@@ -39,10 +36,21 @@ const steps = [
     }
 ];
 
+// const postsDir = rootDir+"dist/content/";
+
+// export var mapDataPath = "dist/assets/maps/map-1.geojson";
+
+var st = new appState();
+export var width = screen.availWidth;
+export var height = screen.availHeight;
+export var projection = d3.geo.mercator().scale(485035).translate([ -215431, 336666]);
+export var pathProjection = d3.geo.path().projection(projection);
+export var cardsWidth = 340;
+
+
 // cette fonction contient modifie les états de l'application, avec des getters et des setters
 // pour pouvoir vivre tout au long du déroulement
 // s'applique sur les trois variables déclarées au dessus
-
 export default function appState() {    
     Object.defineProperty(this, 'space', {
 	get: function() {
@@ -77,6 +85,14 @@ export default function appState() {
 	},
 	set: function(value) {
 	    isCreating = value;
+	}
+    });
+    Object.defineProperty(this, 'isStyling', {
+	get: function() {
+	    return isStyling;
+	},
+	set: function(value) {
+	    isStyling = value;
 	}
     });
     Object.defineProperty(this, 'isDragging', {
@@ -176,16 +192,3 @@ export default function appState() {
 	}
     });
 }
-
-var st = new appState();
-export var width = screen.availWidth;
-export var height = screen.availHeight;
-
-export var projection = d3.geo.mercator()
-    .scale(485035)
-    .translate([ -215431, 336666]);
-
-export var pathProjection = d3.geo.path()
-    .projection(projection);
-
-export var cardsWidth = 340;

@@ -31,7 +31,6 @@ export default async function app(){
         //     loginManager();
     // }
     st.user = "thomas";
-
     requestSpaces();
 }
 async function requestSpaces(){

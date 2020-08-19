@@ -8,7 +8,8 @@ export default function UIinputTerm(type, proj, articleLat, articleLong){
     let e;
     
     if(type=="content"){
-	e = "<div id='input-container' style='transform: translate("+proj[0]+"px, "+proj[1]+"px);'>";
+	// e = "<div id='input-container' style='transform: translate("+proj[0]+"px, "+proj[1]+"px);'>";
+	e = "<div id='input-container'>";
 	e += "<input id='content-title' placeholder='Titre'></input>";
 	e += "<textarea id='content-content' name='content-content'></textarea>";
 	e += "<iframe name='rteeditor' id='rteeditor' onload='this.contentDocument.designMode=\"on\"'></iframe>";
