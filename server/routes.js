@@ -150,14 +150,9 @@ module.exports = function(app){
 	db.tags = req.body.tags;
 	db.space = req.body.space;
 	db.relations = req.body.relations;
-	
-	// response = sliceMarkdown("mon contenu");
 
-	// console.log(db.moment);
-	
 	db.save(function(err, db){
 	    // save() will run insert() command of MongoDB.
-	    // it will add new data in collection.
 	    if(err) {
 		response = {"error" : true, "message" : "Error adding data"};
 	    } else {
@@ -167,12 +162,46 @@ module.exports = function(app){
 	});
     });
     app.put('/content/:id', nocache, function(req, res) {
-	// on update :
-	// - le title
-	// - lastUpdated > user, date
-	// - le nouveau content découpé auuxnivde zoom
-	// - les tags
-	// - la nouvelle location lat long
+	var response = {};
+	models.projects.findById(req.params.id, function(err,data){
+	    if(err) {
+                response = {"error" : true,"message" : "Error fetching data"};
+	    } else {
+		if (req.body.title !== undefined) {
+		    data.title = req.body.title;
+		}
+		if (req.body.content !== undefined) {
+		    data.content = req.body.content;
+		}
+		if (req.body.location !== undefined) {
+		    data.location = req.body.location;
+		}
+		if (req.body.created !== undefined) {
+		    data.created = req.body.created;
+		}
+		if (req.body.lastUpdated !== undefined) {
+		    data.lastUpdated = req.body.lastUpdated;
+		}
+		if (req.body.tags !== undefined) {
+		    data.tags = req.body.tags;
+		}
+		if (req.body.space !== undefined) {
+		    data.space = req.body.space;
+		}
+		if (req.body.relations !== undefined) {
+		    data.relations = req.body.relations;
+		}
+		// Save data
+		data.save(function(err, data){
+                    if(err) {
+                        response = {"error" : true,"message" : "Error updating data"};
+                    } else {
+                        response = {"error" : false,"message" : "Project is updated for "+req.params.id, "data" : data };
+                    }
+		    res.json(response);
+		})
+	    }
+        });
     });
     app.delete('/content/:id', nocache, function(req, res) {
 	

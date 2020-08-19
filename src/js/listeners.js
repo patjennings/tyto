@@ -147,11 +147,9 @@ var dragListener = d3.behavior.drag()
 	var titleRaw = card.attr("id");
 	if(st.user !== null){
 	    request("POST", "server/utils/UpdateMarkdownDocument.php", "titleraw="+titleRaw+"&newlongitude="+st.currentPosition[0]+"&newlatitude="+st.currentPosition[1]+"&space="+st.space+"&user="+st.user, requestPosts);
-
-	    } else {
-		loginAlert();
-		requestPosts();
-	    }
+	} else {
+	    requestPosts();
+	}
     });
 
 function endDrag() {

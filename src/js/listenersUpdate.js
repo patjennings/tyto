@@ -24,20 +24,18 @@ export default function listenersUpdate(data){
     var btnCancel = document.getElementById("document-cancel");
 
     btnValidate.addEventListener('click', function() {
-	console.log("update file");
+	// console.log("update file");
 
 	var titleValue = document.getElementById("content-title").value;
-	// var longValue = document.getElementById("content-position-long").value;
-	// var latValue = document.getElementById("content-position-lat").value;
 
-	var longValue = data.location.longitude;
-	var latValue = data.location.latitude;
+	var longitude = data.location.longitude;
+	var latitude = data.location.latitude;
 
 	var simplemde = new SimpleMDE({ 
             element: document.getElementById("content-edit") 
 	});
 	var contentValue = simplemde.value();
-	console.log(document.getElementById("content-edit"));
+	// console.log(document.getElementById("content-edit"));
 	var tagsValue = document.getElementById("content-tags").value;
 
 	const moment = formattedDate();
@@ -52,7 +50,7 @@ export default function listenersUpdate(data){
 	contentFormatted += "---\n\n";
 	contentFormatted += contentValue;
 
-	console.log(contentFormatted);
+	// console.log(contentFormatted);
 	
 	UIArticle(data);
     }, false);
