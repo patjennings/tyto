@@ -25,7 +25,7 @@ module.exports = function(app){
     app.use("/assets", express.static(path.resolve(".") + '/dist/assets')); 
 
     function nocache(req, res, next) {
-	console.log("NO CAAAACHE");
+	// console.log("NO CAAAACHE");
 	res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
 	res.header('Expires', '-1');
 	res.header('Pragma', 'no-cache');

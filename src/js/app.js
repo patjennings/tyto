@@ -10,8 +10,12 @@ import actions from './listeners/actions';
 import mapActions from './listeners/mapActions';
 import request from './request';
 import loginManager from './utils/loginManager';
-
 import {paths} from './conf/conf';
+
+
+
+/// test
+import {processContent} from './listeners/articlePost';
 
 let content = null;
 let st = new appState();
@@ -23,6 +27,7 @@ let st = new appState();
 export default async function app(){
     // console.log("start app");
     // remove tout si ça existe
+    // processContent();
     configure();
 
     st.user = "thomas";

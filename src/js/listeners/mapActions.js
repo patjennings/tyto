@@ -49,7 +49,6 @@ var dragListener = d3.behavior.drag()
     .on("dragstart", function(d) {
 	// lance un intervalle, puis met launch sur ok
 	var card = d3.select(this.parentNode);
-	console.log(this);
 	st.draggingNode = true;
 	card.select(".grip")
 	    .attr("r", 48)
