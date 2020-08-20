@@ -1,14 +1,15 @@
 import * as globals from "./globals";
 import appState from "./globals";
-import addPost from "./addPost";
+import addArticle from "./addArticle";
 import copyTextToClipboard from './utils/copyTextToClipboard';
 import scale from './utils/scale';
-import displayPosts from './displayPosts';
+import displayArticles from './displayArticles';
 import displayZones from './displayZones';
-import listeners, {d3Listen} from './listeners';
+// import listeners, {d3Listen} from './listeners';
+import actions from './listeners/actions';
+import mapActions from './listeners/mapActions';
 import request from './request';
 import loginManager from './utils/loginManager';
-import logs from './utils/logs';
 
 import {paths} from './conf/conf';
 
@@ -20,25 +21,19 @@ let st = new appState();
 })(window);
 
 export default async function app(){
-    // logs("start app");
+    // console.log("start app");
     // remove tout si ça existe
     configure();
 
-    // logs(conf);
-    
-    // si on n'est pas loggé, on lance la gestion du login
-        // if(st.user == null){
-        //     loginManager();
-    // }
     st.user = "thomas";
-    requestSpaces();
+    getSpaces();
 }
-async function requestSpaces(){
-    let requestSpaces = await request("GET", paths.apiUrl+"/spaces", null, function(data){
+async function getSpaces(){
+    let getSpaces = await request("GET", paths.apiUrl+"/spaces", null, function(data){
 	const dataParse = JSON.parse(data)
 	st.spacesData = dataParse.message;
 	setActiveSpace(0);
-	showNav(); // afficher la nav
+	displayNav(); // afficher la nav
     })
 }
 export function setActiveSpace(index) {
@@ -51,7 +46,7 @@ export function setActiveSpace(index) {
     // - la map
     // - la nav
     // - on lance les listeners
-    showMap(st.mapData, globals.pathProjection); // Afficher la carte
+    displayMap(st.mapData, globals.pathProjection); // Afficher la carte
 
     // listeners(); // on active les écouteurs
     
@@ -60,8 +55,8 @@ export function setActiveSpace(index) {
 
 export function reset(){
     configure();
-    showMap(st.mapData, globals.pathProjection); // Afficher la carte
-    showNav();
+    displayMap(st.mapData, globals.pathProjection); // Afficher la carte
+    displayNav();
 }
 
 // function clean(){
@@ -101,8 +96,8 @@ function configure(){
 	.attr("height", globals.height);
 }
 
-function showMap(mapdata, mapProjection){
-    logs(mapdata);
+function displayMap(mapdata, mapProjection){
+    // console.log(mapdata);
     d3.json(mapdata, function(error, json) {
     	if (error) throw error;
     	d3.select("svg")
@@ -120,13 +115,13 @@ function showMap(mapdata, mapProjection){
     });
 }
 
-async function showNav(){
+async function displayNav(){
     const wrapper = document.getElementById("root");
     let nav = wrapper.querySelector(".nav");
     
     if(!nav){
 	let requestNav = await request("GET", paths.apiUrl+"/spaces", null, function(data){
-	    // logs(data);
+	    // console.log(data);
 	    wrapper.insertAdjacentHTML("afterbegin", "<div class='nav'></div>")
 	    nav = wrapper.querySelector(".nav");
 	    let navList = JSON.parse(data); // on parse le json pour avoir un tableau
@@ -137,19 +132,19 @@ async function showNav(){
 	    });
 	    output += "</ul>"
 	    nav.innerHTML = output;
-	    listeners() // on relance le listener
+
+	    actions(); // on relance les écouteurs
 	});
     }
 }
 
 export function requestPosts(){
     // on télécharge les données
-    // var postsData = request("GET", "server/list-content.php", "space="+st.space, displayPosts);
-    var postsData = request("GET", paths.apiUrl+"/"+st.space+"/content", null, displayPosts);
+    var postsData = request("GET", paths.apiUrl+"/"+st.space+"/content", null, displayArticles);
 }
 
 export function requestZones(){
-    logs("request les zones");
+    // console.log("request les zones");
     // on télécharge les données
     var zonesData = request("GET", paths.apiUrl+"/"+st.space+"/zones", null, displayZones);
 }

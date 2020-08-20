@@ -30,8 +30,9 @@ var contentSchema = {
 var zoneSchema = {
     "title": String,
     "space": String,
-    "latitude": Number,
-    "longitude": Number
+    "location": Object,
+    "created": Object,
+    "lastUpdated": Object
 };
 var spaceSchema = {
     "title": String

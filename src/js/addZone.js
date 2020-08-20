@@ -3,13 +3,12 @@ import appState from "./globals";
 import request from './request';
 import app from './app';
 // import UIinput from './components/UIinput';
-import UIinputTerm from './components/UIinputTerm';
-import listenersSave from './listenersSave';
+import UIZoneNew from './components/UIZoneNew';
+import zonePost from './listeners/zonePost';
 import UISpotCreation from './components/UISpotCreation';
 
 let isCreating = null;
 var st = new appState();
-// var simplemde;
 
 export default function addZone(currentPosition){
     var long = currentPosition[1];
@@ -24,8 +23,7 @@ export default function addZone(currentPosition){
 	long
     ])
     
-    var elements = UIinputTerm("zone", proj, long, lat);
+    var elements = UIZoneNew("zone", proj, long, lat);
     
-    // $(".map").append(elements);
-    listenersSave("zone");
+    zonePost("zone");
 }

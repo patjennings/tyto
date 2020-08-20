@@ -111,10 +111,10 @@ module.exports = function(app){
 	// on crée un nouveau space si le nom n'existe pas déjà
     });
     app.put('/space/:id', nocache, function(req, res) {
-	
+	// on update un space
     });
     app.delete('/space/:id', nocache, function(req, res) {
-	
+	// on delete un space
     });
 
     // content
@@ -163,7 +163,7 @@ module.exports = function(app){
     });
     app.put('/content/:id', nocache, function(req, res) {
 	var response = {};
-	models.projects.findById(req.params.id, function(err,data){
+	models.content.findById(req.params.id, function(err,data){
 	    if(err) {
                 response = {"error" : true,"message" : "Error fetching data"};
 	    } else {
@@ -196,7 +196,7 @@ module.exports = function(app){
                     if(err) {
                         response = {"error" : true,"message" : "Error updating data"};
                     } else {
-                        response = {"error" : false,"message" : "Project is updated for "+req.params.id, "data" : data };
+                        response = {"error" : false,"message" : "content is updated for "+req.params.id, "data" : data };
                     }
 		    res.json(response);
 		})
@@ -204,15 +204,47 @@ module.exports = function(app){
         });
     });
     app.delete('/content/:id', nocache, function(req, res) {
-	
+	var response = {};
+	console.log("delete sent");
+	models.content.findById(req.params.id, function(err,data){
+	    if(err){
+		response = {"error" : true,"message" : "Error retrieving data"};
+	    } else {
+		models.content.deleteOne({ _id : req.params.id}, function(err, obj){
+		    if(err){
+			response = {"error" : true, "message" : "Error while deleting content"};
+		    } else {
+			response = {"error" : false, "message" : "content is removed"};
+		    }
+		});
+	    }
+	    res.send(response);
+        });
     });
 
     // zones
     app.get('/zones/:id', nocache, function(req, res) {
 	//
     });
-    app.post('/zones/:id', nocache, function(req, res) {
-	//
+    app.post('/zones', nocache, function(req, res) {
+	var db = new models.zones(); // on crée ce nouvel objet models pour accéder au schéma
+	var response = {};
+
+	db.title = req.body.title;
+	db.location = req.body.location;
+	db.created = req.body.created;
+	db.lastUpdated = req.body.lastUpdated;
+	db.space = req.body.space;
+
+	db.save(function(err, db){
+	    // save() will run insert() command of MongoDB.
+	    if(err) {
+		response = {"error" : true, "message" : "Error adding data"};
+	    } else {
+		response = {"error" : false, "message" : "Content added", "data" : db};
+	    }
+	    res.json(response);
+	});
     });
     app.put('/zones/:id', nocache, function(req, res) {
 	//

@@ -1,14 +1,17 @@
 import * as globals from "../globals";
 import appState from "../globals";
 
-import {ArticleListeners} from '../listeners';
-import listenersUpdate from '../listenersUpdate';
+// import {ArticleListeners} from '../listeners';
+// import listenersUpdate from '../listenersUpdate';
+
+import articleActions from '../listeners/articleActions';
+import articleUpdate from '../listeners/articleUpdate';
 
 let st = new appState();
-var simplemde;
 
 export default function UIArticle(data, edit=false){
-    console.log(data);
+    // console.log(data);
+    // st.selectedArticle = data._id;
     const container = document.getElementById("root");
     const article = document.querySelector(".article");
     const overlay = document.querySelector(".overlay");
@@ -29,12 +32,8 @@ export default function UIArticle(data, edit=false){
     }
 
     if(edit){
-
-	var converter = new showdown.Converter();	   
-	var md = converter.makeMarkdown(data.content.full);
-
 	e += "<input value='"+data.tags.join(", ")+"' id='content-tags'/>";
-	e += "<textarea id='content-edit' >"+md+"</textarea>";
+	e += "<textarea id='content-edit' >"+data.content+"</textarea>";
 	e += "<button type='submit' value='ok' class='btn highlight' id='document-validate'>Mettre à jour</button>";
 	e += "<button value='cancel' class='btn' id='document-cancel'>Annuler</button>"
 
@@ -61,15 +60,8 @@ export default function UIArticle(data, edit=false){
     container.insertAdjacentHTML("afterbegin", e);
     
     if(edit){
-	startMarkdownEditor();
-	listenersUpdate(data);
+	articleUpdate(data);
     }
-    ArticleListeners(data);
+    articleActions(data);
     
-}
-function startMarkdownEditor(){
-    console.log("start md editor");
-    simplemde = new SimpleMDE({ 
-        element: document.getElementById("content-edit") 
-    });
 }

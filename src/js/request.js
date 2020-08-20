@@ -1,5 +1,4 @@
 import app from './app';
-import logs from './utils/logs';
 
 // AJAX requests
 function getRequestObject(){
@@ -23,7 +22,6 @@ function getRequestObject(){
 
 export default function request(method, uri, sendData = null, callback = requestCallback){
     var o = getRequestObject();
-    
     var async = (callback!==null);
     var timestamp = new Date();
     var uniqueURI = uri+ (uri.indexOf("?") > 0 ? "&" : "?")+ "timestamp="+ timestamp.getTime();
@@ -31,7 +29,7 @@ export default function request(method, uri, sendData = null, callback = request
         if(sendData!=null){uniqueURI+="&"+sendData;}
         o.open(method, uniqueURI, async);
         o.send(null);
-    } else if(method === 'POST'){
+    } else if(method === 'POST' || method === 'PUT' || method === 'DELETE'){
 	// o.withCredentials = true;
         o.open(method, uri, async);
         o.setRequestHeader('Content-Type', 'application/json');

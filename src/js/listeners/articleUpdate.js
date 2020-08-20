@@ -1,25 +1,14 @@
-// import scaleMap from "./scaleMap";
-import * as globals from "./globals";
-import appState from "./globals";
-import addPost from "./addPost";
-import addZone from "./addZone";
-import request from "./request";
-import app from "./app";
-import {removeUIinput} from "./listeners";
-// import {simplemde} from "./addPost";
-import formattedDate from "./utils/formattedDate";
-import {loginAlert} from './utils/loginManager';
-import UIArticle from "./components/UIArticle";
+import * as globals from "../globals";
+import appState from "../globals";
+import UIArticle from "../components/UIArticle";
 
 let ctrlPushed = false;
 let altPushed = false;
-
 var st = new appState();
-
 var selectedNode = null;
 
-export default function listenersUpdate(data){
-
+export default function articleUpdate(data){
+    
     var btnValidate = document.getElementById("document-validate");
     var btnCancel = document.getElementById("document-cancel");
 
@@ -58,4 +47,13 @@ export default function listenersUpdate(data){
     btnCancel.addEventListener('click', function() {
 	UIArticle(data);
     }, false);
+    
+    
+}
+
+function endDrag() {
+    selectedNode = null;
+    if (st.draggingNode !== null) {
+        st.draggingNode = null;
+    }
 }

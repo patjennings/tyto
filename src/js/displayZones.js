@@ -1,6 +1,5 @@
 import * as globals from "./globals";
 import appState from "./globals";
-import logs from "./utils/logs";
 /////////////////////////
 // Ajouter les zones
 /////////////////////////
@@ -12,7 +11,7 @@ export default function displayZones(data){
     const dataParse = JSON.parse(data)
     st.zonesData = dataParse.message; // on récupère les données des zones
 
-    logs("appel zones");
+    // console.log("appel zones");
     
     d3.select("svg")
 	.append("g")

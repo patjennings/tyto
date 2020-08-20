@@ -1,4 +1,4 @@
-import mapScale from "./utils/mapScale";
+// import mapScale from "./utils/mapScale";
 import {paths} from "./conf/conf";
 
 // toutes ces variables sont modifiées dans init.js, via l'objet appState()
@@ -8,6 +8,7 @@ let spaceIndex = null; // default, le premier space dans la bdd
 let isCreating = null; // on est en train de créer un article // false
 let isStyling = null;
 let isDragging = null; // false
+let selectedArticle = null; // l'id de l'article sélectionné
 let scaleFac = null; // doit être modifié //40000.503614997007
 let currentPosition = null;      // doit être modifié //[0, 0]
 let spacesData = null; // doit être modifié avec le nouveau contenu chargé du json
@@ -15,8 +16,9 @@ let mapData = null;
 let postsData = null;      
 let zonesData = null;
 let firstStart = true;
-let logs = true;
 let rootDir = paths.appUrl;
+let isCtrlKeyPushed = false;
+let isAltKeyPushed = false;
 let steps = [
     {
 	name: "galaxy",
@@ -35,6 +37,7 @@ let steps = [
 	level: 260
     }
 ];
+
 
 // const postsDir = rootDir+"dist/content/";
 
@@ -159,14 +162,6 @@ export default function appState() {
 	    firstStart = value;
 	}
     });
-    Object.defineProperty(this, 'logs', {
-	get: function() {
-	    return logs;
-	},
-	set: function(value) {
-	    logs = value;
-	}
-    });
     Object.defineProperty(this, 'rootDir', {
 	get: function() {
 	    return rootDir;
@@ -189,6 +184,22 @@ export default function appState() {
 	},
 	set: function(value) {
 	    steps = value;
+	}
+    });
+    Object.defineProperty(this, 'isCtrlKeyPushed', {
+	get: function() {
+	    return isCtrlKeyPushed;
+	},
+	set: function(value) {
+	    isCtrlKeyPushed = value;
+	}
+    });
+    Object.defineProperty(this, 'isAltKeyPushed', {
+	get: function() {
+	    return isAltKeyPushed;
+	},
+	set: function(value) {
+	    isAltKeyPushed = value;
 	}
     });
 }

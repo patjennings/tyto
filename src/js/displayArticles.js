@@ -1,7 +1,7 @@
 import * as globals from "./globals";
 import UIArticle from "./components/UIArticle";
 import appState from "./globals";
-import {d3Listen} from "./listeners";
+import mapActions from "./listeners/mapActions";
 
 var st = new appState();
 let linkDisplay = false;
@@ -10,7 +10,7 @@ let linkDisplay = false;
 // Ajouter les articles
 //////////////////////////
 
-export default function displayPosts(data){
+export default function displayArticles(data){
     const dataParse = JSON.parse(data); // on récupère les données des contenus
     st.postsData = dataParse.message;
 
@@ -113,7 +113,7 @@ export default function displayPosts(data){
 	})
     
     adjustFoHeight();
-    d3Listen();
+    mapActions();
 }
 
 // Permet d'ajuster automatiquement la hauteur du foreignObject en se basant sur le body
@@ -131,7 +131,7 @@ function adjustFoHeight(){
 
 }
 
-export function updatePosts(newProjection = null){
+export function updateArticles(newProjection = null){
     // transforme les points au zoom et translate
     d3.selectAll(".card").attr("transform", function(d) {
 	var proj = globals.projection([
@@ -155,14 +155,14 @@ export function updatePosts(newProjection = null){
 function getContent(data){
     // console.log(data);
     if(st.scaleFac < toD3Scale(st.steps[1].level)){
-	logger(st.steps[0].name, toD3Scale(st.steps[0].level), st.scaleFac)
+	// logger(st.steps[0].name, toD3Scale(st.steps[0].level), st.scaleFac)
 	linkDisplay = false;
 	d3.selectAll(".card")
 	    .attr("class", "card "+st.steps[0].name)
 	return null;
     }
     else if(st.scaleFac > toD3Scale(st.steps[1].level) && st.scaleFac < toD3Scale(st.steps[2].level)){
-	logger(st.steps[1].name, toD3Scale(st.steps[1].level), st.scaleFac)
+	// logger(st.steps[1].name, toD3Scale(st.steps[1].level), st.scaleFac)
 	linkDisplay = false;
 	d3.selectAll(".card")
 	    .attr("class", "card "+st.steps[1].name)
@@ -170,7 +170,7 @@ function getContent(data){
 
     }
     else if(st.scaleFac > toD3Scale(st.steps[2].level) && st.scaleFac < toD3Scale(st.steps[3].level)){	
-	logger(st.steps[2].name, toD3Scale(st.steps[2].level), st.scaleFac)
+	// logger(st.steps[2].name, toD3Scale(st.steps[2].level), st.scaleFac)
 	linkDisplay = false;
 	d3.selectAll(".card")
 	    .attr("class", "card "+st.steps[2].name)
@@ -178,7 +178,7 @@ function getContent(data){
 
     }
     else if(st.scaleFac > toD3Scale(st.steps[3].level)){
-	logger(st.steps[3].name, toD3Scale(st.steps[3].level), st.scaleFac)
+	// logger(st.steps[3].name, toD3Scale(st.steps[3].level), st.scaleFac)
 	linkDisplay = false;
 	d3.selectAll(".card")
 	    .attr("class", "card "+st.steps[3].name)
@@ -201,8 +201,8 @@ function editPost(data){
     console.log(data);
 }
 
-function logger(stName, stLevel, stCur){
-    console.log(
-	"Zoom level :"+stName+"("+stLevel/10000+") while at : "+stCur/10000
-    );
-}
+// function logger(stName, stLevel, stCur){
+//     console.log(
+// 	"Zoom level :"+stName+"("+stLevel/10000+") while at : "+stCur/10000
+//     );
+// }

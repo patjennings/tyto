@@ -44,3 +44,12 @@ Quelques features qui seront implémentés après une première version stable
 - découper les fichiers selon position = possibilité de repartir vers du texte entièrement. Tyto = outil de structuration
 - gestion de compte (login, sécurisation)
 - mode édition, mode consultation
+
+### Rich text edition ###
+- https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Editable_content/Rich-Text_Editing_in_Mozilla
+- part 1 > https://www.youtube.com/watch?v=JxdBzejlMyY
+- part 2 > https://www.youtube.com/watch?v=rnScNTAzC0c
+- infos de base : https://stackoverflow.com/questions/6007242/how-to-create-a-rich-text-editor
+- example > https://codepen.io/netsi1964/full/QbLLGW/
+- avec execCommand > https://developer.mozilla.org/fr/docs/Web/API/Document/execCommand
+- https://www.dyn-web.com/tutorials/iframes/refs/iframe.php
