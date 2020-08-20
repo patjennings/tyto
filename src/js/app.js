@@ -15,7 +15,7 @@ import {paths} from './conf/conf';
 
 
 /// test
-import {processContent} from './listeners/articlePost';
+import {getSlicedContent} from './listeners/articlePost';
 
 let content = null;
 let st = new appState();
@@ -27,7 +27,7 @@ let st = new appState();
 export default async function app(){
     // console.log("start app");
     // remove tout si ça existe
-    // processContent();
+    // getSlicedContent();
     configure();
 
     st.user = "thomas";

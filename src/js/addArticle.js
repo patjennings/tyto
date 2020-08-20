@@ -27,7 +27,7 @@ export default function addPost(currentPosition){
 	long
     ])
 
-    let elements = UIArticleNew("content", proj, long, lat);    
+    let elements = UIArticleNew(proj, long, lat, "new");    
     articlePost();
     richEditor();
 }

@@ -78,7 +78,7 @@ export default function displayArticles(data){
     d3.selectAll(".card")
 	.select("body")
 	.attr("id",function(d) {
-    	    return "wrapper-"+d.raw;
+    	    return "wrapper-"+d._id;
     	})
 	.append("div")
         .attr("class", "card-content")
@@ -121,11 +121,11 @@ function adjustFoHeight(){
     d3.selectAll(".card")
 	.select("foreignObject")
 	.attr("height", function(d){
-	    let bodyHeight = document.getElementById("wrapper-"+d.raw).clientHeight;
+	    let bodyHeight = document.getElementById("wrapper-"+d._id).clientHeight;
 	    return bodyHeight;
 	})
 	.attr("y", function(d){
-	    let bodyHeight = document.getElementById("wrapper-"+d.raw).clientHeight;
+	    let bodyHeight = document.getElementById("wrapper-"+d._id).clientHeight;
 	    return -((bodyHeight+12)/2);
 	})
 
@@ -153,7 +153,7 @@ export function updateArticles(newProjection = null){
 
 // return the  content, related to zoom level
 function getContent(data){
-    // console.log(data);
+    // console.log(data.content);
     if(st.scaleFac < toD3Scale(st.steps[1].level)){
 	// logger(st.steps[0].name, toD3Scale(st.steps[0].level), st.scaleFac)
 	linkDisplay = false;
@@ -166,7 +166,7 @@ function getContent(data){
 	linkDisplay = false;
 	d3.selectAll(".card")
 	    .attr("class", "card "+st.steps[1].name)
-	return data.content.top;
+	return data.content.high;
 
     }
     else if(st.scaleFac > toD3Scale(st.steps[2].level) && st.scaleFac < toD3Scale(st.steps[3].level)){	
@@ -174,7 +174,7 @@ function getContent(data){
 	linkDisplay = false;
 	d3.selectAll(".card")
 	    .attr("class", "card "+st.steps[2].name)
-	return data.content.middle;
+	return data.content.mid;
 
     }
     else if(st.scaleFac > toD3Scale(st.steps[3].level)){

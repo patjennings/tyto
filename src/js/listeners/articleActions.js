@@ -1,6 +1,6 @@
 import * as globals from "../globals";
 import appState from "../globals";
-import UIArticle from '../components/UIArticle';
+import UIArticleNew from '../components/UIArticleNew';
 import request from '../request';
 import {paths} from '../conf/conf';
 import {requestPosts} from '../app';
@@ -11,7 +11,7 @@ var st = new appState();
 var selectedNode = null;
 
 export default function articleActions(data){
-    // console.log(data);
+
     // REMOVE ARTICLE
     // ----------------
     const articleOverlay = document.querySelector(".overlay");
@@ -48,6 +48,6 @@ export default function articleActions(data){
 
     editArticle.addEventListener("click", e => {
 	const titleRaw = activeArticle.getAttribute("id");
-	UIArticle(data, true);
+	UIArticleNew(null, null, null, "edit");
     })
 }

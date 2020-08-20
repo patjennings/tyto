@@ -21,6 +21,7 @@ function getRequestObject(){
 }
 
 export default function request(method, uri, sendData = null, callback = requestCallback){
+    console.log("requête : "+method+" | "+uri);
     var o = getRequestObject();
     var async = (callback!==null);
     var timestamp = new Date();

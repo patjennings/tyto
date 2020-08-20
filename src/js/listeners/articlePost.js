@@ -22,7 +22,7 @@ export default function articlePost(){
 
 	const rteeditor = document.getElementById("rteeditor");
 	const contentRaw = rteeditor.contentWindow.document.body.innerHTML;
-	const content = processContent(contentRaw);
+	const content = getSlicedContent(contentRaw);
 
 	const tagsWrapper = document.getElementById("content-tags")
 	const tags = getTags(tagsWrapper.value);
@@ -36,7 +36,7 @@ export default function articlePost(){
 	    },
 	    "content":{
 		"high": content.high,
-		"medium": content.medium,
+		"mid": content.medium,
 		"low": content.low,
 		"full": contentRaw
 	    },
@@ -64,66 +64,55 @@ export default function articlePost(){
     }, false);
 }
 
-export function processContent(data){
-    // const bigContentPattern = new RegExp("(?<=<h1>)(.*?)(?=</h1>)");
-
+export function getSlicedContent(data){
+    // /!\ TEST ZONE /!\
     // const testData="<h2>Le titre, c'est <br></h2><h1><br>formidable</h1><div><h2>hou, encore</h2><div><h3>petit,<br> petit<br></h3></div></div><h1>dernier</h1>";
-
-    // find /big
-    const bigC = processForTag(data, "b"); // sélectionne h1 seulement
-    const mediumC = processForTag(data, "m"); // résultat: avoir h1 et h2 imbriqués / match h3, retirer le match, retirer les balises et les <br>
-    const smallC = processForTag(data, "s"); // avoir tout imbriqué / remplacer
+    // const bigC = processByLevel(testData, "b");
+    // const mediumC = processByLevel(testData, "m");
+    // const smallC = processByLevel(testData, "s");
+    // /!\ TEST ZONE /!\
     
-    // console.log(bigC);
-    // console.log(mediumC);
-    // console.log(smallC);
+    // find /big
+    const bigC = processByLevel(data, "b"); // sélectionne h1 seulement
+    const mediumC = processByLevel(data, "m"); // résultat: avoir h1 et h2 imbriqués / match h3, retirer le match, retirer les balises et les <br>
+    const smallC = processByLevel(data, "s"); // avoir tout imbriqué / remplacer
 
     const result = {
 	"high": bigC,
 	"medium": mediumC,
 	"low": smallC
     }
-
-    //exclude <br> from each
-    // const excludeBr = [...getBigContent.matchAll(smallContentPattern)]
-    
     return result;
-
-    //on suppr tout ce qui est div
-    // on place <h1> dans <  
 }
 
-function processForTag(str, method){
+function processByLevel(str, method){
     let patt;
     let content;
     
     if(method == "b"){
-	 patt = new RegExp("<h1>(.*?)</h1>", "g");
-	 content = [...str.matchAll(patt)];
+	patt = new RegExp("<h1>(.*?)</h1>", "g");
+	content = [...str.matchAll(patt)];
     }
     if(method == "m"){
-	 patt = new RegExp("(<h1>.*?</h1>|<h2>.*?</h2>)", "g");
-	 content = [...str.matchAll(patt)];
+	patt = new RegExp("(<h1>.*?</h1>|<h2>.*?</h2>)", "g");
+	content = [...str.matchAll(patt)];
     }
     if(method == "s"){
-	 content = str;
+	patt = new RegExp("(<h1>.*?</h1>|<h2>.*?</h2>|<h3>.*?</h3>)", "g");
+	content = [...str.matchAll(patt)];
     }
-
-    
-    // console.log(content);
     let bTot = "";
 
-    if(method !== "s"){
-	const bOcc = content.forEach(d => {
-	    // console.log(d[1]);
-	    bTot += d[1]+"… ";
-	});
-    } else {
-	bTot = content;
-    }
+    const bOcc = content.forEach(d => {
+	bTot += d[1]+"… ";
+    });			 
     
-    // console.log(bTot);
-
-    let bRes = bTot.replace(/<br>/g, "");
+    let bRes = bTot.replace(/(<br>|<div>|<\/div>)/g, "");
+    bRes = bRes.replace(/<h1>/g, "<span class='big'>");
+    bRes = bRes.replace(/<h2>/g, "<span class='medium'>");
+    bRes = bRes.replace(/<h3>/g, "<span class='small'>");
+    bRes = bRes.replace(/<\/h1>/g, "</span>");
+    bRes = bRes.replace(/<\/h2>/g, "</span>");
+    bRes = bRes.replace(/<\/h3>/g, "</span>");
     return bRes;
 }
