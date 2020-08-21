@@ -106,6 +106,14 @@ export default function appState() {
 	    isDragging = value;
 	}
     });
+    Object.defineProperty(this, 'selectedArticle', {
+	get: function() {
+	    return selectedArticle;
+	},
+	set: function(value) {
+	    selectedArticle = value;
+	}
+    });
     Object.defineProperty(this, 'scaleFac', {
 	get: function() {
 	    return scaleFac;

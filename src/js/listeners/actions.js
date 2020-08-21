@@ -1,10 +1,7 @@
 import * as globals from "../globals";
 import appState from "../globals";
 import {reset, setActiveSpace} from "../app";
-import removeUIInput from '../components/removeUIInput';
-
-// export let ctrlPushed = false;
-// export let altPushed = false;
+import {removeUIInput} from '../components/UIUtils';
 
 var st = new appState();
 var selectedNode = null;

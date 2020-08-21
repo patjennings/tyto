@@ -15,9 +15,8 @@ if (isset($_POST['space'])) { $space = $_POST['space']; }
 
 // formattage du titre pour avoir un nom de fichier propre
 $unwanted_array = getForbiddenChar();
-$tNoAccents = strtr( $t, $unwanted_array);
+$tNoAccents = strtr($t, $unwanted_array);
 $tFrmt = strtolower($tNoAccents);
-
 
 if ($t) {
     if(file_put_contents("../../dist/spaces/".$space."/content/".$tFrmt.".md", $c)){

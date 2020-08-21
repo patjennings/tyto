@@ -2,6 +2,7 @@
 // import appState from "./globals";
 // import request from './request';
 // import app from './app';
+import editorZoneActions from "../listeners/editorZoneActions";
 
 export default function UIZoneNew(type, proj, articleLat, articleLong){
     const container = document.getElementById("root");
@@ -17,5 +18,5 @@ export default function UIZoneNew(type, proj, articleLat, articleLong){
     e += "</div>";    
     
     container.insertAdjacentHTML("afterbegin", e);
-    
+    editorZoneActions();
 }

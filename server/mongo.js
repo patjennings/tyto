@@ -19,6 +19,7 @@ var userSchema  = {
 };
 var contentSchema = {
     "title": String,
+    "titleRaw": String,
     "created": Object,
     "lastUpdated": Object,
     "content": Object,

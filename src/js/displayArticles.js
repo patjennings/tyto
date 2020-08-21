@@ -28,7 +28,7 @@ export default function displayArticles(data){
 
     d3.selectAll(".card")	
     	.attr("id",function(d) {
-    	    return d.raw;
+    	    return d.titleRaw;
     	})
     	.attr("transform", function(d) {
     	    var proj = globals.projection([

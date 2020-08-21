@@ -15,7 +15,7 @@ import {paths} from './conf/conf';
 
 
 /// test
-import {getSlicedContent} from './listeners/articlePost';
+import {getRawTitle} from './actions/articlePost';
 
 let content = null;
 let st = new appState();
@@ -27,7 +27,8 @@ let st = new appState();
 export default async function app(){
     // console.log("start app");
     // remove tout si ça existe
-    // getSlicedContent();
+    // getRawTitle();
+    
     configure();
 
     st.user = "thomas";

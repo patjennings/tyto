@@ -16,13 +16,13 @@ import UIArticle from '../components/UIArticle';
 // let altPushed = false;
 var st = new appState();
 var selectedNode = null;
-let activeNode = null;
+// let activeNode = null;
 
 export default function mapActions(){
     d3.select("body").select("svg")
 	.on('mousemove', function() {
 	    st.currentPosition = globals.projection.invert(d3.mouse(this));
-	    console.log(activeNode.__data__._id);
+	    // console.log(activeNode.__data__._id);
 	})
 	.on('click', function() {
 	    st.currentPosition = globals.projection.invert(d3.mouse(this));
@@ -62,7 +62,7 @@ export default function mapActions(){
 	.on("mouseover", d => {
 	    const item = d3.event.currentTarget.parentNode;
 	    d3.select(item).classed("hover", true);
-	    activeNode = item;
+	    // activeNode = item;
 
 	})
 	.on("mouseout", d => {

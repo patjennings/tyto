@@ -126,6 +126,7 @@ module.exports = function(app){
 	    } else {
 		response._id = data._id;
 		response.title = data.title;
+		response.titleRaw = data.titleRaw;
 		response.created = data.created;
 		response.lastUpdated = data.lastUpdated;
 		response.content = data.content; // on écrit en markdown
@@ -143,6 +144,7 @@ module.exports = function(app){
 	var response = {};
 
 	db.title = req.body.title;
+	db.titleRaw = req.body.titleRaw;
 	db.content = req.body.content;
 	db.location = req.body.location;
 	db.created = req.body.created;
@@ -169,6 +171,9 @@ module.exports = function(app){
 	    } else {
 		if (req.body.title !== undefined) {
 		    data.title = req.body.title;
+		}
+		if (req.body.titleRaw !== undefined) {
+		    data.titleRaw = req.body.titleRaw;
 		}
 		if (req.body.content !== undefined) {
 		    data.content = req.body.content;

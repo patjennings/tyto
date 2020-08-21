@@ -4,7 +4,7 @@ import request from './request';
 import app from './app';
 // import UIinput from './components/UIinput';
 import UIZoneNew from './components/UIZoneNew';
-import zonePost from './listeners/zonePost';
+import zonePost from './actions/zonePost';
 import UISpotCreation from './components/UISpotCreation';
 
 let isCreating = null;
@@ -25,5 +25,5 @@ export default function addZone(currentPosition){
     
     var elements = UIZoneNew("zone", proj, long, lat);
     
-    zonePost("zone");
+    zonePost();
 }
