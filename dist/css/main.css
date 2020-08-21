@@ -211,6 +211,9 @@ html, body {
       transform: scale(2);
       opacity: 0.5;
       background: #0044f2; }
+  .card .linker {
+    cursor: pointer;
+    opacity: 0.1; }
   .card.isDragged {
     opacity: 0.5; }
   .card body {

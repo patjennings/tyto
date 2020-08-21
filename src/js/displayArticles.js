@@ -38,6 +38,7 @@ export default function displayArticles(data){
 	    return "translate(" + (proj[0]) +", "+(proj[1])+ ")";
 	})
 
+    // circle position
     d3.selectAll(".card")
     	.append("circle")
     	.attr("cx", 0)
@@ -54,15 +55,24 @@ export default function displayArticles(data){
     	.attr("opacity", 0.05)
     	.attr("fill", "#ffffff")
 
-    // d3.selectAll(".card")
-    // 	.append("line")
-    // 	.attr("class", "link")
-    // 	.attr("stroke", "#ffffff")
-    // 	.attr("x1", 0)   
-    // 	.attr("y1", 0)   
-    // 	.attr("x2", 24)  
-    // 	.attr("y2", -24)
+    // circle relations
+    d3.selectAll(".card")
+    	.append("circle")
+    	.attr("cx", 280)
+    	.attr("cy", 0)
+    	.attr("r", 2)
+    	.attr("fill", "#6666ff")
 
+    d3.selectAll(".card")
+    	.append("circle")
+    	.attr("class", "linker")
+    	.attr("cx", 280)
+    	.attr("cy", 0)
+    	.attr("r", 12)
+    	.attr("opacity", 0.05)
+    	.attr("fill", "#6666ff")
+
+    // content
     d3.selectAll(".card")
 	.append("svg:foreignObject")
 	.attr("class", "content")
@@ -96,21 +106,7 @@ export default function displayArticles(data){
         .attr("class", "card-edit")
 	.html(function(d){return linkDisplay ? editPost(d) : null;})
 
-    // ----------------
-    // CLICK ON ITEMS
-    // ----------------
-    d3.selectAll(".card").select(".content")
-	.on("click", d => {
-	    UIArticle(d);	    
-	})
-	.on("mouseover", d => {
-	    const item = d3.event.currentTarget.parentNode;
-	    d3.select(item).classed("hover", true);
-	})
-	.on("mouseout", d => {
-	    const item = d3.event.currentTarget.parentNode;
-	    d3.select(item).classed("hover", false);
-	})
+    
     
     adjustFoHeight();
     mapActions();
@@ -200,9 +196,3 @@ function toD3Scale(initialScale){
 function editPost(data){
     console.log(data);
 }
-
-// function logger(stName, stLevel, stCur){
-//     console.log(
-// 	"Zoom level :"+stName+"("+stLevel/10000+") while at : "+stCur/10000
-//     );
-// }

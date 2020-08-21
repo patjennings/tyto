@@ -9,17 +9,20 @@ import formattedDate from '../utils/formattedDate'
 import {paths} from '../conf/conf';
 import request from '../request';
 import {requestPosts} from '../app';
+import UIArticle from '../components/UIArticle';
 // import {ctrlPushed, altPushed} from './actions'
 
 // let ctrlPushed = false;
 // let altPushed = false;
 var st = new appState();
 var selectedNode = null;
+let activeNode = null;
 
 export default function mapActions(){
     d3.select("body").select("svg")
 	.on('mousemove', function() {
 	    st.currentPosition = globals.projection.invert(d3.mouse(this));
+	    console.log(activeNode.__data__._id);
 	})
 	.on('click', function() {
 	    st.currentPosition = globals.projection.invert(d3.mouse(this));
@@ -42,10 +45,33 @@ export default function mapActions(){
 
     // puis on l'appelle
     d3.select("svg").call(zoom);
+
+    // drag/drop des articles
     d3.select("#articles").selectAll(".card").select(".grip").call(dragListener);
 
+    // relation entre les articles
+    d3.select("#articles").selectAll(".card").select(".linker").call(linkListener);
+
+    // ----------------
+    // CLICK ON CARDS/ARTICLES
+    // ----------------
+    d3.selectAll(".card").select(".content")
+	.on("click", d => {
+	    UIArticle(d);	    
+	})
+	.on("mouseover", d => {
+	    const item = d3.event.currentTarget.parentNode;
+	    d3.select(item).classed("hover", true);
+	    activeNode = item;
+
+	})
+	.on("mouseout", d => {
+	    const item = d3.event.currentTarget.parentNode;
+	    d3.select(item).classed("hover", false);
+	})
+
 }
-var dragListener = d3.behavior.drag()
+const dragListener = d3.behavior.drag()
     .on("dragstart", function(d) {
 	// lance un intervalle, puis met launch sur ok
 	var card = d3.select(this.parentNode);
@@ -73,8 +99,40 @@ var dragListener = d3.behavior.drag()
 	
     });
 
+let startLong, startLat;
+const linkListener =  d3.behavior.drag()
+      .on("dragstart", function(d) {
+	  var card = d3.select(this.parentNode);
+	  startLong = globals.projection(st.currentPosition)[0]
+	  startLat = globals.projection(st.currentPosition)[1]
+	  card.select(".linker")
+	      .attr("r", 48)
+	      .attr("opacity", "0.25")
+	  card.classed("card isLinked", true)
+          d3.event.sourceEvent.stopPropagation();
+      })
+      .on("drag", function(d) {
+	  // remove previous line
+	  d3.select("#link")
+	      .remove()
+	  
+	  // draw line (current)
+	  d3.select("svg")
+	      .append('line')
+	      .attr("id", "link")
+	      .style("stroke", "#6666ff")
+	      .style("stroke-width", 2)
+	      .attr("x1", startLong)
+	      .attr("y1", startLat)
+	      .attr("x2", globals.projection(st.currentPosition)[0])
+	      .attr("y2", globals.projection(st.currentPosition)[1]); 
+    })
+    .on("dragend", function(d) {
+	d3.select("#link")
+	    .remove()
+    });
+
 function updateArticlePosition(d){
-    // request("POST", "server/utils/UpdateMarkdownDocument.php", "titleraw="+titleRaw+"&newlongitude="+st.currentPosition[0]+"&newlatitude="+st.currentPosition[1]+"&space="+st.space+"&user="+st.user, requestPosts)
     const moment = formattedDate();
     
     const data = {
