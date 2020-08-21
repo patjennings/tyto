@@ -261,12 +261,15 @@ html, body {
     top: 0;
     left: 0; // (largeur/2)-largeur
     bottom: 0;
-    width: 480px;
-    padding: 24px;
+    width: 100%;
+    bottom: 0;
+    padding: 0;
     // padding: 16px;
     background: #fff;
     display: flex;
     flex-direction: column;
+
+    font-family: "lato", sans-serif;
 
     #content-rte{
 	color: black;
@@ -274,10 +277,18 @@ html, body {
 
     #content-title{
 	margin-bottom: 16px;
+	// padding:
     }    
     #content-content{
 	display: none;
 	margin-bottom: 16px;	
+    }
+    #rteeditor{
+	// color: blue;
+	html, body{
+	    font-family: "lato", sans-serif;	    
+	}
+
     }
     .btn-container{
 	
@@ -286,7 +297,7 @@ html, body {
     .CodeMirror,
     .editor-statusbar,
     .editor-toolbar{
-	font-family: "lato", sans-serif;
+
     }
 
     .CodeMirror{

@@ -350,11 +350,13 @@ html, body {
   top: 0;
   left: 0;
   bottom: 0;
-  width: 480px;
-  padding: 24px;
+  width: 100%;
+  bottom: 0;
+  padding: 0;
   background: #fff;
   display: flex;
-  flex-direction: column; }
+  flex-direction: column;
+  font-family: "lato", sans-serif; }
   #input-container #content-rte {
     color: black; }
   #input-container #content-title {
@@ -362,9 +364,7 @@ html, body {
   #input-container #content-content {
     display: none;
     margin-bottom: 16px; }
-  #input-container .CodeMirror,
-  #input-container .editor-statusbar,
-  #input-container .editor-toolbar {
+  #input-container #rteeditor html, #input-container #rteeditor body {
     font-family: "lato", sans-serif; }
   #input-container .CodeMirror {
     height: 128px;

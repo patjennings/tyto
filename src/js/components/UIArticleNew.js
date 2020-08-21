@@ -48,7 +48,6 @@ export default function UIArticleNew(proj, lat, long, edit=false, data=null){
 	    rteeditor.document.body.innerHTML = data.content.full;
 	}, 150);
     }
-    
     editorActions();
     richEditor();
 }
