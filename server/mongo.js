@@ -10,6 +10,7 @@ var userSchema  = {
     "lastName": String,
     "email" : String,
     "password" : String,
+    "passKey" : String,
     "isAdmin" : Boolean,
     "isFirst" : Boolean,
     "date": String,

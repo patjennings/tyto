@@ -36,14 +36,20 @@ var sess = {
     saveUninitialized: true
 }
 
+process.env.DB_URL = process.env.DB_URL || 'mongodb://localhost:27017/tyto'
+process.env.DB_HOST = process.env.DB_HOST || 'localhost'
+process.env.DB_PORT = process.env.DB_PORT || 27017;
+process.env.DB_NAME = process.env.DB_NAME || 'tyto';
+
 if (app.get('env') === 'production') {
     app.set('trust proxy', 1) // trust first proxy
     sess.cookie.secure = true // serve secure cookies
 }
 
-// app.use(session(sess))
+app.use(session(sess))
 
 var routes = require("./routes.js")(app);
+// var routesApi = require("./routes-api.js")(app);
 
 var server = app.listen(3000, function () {
     console.log("Listening on port %s...", server.address().port);

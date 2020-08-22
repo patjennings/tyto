@@ -1,0 +1,12 @@
+
+extends layout
+
+block content
+
+	include account
+	include modals/alert
+
+block scripts
+	script(src='/dist/js/views/signup.js')
+	script(src='/dist/js/controllers/signupController.js')
+	script(src='/dist/js/form-validators/accountValidator.js')

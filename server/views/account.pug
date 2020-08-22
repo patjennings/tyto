@@ -1,0 +1,19 @@
+
+extends layout
+
+block content
+	nav.navbar.navbar-expand.navbar-light.bg-light
+		.nav-item
+			.navbar-brand Control Panel
+		.navbar-nav.ml-auto
+			.nav-item
+				button.btn.navbar-btn.btn-outline-dark#btn-logout Sign Out
+
+	include user
+	include modals/alert
+	include modals/confirm
+
+block scripts
+	script(src='/dist/js/views/home.js')
+	script(src='/dist/js/controllers/homeController.js')
+	script(src='/dist/js/form-validators/accountValidator.js')

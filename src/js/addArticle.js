@@ -3,7 +3,7 @@ import appState from "./globals";
 import request from './request';
 import app from './app';
 // import UIinput from './components/UIinput';
-import UIArticleNew from './components/UIArticleNew';
+import UIArticleEdit from './components/UIArticleEdit';
 import articlePost from './actions/articlePost';
 import UISpotCreation from './components/UISpotCreation';
 
@@ -24,6 +24,6 @@ export default function addPost(currentPosition){
 	long
     ])
 
-    let elements = UIArticleNew(proj, long, lat, false);    
+    let elements = UIArticleEdit(proj, long, lat, false);    
     // richEditor();
 }

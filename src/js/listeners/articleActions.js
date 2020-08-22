@@ -1,6 +1,6 @@
 import * as globals from "../globals";
 import appState from "../globals";
-import UIArticleNew from '../components/UIArticleNew';
+import UIArticleEdit from '../components/UIArticleEdit';
 import request from '../request';
 import {paths} from '../conf/conf';
 import {requestPosts} from '../app';
@@ -43,7 +43,7 @@ export default function articleActions(data){
     // clic sur edit (fermer et ouvrir l'éditeur)
     editArticle.addEventListener("click", e => {
 	// const titleRaw = activeArticle.getAttribute("id");
-	UIArticleNew(null, null, null, true, data);
+	UIArticleEdit(null, null, null, true, data);
 	removeUIArticle();
     });
 }

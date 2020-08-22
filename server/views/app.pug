@@ -7,8 +7,19 @@ html
 		meta(http-equiv="expires", content="Tue, 01 Jan 1980 1:00:00 GMT")
 		meta(http-equiv="pragma", content="no-cache")
 		title=title
+		link(href='dist/css/main.css', rel='stylesheet')
 	body
 		#root
-		h1="Hello "+title
+			#map
 		block scripts
-		script(src='dist/bundle.js')
+		script(src='dist/includes/jquery-3.3.1.min.js')
+		script(src='dist/includes/d3-color.v1.min.js')
+		script(src='dist/includes/d3-dispatch.v1.min.js')
+		script(src='dist/includes/d3-ease.v1.min.js')
+		script(src='dist/includes/d3-interpolate.v1.min.js')
+		script(src='dist/includes/d3-selection.v1.min.js')
+		script(src='dist/includes/d3-timer.v1.min.js')
+		script(src='dist/includes/d3-transition.v1.min.js')
+		script(src='dist/includes/d3.v3.min.js')
+		script(src='dist/includes/topojson.v1.min.js')
+		script(src='dist/js/bundle.js')

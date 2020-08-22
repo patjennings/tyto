@@ -5,7 +5,7 @@ module.exports = {
     entry: ['./src/js/app.js', './src/sass/main.scss'],
     output: {
 	path: path.resolve(__dirname, 'dist'),
-	filename: 'bundle.js'
+	filename: 'js/bundle.js'
     },
     mode: 'development',
     watch: true,
