@@ -16,7 +16,6 @@ import {paths} from './conf/conf';
 
 /// test
 import {getRawTitle} from './actions/articlePost';
-
 let content = null;
 let st = new appState();
 
@@ -31,7 +30,10 @@ export default async function app(){
     
     configure();
 
-    st.user = "thomas";
+    const username = document.getElementById("userId").value;
+    // console.log(user);
+
+    st.user = username;
     getSpaces();
 }
 async function getSpaces(){

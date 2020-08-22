@@ -39,6 +39,7 @@ module.exports = function(app) {
     		if (o){
     		    am.autoLogin(o.user, o.pass, function(o){
     			req.session.user = o;
+			// console.log(o);
     			res.redirect('/app');
     		    });
     		}
@@ -73,7 +74,8 @@ module.exports = function(app) {
     });
 
     app.get("/app", nocache, function(req, res) {
-    	res.render('app', {title: "Tyto"});
+	console.log(req.session.user);
+    	res.render('app', {title: "Tyto", udata: req.session.user});
     });
 
     app.post('/logout', function(req, res){

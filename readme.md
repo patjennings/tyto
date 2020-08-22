@@ -1,15 +1,31 @@
 l'idée qui a conduit à ce projet est celle de pouvoir mettre en relation des idées dans un espace géographique, un genre de _carte du tendre_. dans cet espace, on crée des blocs de contenu, que l'on formatte selon leur "poids" : ainsi, plus l'élément est léger, plus haut on le voit et, plus l'élément est lourd, plus il va falloir zoomer pour le voir.
 selon ce principe, on structure des idées qu'on pourra voir s'entrechoquer avec d'autres sur l'espace de la carte.
 
-## lancement ##
-d'abord, on ouvre les droits en écriture sur `/content` (c'est là que les fichiers markdown sont créés
+## Installation, lancement ##
 
-il faut pouvoir utiliser php, soit avec un genre de wamp ou de mamp ou de serveur apache configuré, ou alors avec ça (dans le terminal)
+
+1. Install Node.js & MongoDB if you haven't already.
+2. Clone this repository and install its dependencies.
 
 ``` bash
-$ cd tyto # se positionner sur le dossier
-$ php -S localhost:8000 # lancer php, et ouvrir http://localhost:8000 dans le navigateur
+git clone https://framagit.org/patjennings/tyto.git tyto
+cd tyto
+npm install
 ```
+
+3. In a separate shell start MongoDB.
+
+``` bash
+mongod
+```
+
+4. From within the `tyto` directory start the server.
+
+``` bash
+npm start
+```
+
+5. Open a browser window and navigate to: http://localhost:3000
 
 ## démo ##
 
@@ -31,19 +47,12 @@ rien : lourd
 
 pour ajouter un élément : `ctrl+click` à l'endroit souhaité
 
-## reste à faire ##
-- ~~ajouter fonctions basiques de preview/formattage markdown~~
-- ~~possibilité de drag&dropper un élément + actualisation de la position dans le fichier lié~~
-- possibilité d'éditer un élément
-- on drag à partir de l'endroit où l'on a cliqué sur la carte, i.e. on ne bouge pas l'origine de celle-ci sous la souris au clic/drag 
-- affichage de la page contenu, au clic sur une carte
-- ranger les dossiers de façon plus claire (dossier src ? Les js dans assets ?)
-
 ### V2 ###
 Quelques features qui seront implémentés après une première version stable
 - découper les fichiers selon position = possibilité de repartir vers du texte entièrement. Tyto = outil de structuration
+- lier les cartes/articles graphiquement
 - gestion de compte (login, sécurisation)
-- mode édition, mode consultation
+- édition des zones
 
 ### Rich text edition ###
 - https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Editable_content/Rich-Text_Editing_in_Mozilla

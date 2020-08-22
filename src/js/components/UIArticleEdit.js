@@ -110,6 +110,9 @@ function displayStyleInput(wrapper, editor, x, y){
 function hideStyleInput(){
     const nse = document.getElementById("style-editor--input");
     nse ? nse.remove() : null;
+    window.setTimeout(e => {	
+	rteeditor.focus();
+    }, 500)
 }
 
 
