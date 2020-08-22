@@ -1,0 +1,7 @@
+html, body{
+    font-family: Arial, Helvetica, sans;
+    color: #666;
+}
+body{
+    overflow-y:auto;
+}

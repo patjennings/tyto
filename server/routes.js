@@ -3,7 +3,7 @@ var path =         require("path");
 var express =      require("express");
 var crypto =       require("crypto");
 var cookieParser = require("cookie-parser");
-var emailjs =   require("emailjs/email");
+var emailjs =      require("emailjs/email");
 
 var ct = require('./modules/country-list');
 var am = require('./modules/account-manager');
@@ -453,7 +453,7 @@ module.exports = function(app) {
 	//
     });
     app.get('/richeditor', nocache, function(req, res) {
-    	const response = "<html><head><link href='dist/css/main.css' rel='stylesheet'/></head><body id='richeditor'></body></html>";
+    	const response = "<html><head><link href='dist/css/richeditor.css' rel='stylesheet'/></head><body id='richeditor'></body></html>";
 	res.send(response);
     });
 

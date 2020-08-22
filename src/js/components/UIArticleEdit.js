@@ -18,7 +18,7 @@ export default function UIArticleEdit(proj, lat, long, edit=false, data=null){
 	e = "<div id='input-container'>";
 	e += "<input id='content-title' placeholder='Titre'></input>";
 	e += "<textarea id='content-content' name='content-content'></textarea>";
-	e += "<iframe name='rteeditor' id='rteeditor' onload='this.contentDocument.designMode=\"on\"' src='http://localhost:3000/richeditor'></iframe>";
+	e += "<iframe name='rteeditor' id='rteeditor' onload='this.contentDocument.designMode=\"on\"' scrolling='yes' src='http://localhost:3000/richeditor'></iframe>";
 	e += "<input id='content-position-long' type='hidden' value='"+long+"'/>";
 	e += "<input id='content-position-lat' type='hidden' value='"+lat+"'/>";
 	e += "<input id='content-tags' placeholder='tags'></input>";
@@ -110,9 +110,9 @@ function displayStyleInput(wrapper, editor, x, y){
 function hideStyleInput(){
     const nse = document.getElementById("style-editor--input");
     nse ? nse.remove() : null;
-    window.setTimeout(e => {	
-	rteeditor.focus();
-    }, 500)
+    // window.setTimeout(e => {	
+    // 	rteeditor.focus();
+    // }, 500);
 }
 
 
