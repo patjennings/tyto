@@ -33,7 +33,8 @@ var sess = {
   secret: 'faeb4453e5d14fe6f6d04637f78077c76c73d1b4',
     proxy: true,
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: { secure: true }
 }
 
 process.env.DB_URL = process.env.DB_URL || 'mongodb://localhost:27017/tyto'
@@ -43,7 +44,6 @@ process.env.DB_NAME = process.env.DB_NAME || 'tyto';
 
 if (app.get('env') === 'production') {
     app.set('trust proxy', 1) // trust first proxy
-    sess.cookie.secure = true // serve secure cookies
 }
 
 app.use(session(sess))
