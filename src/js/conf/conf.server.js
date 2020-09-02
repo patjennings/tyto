@@ -1,5 +1,5 @@
 export const paths = {
-    "appUrl" :  "http://tyto.thomasguesnon.net",
-    "apiUrl" :  "http://localhost:3000/",
+    "appUrl" :  "https://tyto.thomasguesnon.net",
+    "apiUrl" :  "http://localhost:8752/",
     "mapsDir" : "dist/assets/maps/"
 }
