@@ -7,7 +7,7 @@ var mongoOp =    require("./mongo"); // le modèle mongodb
 var cors = require("cors"); // cors permet de setup les headers pour effectuer des appels cross-domain
 let API_PORT;
 var app = express();
-const whitleListDomain = ['http://localhost:3000', 'http://localhost'];
+const whitleListDomain = ['http://localhost:3000', 'http://localhost', 'https://tyto.thomasguesnon.net'];
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'pug');
