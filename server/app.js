@@ -5,7 +5,7 @@ var bodyParser = require("body-parser");
 var cookieParser = require("cookie-parser");
 var mongoOp =    require("./mongo"); // le modèle mongodb
 var cors = require("cors"); // cors permet de setup les headers pour effectuer des appels cross-domain
-
+let API_PORT;
 var app = express();
 const whitleListDomain = ['http://localhost:3000', 'http://localhost'];
 
@@ -44,6 +44,9 @@ process.env.DB_NAME = process.env.DB_NAME || 'tyto';
 
 if (app.get('env') === 'production') {
     app.set('trust proxy', 1) // trust first proxy
+    API_PORT = 8752;
+} else {
+    API_PORT = 3000;
 }
 
 app.use(session(sess))
@@ -51,6 +54,6 @@ app.use(session(sess))
 var routes = require("./routes.js")(app);
 // var routesApi = require("./routes-api.js")(app);
 
-var server = app.listen(3000, function () {
+var server = app.listen(API_PORT, function () {
     console.log("Listening on port %s...", server.address().port);
 });
