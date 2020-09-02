@@ -1,6 +1,8 @@
 const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
+const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
+
 module.exports = {
     entry: ['./src/js/app.js', './src/sass/main.scss'],
     output: {
