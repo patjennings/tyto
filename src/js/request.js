@@ -1,4 +1,5 @@
 import app from './app';
+import Config from "Config";
 
 // AJAX requests
 function getRequestObject(){
@@ -34,7 +35,7 @@ export default function request(method, uri, sendData = null, callback = request
 	// o.withCredentials = true;
         o.open(method, uri, async);
         o.setRequestHeader('Content-Type', 'application/json');
-	o.setRequestHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+	o.setRequestHeader('Access-Control-Allow-Origin', Config.apiUrl);
         o.send(sendData);
     }
     if(async){

@@ -12,9 +12,9 @@ var em = require('./modules/email-dispatcher');
 module.exports = function(app) {
 
     // folders
-    app.use("/styles", express.static(path.resolve(".") + '/dist/css')); 
-    app.use("/dist", express.static(path.resolve(".") + '/dist'));
-    app.use("/assets", express.static(path.resolve(".") + '/dist/assets'));
+    app.use("/includes", express.static(path.resolve(".") + '/includes'));
+    app.use("/maps", express.static(path.resolve(".") + '/maps'));
+    app.use("/dist", express.static(path.resolve(".") + '/dist')); 
     
     function nocache(req, res, next) {
 	res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
@@ -74,7 +74,7 @@ module.exports = function(app) {
     });
 
     app.get("/app", nocache, function(req, res) {
-	console.log(req.session.user);
+	// console.log(req.session.user);
     	res.render('app', {title: "Tyto", udata: req.session.user});
     });
 
@@ -453,7 +453,7 @@ module.exports = function(app) {
 	//
     });
     app.get('/richeditor', nocache, function(req, res) {
-    	const response = "<html><head><link href='dist/css/richeditor.css' rel='stylesheet'/></head><body id='richeditor'></body></html>";
+    	const response = "<html><head><link href='includes/css/richeditor.css' rel='stylesheet'/></head><body id='richeditor'></body></html>";
 	res.send(response);
     });
 

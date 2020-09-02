@@ -1,5 +1,6 @@
 // import mapScale from "./utils/mapScale";
-import {paths} from "./conf/conf";
+// import {paths} from "./conf/conf";
+import Config from "Config";
 
 // toutes ces variables sont modifiées dans init.js, via l'objet appState()
 let user = null;
@@ -16,7 +17,7 @@ let mapData = null;
 let postsData = null;      
 let zonesData = null;
 let firstStart = true;
-let rootDir = paths.appUrl;
+let rootDir = Config.appUrl;
 let isCtrlKeyPushed = false;
 let isAltKeyPushed = false;
 let steps = [

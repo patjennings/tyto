@@ -1,6 +1,6 @@
 import * as globals from "./globals";
 import appState from "./globals";
-import request from './request';
+// import request from './request';
 import app from './app';
 // import UIinput from './components/UIinput';
 import UIArticleEdit from './components/UIArticleEdit';

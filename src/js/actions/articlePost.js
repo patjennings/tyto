@@ -1,8 +1,9 @@
 import * as globals from "../globals";
 import appState from "../globals";
 import {removeUIInput} from '../components/UIUtils';
-import {paths} from '../conf/conf';
+// import {paths} from '../conf/conf';
 import getTags from '../utils/getTags';
+import Config from "Config";
 import formattedDate from '../utils/formattedDate';
 import request from '../request';
 import {requestPosts} from '../app';
@@ -68,10 +69,10 @@ export default function articlePost(method){
     };
 
     if(method=="post"){
-	request("POST", paths.apiUrl+"/content", JSON.stringify(data), requestPosts);
+	request("POST", Config.apiUrl+"/content", JSON.stringify(data), requestPosts);
     }
     if(method=="put"){
-	request("PUT", paths.apiUrl+"/content/"+st.selectedArticle, JSON.stringify(data), requestPosts);
+	request("PUT", Config.apiUrl+"/content/"+st.selectedArticle, JSON.stringify(data), requestPosts);
     }
     
 

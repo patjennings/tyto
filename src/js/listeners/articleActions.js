@@ -2,7 +2,8 @@ import * as globals from "../globals";
 import appState from "../globals";
 import UIArticleEdit from '../components/UIArticleEdit';
 import request from '../request';
-import {paths} from '../conf/conf';
+// import {paths} from '../conf/conf';
+import Config from "Config";
 import {requestPosts} from '../app';
 import {removeUIArticle, removeUIInput} from '../components/UIUtils';
 
@@ -36,7 +37,7 @@ export default function articleActions(data){
 	window.setTimeout(d => {
 	    activeArticle.parentNode.removeChild(activeArticle);
 	    articleOverlay.parentNode.removeChild(articleOverlay);
-	    request("DELETE",  paths.apiUrl+"/content/"+data._id, null, requestPosts);
+	    request("DELETE",  Config.apiUrl+"/content/"+data._id, null, requestPosts);
 	}, 650);
     })
 

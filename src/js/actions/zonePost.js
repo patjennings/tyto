@@ -4,8 +4,8 @@ import {removeUIInput} from '../components/UIUtils';
 import formattedDate from '../utils/formattedDate';
 import request from '../request';
 import {requestZones} from '../app';
-import {paths} from '../conf/conf';
-
+// import {paths} from '../conf/conf';
+import Config from "Config";
 var st = new appState();
 var selectedNode = null;
 
@@ -34,5 +34,5 @@ export default function zonePost(){
 	"space": st.space
     }
    
-    request("POST", paths.apiUrl+"/zones", JSON.stringify(data), requestZones);
+    request("POST", Config.apiUrl+"/zones", JSON.stringify(data), requestZones);
 }

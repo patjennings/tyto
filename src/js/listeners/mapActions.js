@@ -6,7 +6,8 @@ import addZone from '../addZone';
 import {updateArticles} from '../displayArticles';
 import {updateZones} from '../displayZones';
 import formattedDate from '../utils/formattedDate'
-import {paths} from '../conf/conf';
+// import {paths} from '../conf/conf';
+import Config from "Config";
 import request from '../request';
 import {requestPosts} from '../app';
 import UIArticle from '../components/UIArticle';
@@ -145,7 +146,7 @@ function updateArticlePosition(d){
 	    "date": moment
 	}
     }
-    request("PUT",  paths.apiUrl+"/content/"+d._id, JSON.stringify(data), requestPosts);
+    request("PUT",  Config.apiUrl+"/content/"+d._id, JSON.stringify(data), requestPosts);
 }
 
 function mapScale(){
