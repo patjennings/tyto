@@ -35,7 +35,7 @@ export default function request(method, uri, sendData = null, callback = request
 	// o.withCredentials = true;
         o.open(method, uri, async);
         o.setRequestHeader('Content-Type', 'application/json');
-	o.setRequestHeader('Access-Control-Allow-Origin', Config.apiUrl);
+	o.setRequestHeader('Access-Control-Allow-Origin', '*');
         o.send(sendData);
     }
     if(async){
