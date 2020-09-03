@@ -1,5 +1,5 @@
 {
     "appUrl" :  "https://tyto.thomasguesnon.net",
-    "apiUrl" :  "http://localhost:8752",
+    "apiUrl" :  "https://tyto.thomasguesnon.net",
     "mapsDir" : "maps"
 }
