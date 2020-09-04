@@ -4,4 +4,7 @@ sein.osm
 node_modules/*
 node_modules/
 .sass-cache
-notes.md
+dist/
+dist/*
+build/
+build/*
