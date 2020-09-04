@@ -19,17 +19,25 @@ npm install
 mongod
 ```
 
-4. From within the `tyto` directory start the server.
+4. Create the `tyto` database
+
+``` bash
+$ mongo
+> use tyto
+switched to db tyto
+```
+
+5. From within the `tyto` directory start the server.
 
 ``` bash
 npm start
 ```
 
-5. Open a browser window and navigate to: http://localhost:3000
+6. Open a browser window and navigate to: http://localhost:3000
 
 ## démo ##
 
-http://tyto.thomasguesnon.net/
+https://tyto.thomasguesnon.net/
 
 ## utilisation ##
 
