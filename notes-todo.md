@@ -1,3 +1,4 @@
+## v1.0 ##
 - [x] Ré-écrire le backend en nodeJS
 - [x] éditeur de texte riche
 - [x] possibilité de login d'utilisateur
