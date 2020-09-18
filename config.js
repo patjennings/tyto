@@ -30,15 +30,15 @@ const production = {
 
 const staging = {
     app: {
-	port: null,
-	url : null,
-	apiUrl: null,
-	mapsDir: null
+	port: 9863,
+	url : "https://tytolive.thomasguesnon.net",
+	apiUrl: "https://tytolive.thomasguesnon.net/api",
+	mapsDir: "maps"
     },
     db: {
 	host: 'localhost',
 	port: 27017,
-	name: null
+	name: 'tytolive'
     }
 };
 
