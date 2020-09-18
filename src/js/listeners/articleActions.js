@@ -37,7 +37,7 @@ export default function articleActions(data){
 	window.setTimeout(d => {
 	    activeArticle.parentNode.removeChild(activeArticle);
 	    articleOverlay.parentNode.removeChild(articleOverlay);
-	    request("DELETE",  Config.apiUrl+"/content/"+data._id, null, requestPosts);
+	    request("DELETE",  Config.app.apiUrl+"/content/"+data._id, null, requestPosts);
 	}, 650);
     })
 

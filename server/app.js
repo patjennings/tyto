@@ -7,6 +7,7 @@ var mongoOp =    require("./mongo"); // le modèle mongodb
 var cors = require("cors"); // cors permet de setup les headers pour effectuer des appels cross-domain
 let API_PORT;
 var app = express();
+const config = require("../config");
 // const whitleListDomain = ['http://localhost:3000', 'http://localhost', 'https://tyto.thomasguesnon.net'];
 
 app.set('views', __dirname + '/views');
@@ -37,23 +38,15 @@ var sess = {
     cookie: { secure: true }
 }
 
-process.env.DB_URL = process.env.DB_URL || 'mongodb://localhost:27017/tyto'
-process.env.DB_HOST = process.env.DB_HOST || 'localhost'
-process.env.DB_PORT = process.env.DB_PORT || 27017;
-process.env.DB_NAME = process.env.DB_NAME || 'tyto';
-
-if (app.get('env') === 'production') {
-    app.set('trust proxy', 1) // trust first proxy
-    API_PORT = 8752;
-} else {
-    API_PORT = 3000;
-}
+process.env.DB_URL = process.env.DB_URL || 'mongodb://'+config.db.host+':'+config.db.port+'/'+config.db.name;
+process.env.DB_HOST = process.env.DB_HOST || config.db.host;
+process.env.DB_PORT = process.env.DB_PORT || config.db.port;
+process.env.DB_NAME = process.env.DB_NAME || config.db.name;
 
 app.use(session(sess))
 
 var routes = require("./routes.js")(app);
-// var routesApi = require("./routes-api.js")(app);
 
-var server = app.listen(API_PORT, function () {
+var server = app.listen(config.app.port, function () {
     console.log("Listening on port %s...", server.address().port);
 });

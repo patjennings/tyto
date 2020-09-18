@@ -1,5 +1,7 @@
 var mongoose    =   require("mongoose");
-mongoose.connect('mongodb://localhost:27017/tyto', { useNewUrlParser: true });
+const config = require("../config");
+mongoose.connect('mongodb://'+config.db.host+':'+config.db.port+'/'+config.db.name, { useNewUrlParser: true });
+
 
 // create instance of Schema
 var mongoSchema = mongoose.Schema;

@@ -1,17 +1,18 @@
 const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const config = require('./config');
+
 let dirPath = "dist";
 
+
 process.env.NODE_ENV === 'production' ? dirPath = "build/dist" : dirPath = "dist";
-console.log("this is dirPath : "+dirPath);
-// const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
 
 module.exports = {
     entry: ['./src/js/app.js', './src/sass/main.scss'],
     watch: process.env.NODE_ENV === 'production' ? false : true,
     mode: process.env.NODE_ENV === 'production' ? 'production':'development',
     externals: {
-	'Config': JSON.stringify(process.env.NODE_ENV === 'production' ? require('./config.prod.json') : require('./config.dev.json'))
+	'Config': JSON.stringify(config)
     },
     module: {
         rules: [

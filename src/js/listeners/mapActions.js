@@ -146,7 +146,7 @@ function updateArticlePosition(d){
 	    "date": moment
 	}
     }
-    request("PUT",  Config.apiUrl+"/content/"+d._id, JSON.stringify(data), requestPosts);
+    request("PUT",  Config.app.apiUrl+"/content/"+d._id, JSON.stringify(data), requestPosts);
 }
 
 function mapScale(){

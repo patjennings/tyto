@@ -5,6 +5,8 @@ var crypto =       require("crypto");
 var cookieParser = require("cookie-parser");
 var emailjs =      require("emailjs/email");
 
+const config = require("../config");
+
 var ct = require('./modules/country-list');
 var am = require('./modules/account-manager');
 var em = require('./modules/email-dispatcher');
@@ -26,8 +28,7 @@ module.exports = function(app) {
       login & logout
     */
 
-    app.get('/', function(req, res){
-    	console.log("GET /");
+    app.get('/', nocache, function(req, res){
     	// console.debug(req.cookies.login+" ///// "+res);
     	// check if the user has an auto login key saved in a cookie //
     	if (req.cookies.login == undefined){
@@ -39,7 +40,7 @@ module.exports = function(app) {
     		if (o){
     		    am.autoLogin(o.user, o.pass, function(o){
     			req.session.user = o;
-			// console.log(o);
+			console.log(req.session);
     			res.redirect('/app');
     		    });
     		}
@@ -51,9 +52,8 @@ module.exports = function(app) {
     });
     
     app.post('/', function(req, res){
-    	console.log("POST / (this is login ?)");
     	am.manualLogin(req.body['user'], req.body['pass'], function(e, o){
-    	    console.log(req.session);
+    	    console.log(req);
     	    if (!o){
     		res.status(400).send(e);
     	    }
@@ -74,7 +74,7 @@ module.exports = function(app) {
     });
 
     app.get("/app", nocache, function(req, res) {
-	// console.log(req.session.user);
+	console.log(req.session);
     	res.render('app', {title: "Tyto", udata: req.session.user});
     });
 
@@ -88,6 +88,7 @@ module.exports = function(app) {
     */
     
     app.get('/account', function(req, res) {
+	console.log(req.session);
     	if (req.session.user == null){
     	    res.redirect('/');
     	}
@@ -227,6 +228,12 @@ module.exports = function(app) {
     	    res.redirect('/print');
     	});
     });
+    app.get('/richeditor', nocache, function(req, res) {
+    	const response = "<html><head><link href='includes/css/richeditor.css' rel='stylesheet'/></head><body id='richeditor'></body></html>";
+	res.send(response);
+    });
+    
+
     
     /////////
     /* API */
@@ -249,7 +256,7 @@ module.exports = function(app) {
     // });
 
     // spaces et accès aux contenus par les spaces (que du get)
-    app.get('/spaces', nocache, function(req, res) {
+    app.get('/api/spaces', nocache, function(req, res) {
 	var response = {};
 	models.spaces.find({},function(err,data){
 	    if(err) {
@@ -260,7 +267,7 @@ module.exports = function(app) {
 	    res.json(response);
 	});
     });
-    app.get('/:spaceid/content', nocache, function(req, res) {
+    app.get('/api/:spaceid/content', nocache, function(req, res) {
 	var response = {};
 	models.content.find({ space : req.params.spaceid },function(err,data){
 	    if(err) {
@@ -271,14 +278,14 @@ module.exports = function(app) {
 	    res.json(response);
 	});
     });
-    app.get('/:spaceid/export', nocache, function(req, res) {
+    app.get('/api/:spaceid/export', nocache, function(req, res) {
 	// on crée un dossier sur le serveur, avec un nom généré
 	// on prend tous les contenus du space renseigné
 	// on crée les fichiers markdown
 	// on crée une archive, on les y colle 
 	// on télécharge l'archive sur l'ordi du client
     });
-    app.get('/:spaceid/zones', nocache, function(req, res) {
+    app.get('/api/:spaceid/zones', nocache, function(req, res) {
 	var response = {};
 	models.zones.find({ space : req.params.spaceid },function(err,data){
 	    if(err) {
@@ -291,7 +298,7 @@ module.exports = function(app) {
     });
 
     // spaces, gestion
-    app.get('/space/:id', nocache, function(req, res) {
+    app.get('/api/space/:id', nocache, function(req, res) {
 	var response = {};
 	models.spaces.find({ _id : req.params.id },function(err,data){
 	    if(err) {
@@ -302,18 +309,18 @@ module.exports = function(app) {
 	    res.json(response);
 	});
     });
-    app.post('/space/:id', nocache, function(req, res) {
+    app.post('/api/space/:id', nocache, function(req, res) {
 	// on crée un nouveau space si le nom n'existe pas déjà
     });
-    app.put('/space/:id', nocache, function(req, res) {
+    app.put('/api/space/:id', nocache, function(req, res) {
 	// on update un space
     });
-    app.delete('/space/:id', nocache, function(req, res) {
+    app.delete('/api/space/:id', nocache, function(req, res) {
 	// on delete un space
     });
 
     // content
-    app.get('/content/:id', nocache, function(req, res) {
+    app.get('/api/content/:id', nocache, function(req, res) {
 	var response = {};
 	models.content.findById(req.params.id, function(err,data){
 	    if(err){
@@ -334,7 +341,7 @@ module.exports = function(app) {
         });
 	
     });
-    app.post('/content', nocache, function(req, res) {
+    app.post('/api/content', nocache, function(req, res) {
 	var db = new models.content(); // on crée ce nouvel objet models pour accéder au schéma
 	var response = {};
 
@@ -358,7 +365,7 @@ module.exports = function(app) {
 	    res.json(response);
 	});
     });
-    app.put('/content/:id', nocache, function(req, res) {
+    app.put('/api/content/:id', nocache, function(req, res) {
 	var response = {};
 	models.content.findById(req.params.id, function(err,data){
 	    if(err) {
@@ -403,7 +410,7 @@ module.exports = function(app) {
 	    }
         });
     });
-    app.delete('/content/:id', nocache, function(req, res) {
+    app.delete('/api/content/:id', nocache, function(req, res) {
 	var response = {};
 	console.log("delete sent");
 	models.content.findById(req.params.id, function(err,data){
@@ -423,10 +430,10 @@ module.exports = function(app) {
     });
 
     // zones
-    app.get('/zones/:id', nocache, function(req, res) {
+    app.get('/api/zones/:id', nocache, function(req, res) {
 	//
     });
-    app.post('/zones', nocache, function(req, res) {
+    app.post('/api/zones', nocache, function(req, res) {
 	var db = new models.zones(); // on crée ce nouvel objet models pour accéder au schéma
 	var response = {};
 
@@ -446,17 +453,12 @@ module.exports = function(app) {
 	    res.json(response);
 	});
     });
-    app.put('/zones/:id', nocache, function(req, res) {
+    app.put('/api/zones/:id', nocache, function(req, res) {
 	//
     });
-    app.delete('/zones/:id', nocache, function(req, res) {
+    app.delete('/api/zones/:id', nocache, function(req, res) {
 	//
-    });
-    app.get('/richeditor', nocache, function(req, res) {
-    	const response = "<html><head><link href='includes/css/richeditor.css' rel='stylesheet'/></head><body id='richeditor'></body></html>";
-	res.send(response);
     });
 
-    
     app.get('*', function(req, res) { res.render('404', { title: 'Page Not Found'}); });
 };

@@ -69,10 +69,10 @@ export default function articlePost(method){
     };
 
     if(method=="post"){
-	request("POST", Config.apiUrl+"/content", JSON.stringify(data), requestPosts);
+	request("POST", Config.app.apiUrl+"/content", JSON.stringify(data), requestPosts);
     }
     if(method=="put"){
-	request("PUT", Config.apiUrl+"/content/"+st.selectedArticle, JSON.stringify(data), requestPosts);
+	request("PUT", Config.app.apiUrl+"/content/"+st.selectedArticle, JSON.stringify(data), requestPosts);
     }
     
 

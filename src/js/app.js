@@ -36,7 +36,7 @@ export default async function app(){
     getSpaces();
 }
 async function getSpaces(){
-    let getSpaces = await request("GET", Config.apiUrl+"/spaces", null, function(data){
+    let getSpaces = await request("GET", Config.app.apiUrl+"/spaces", null, function(data){
 	const dataParse = JSON.parse(data)
 	st.spacesData = dataParse.message;
 	setActiveSpace(0);
@@ -47,7 +47,7 @@ export function setActiveSpace(index) {
     st.spaceIndex = index; // set l'index du space dans l'objet des spaces
     // set default space + map
     st.space = st.spacesData[index]._id;
-    st.mapData = Config.mapsDir+"/"+st.spacesData[index].map
+    st.mapData = Config.app.mapsDir+"/"+st.spacesData[index].map
 
     // une fois le space renseigné, on charge :
     // - la map
@@ -127,7 +127,7 @@ async function displayNav(){
     let nav = wrapper.querySelector(".nav");
     
     if(!nav){
-	let requestNav = await request("GET", Config.apiUrl+"/spaces", null, function(data){
+	let requestNav = await request("GET", Config.app.apiUrl+"/spaces", null, function(data){
 	    // console.log(data);
 	    wrapper.insertAdjacentHTML("afterbegin", "<div class='nav'></div>")
 	    nav = wrapper.querySelector(".nav");
@@ -147,13 +147,13 @@ async function displayNav(){
 
 export function requestPosts(){
     // on télécharge les données
-    var postsData = request("GET", Config.apiUrl+"/"+st.space+"/content", null, displayArticles);
+    var postsData = request("GET", Config.app.apiUrl+"/"+st.space+"/content", null, displayArticles);
 }
 
 export function requestZones(){
     // console.log("request les zones");
     // on télécharge les données
-    var zonesData = request("GET", Config.apiUrl+"/"+st.space+"/zones", null, displayZones);
+    var zonesData = request("GET", Config.app.apiUrl+"/"+st.space+"/zones", null, displayZones);
 }
 
 

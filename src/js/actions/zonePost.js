@@ -34,5 +34,5 @@ export default function zonePost(){
 	"space": st.space
     }
    
-    request("POST", Config.apiUrl+"/zones", JSON.stringify(data), requestZones);
+    request("POST", Config.app.apiUrl+"/zones", JSON.stringify(data), requestZones);
 }

@@ -3,6 +3,7 @@ import appState from "../globals";
 // import request from './request';
 // import app from './app';
 import editorActions from "../listeners/editorActions";
+import Config from 'Config';
 
 var st = new appState();
 let styleSwitcher = false;
@@ -18,7 +19,7 @@ export default function UIArticleEdit(proj, lat, long, edit=false, data=null){
 	e = "<div id='input-container'>";
 	e += "<input id='content-title' placeholder='Titre'></input>";
 	e += "<textarea id='content-content' name='content-content'></textarea>";
-	e += "<iframe name='rteeditor' id='rteeditor' onload='this.contentDocument.designMode=\"on\"' scrolling='yes' src='http://localhost:3000/richeditor'></iframe>";
+	e += "<iframe name='rteeditor' id='rteeditor' onload='this.contentDocument.designMode=\"on\"' scrolling='yes' src='"+Config.app.url+"/richeditor'></iframe>";
 	e += "<input id='content-position-long' type='hidden' value='"+long+"'/>";
 	e += "<input id='content-position-lat' type='hidden' value='"+lat+"'/>";
 	e += "<input id='content-tags' placeholder='tags'></input>";
@@ -32,7 +33,7 @@ export default function UIArticleEdit(proj, lat, long, edit=false, data=null){
 	e = "<div id='input-container'>";
 	e += '<input id="content-title" value="'+data.title+'"></input>';
 	e += "<textarea id='content-content' name='content-content'></textarea>";
-	e += "<iframe name='rteeditor' id='rteeditor' onload='this.contentDocument.designMode=\"on\"' src='http://localhost:3000/richeditor'></iframe>";
+	e += "<iframe name='rteeditor' id='rteeditor' onload='this.contentDocument.designMode=\"on\"' src='"+Config.app.url+"/richeditor'></iframe>";
 	e += "<input id='content-position-long' type='hidden' value='"+data.location.longitude+"'/>";
 	e += "<input id='content-position-lat' type='hidden' value='"+data.location.latitude+"'/>";
 	e += "<input id='content-tags' value="+data.tags+"></input>";

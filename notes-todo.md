@@ -2,6 +2,7 @@
 - [x] Ré-écrire le backend en nodeJS
 - [x] éditeur de texte riche
 - [x] possibilité de login d'utilisateur
+- [ ] Node login ne passe pas le nom de l'utilisateur à l'application tyto (`req.session.user` in `app.get("/app")`)
 - [ ] URL de l'éditeur riche (problème en production avec localhost) / résout problème lors du POST d'une édition d'article ?
 - [ ] Rappel nom utilisateur actif
 - [ ] Nom utilisateur dans les créations/changements
