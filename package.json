@@ -43,7 +43,8 @@
 	"start": "start-concurrently",
 	"start-node": "NODE_ENV=dev node server/app.js",
 	"start-webpack": "NODE_ENV=dev webpack --config ./webpack.config.js",
-	"build": "NODE_ENV=production webpack --config ./webpack.config.js --progress --profile --colors && cp -R server build && cp -R includes build && cp -R maps build"
+	"build": "NODE_ENV=production webpack --config ./webpack.config.js --progress --profile --colors && cp -R server build-production && cp -R includes build-production && cp -R maps build-production",
+	"stage": "NODE_ENV=staging webpack --config ./webpack.config.js --progress --profile --colors && cp -R server build-staging && cp -R includes build-staging && cp -R maps build-staging"
     },
     "repository": {
 	"type": "git",

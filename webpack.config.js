@@ -4,13 +4,20 @@ const config = require('./config');
 
 let dirPath = "dist";
 
-
-process.env.NODE_ENV === 'production' ? dirPath = "build/dist" : dirPath = "dist";
+if(process.env.NODE_ENV === 'production') {
+    dirPath = "build-production/dist"
+}
+if(process.env.NODE_ENV === 'staging') {
+    dirPath = "build-staging/dist"
+}
+if(process.env.NODE_ENV === 'dev') {
+    dirPath = "dist"
+}
 
 module.exports = {
     entry: ['./src/js/app.js', './src/sass/main.scss'],
     watch: process.env.NODE_ENV === 'production' ? false : true,
-    mode: process.env.NODE_ENV === 'production' ? 'production':'development',
+    mode: process.env.NODE_ENV === 'dev' ? 'development':'production',
     externals: {
 	'Config': JSON.stringify(config)
     },
