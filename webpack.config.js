@@ -16,7 +16,7 @@ if(process.env.NODE_ENV === 'dev') {
 
 module.exports = {
     entry: ['./src/js/app.js', './src/sass/main.scss'],
-    watch: process.env.NODE_ENV === 'production' ? false : true,
+    watch: process.env.NODE_ENV === 'dev' ? true : false,
     mode: process.env.NODE_ENV === 'dev' ? 'development':'production',
     externals: {
 	'Config': JSON.stringify(config)
